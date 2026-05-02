@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0a0e27;
+  --color-card: #1a1f2e;
+  --color-red: #ff1744;
+  --color-cyan: #00d4ff;
+}
+
+:root {
+  --background: #0a0e27;
+  --foreground: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: #0a0e27;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── BACKGROUND TEXTURES ── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+/* ── GRADIENT TEXT ── */
+.gradient-text-red {
+  background: linear-gradient(135deg, #ff1744 0%, #ff6363 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099bb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── GLASS ── */
+.glass {
+  background: linear-gradient(135deg, rgba(30,36,56,0.8) 0%, rgba(26,31,46,0.75) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ── BUTTONS ── */
+.btn-red {
+  background: linear-gradient(135deg, #ff1744 0%, #e0102f 100%);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 20px rgba(255,23,68,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.btn-red:hover {
+  background: linear-gradient(135deg, #ff3358 0%, #ff1744 100%);
+  box-shadow: 0 6px 30px rgba(255,23,68,0.6), 0 0 50px rgba(255,23,68,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+  transform: translateY(-2px) scale(1.015);
+}
+.btn-red:active { transform: translateY(0) scale(0.98); }
+
+.btn-ghost {
+  background: transparent;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: all 0.18s ease;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.32);
+  transform: translateY(-1px);
+}
+
+/* ── CARDS ── */
+.card-hover {
+  transition: all 0.22s ease;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.card-hover:hover {
+  border-color: rgba(255,255,255,0.16);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.45);
+}
+.card-hover-red:hover {
+  border-color: rgba(255,23,68,0.32);
+  box-shadow: 0 16px 48px rgba(255,23,68,0.12);
+}
+.card-hover-cyan:hover {
+  border-color: rgba(0,212,255,0.28);
+  box-shadow: 0 16px 48px rgba(0,212,255,0.08);
+}
+
+/* Premium card gradient bg */
+.card-premium {
+  background: linear-gradient(145deg, #1e2438 0%, #1a1f2e 60%, #171c2b 100%);
+}
+
+/* ── ORBS ── */
+.orb {
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+/* ── PULSE ── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.65); opacity: 0; }
+}
+.pulse-ring { animation: pulse-ring 2s ease-out infinite; }
+
+/* ── FADE UP ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.fade-up-delay-1 { animation-delay: 0.1s; }
+.fade-up-delay-2 { animation-delay: 0.22s; }
+.fade-up-delay-3 { animation-delay: 0.34s; }
+
+/* ── SCAM DEMO ── */
+@keyframes msg-appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.msg-appear {
+  animation: msg-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── QUIZ OPTION STATES ── */
+.option-default {
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+.option-default:hover {
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.07);
+}
+.option-correct {
+  border: 1px solid rgba(34,197,94,0.5) !important;
+  background: rgba(34,197,94,0.08) !important;
+  cursor: default;
+}
+.option-wrong {
+  border: 1px solid rgba(255,23,68,0.4) !important;
+  background: rgba(255,23,68,0.07) !important;
+  cursor: default;
+}
+.option-neutral {
+  border: 1px solid rgba(255,255,255,0.05);
+  background: transparent;
+  cursor: default;
+  opacity: 0.45;
+}
+
+/* ── KNOWLEDGE QUIZ EXPLANATION ── */
+@keyframes explain-in {
+  from { opacity: 0; max-height: 0; transform: translateY(-6px); }
+  to   { opacity: 1; max-height: 200px; transform: translateY(0); }
+}
+.explain-in {
+  animation: explain-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  overflow: hidden;
+}
+
+/* ── RESULT REVEAL ── */
+@keyframes result-pop {
+  from { opacity: 0; transform: scale(0.92) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.result-pop {
+  animation: result-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── THREAT BAR GLOW ── */
+.threat-bar-fill {
+  transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 14px rgba(255,23,68,0.7), 0 0 4px rgba(255,23,68,0.9);
+}
+
+/* ── MONOSPACE LABEL ── */
+.mono-label {
+  font-family: ui-monospace, "SF Mono", Menlo, "Cascadia Code", monospace;
+  letter-spacing: 0.06em;
+}

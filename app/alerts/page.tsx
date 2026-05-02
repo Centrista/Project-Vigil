@@ -1,0 +1,150 @@
+import Link from "next/link";
+import { ALERTS, type Alert } from "@/lib/alerts";
+
+export const metadata = {
+  title: "Scam Alerts — Project Vigil",
+  description: "Bi-weekly alerts on the latest AI scam techniques targeting teens.",
+};
+
+const SEVERITY = {
+  critical: { label: "CRITICAL", color: "#ff1744", bg: "rgba(255,23,68,0.08)", border: "rgba(255,23,68,0.28)" },
+  high:     { label: "HIGH",     color: "#ff6d00", bg: "rgba(255,109,0,0.08)", border: "rgba(255,109,0,0.28)" },
+  medium:   { label: "MEDIUM",   color: "#ffd600", bg: "rgba(255,214,0,0.08)", border: "rgba(255,214,0,0.28)" },
+};
+
+function AlertCard({ alert }: { alert: Alert }) {
+  const sev = SEVERITY[alert.severity];
+  return (
+    <div
+      className="group flex flex-col rounded-2xl p-5 transition-all duration-200 hover:-translate-y-0.5"
+      style={{
+        background: "linear-gradient(145deg, #1e2438, #1a1f2e)",
+        border: "1px solid rgba(255,255,255,0.07)",
+        borderLeft: `3px solid ${sev.color}`,
+        boxShadow: "0 4px 24px rgba(0,0,0,0.25)",
+      }}
+    >
+      {/* Badges */}
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
+        <span
+          className="mono-label text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded"
+          style={{ color: sev.color, background: sev.bg, border: `1px solid ${sev.border}` }}
+        >
+          {sev.label}
+        </span>
+        <span
+          className="mono-label text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded"
+          style={{
+            color: alert.categoryColor,
+            background: `${alert.categoryColor}12`,
+            border: `1px solid ${alert.categoryColor}30`,
+          }}
+        >
+          {alert.category}
+        </span>
+      </div>
+
+      {/* Title */}
+      <h2 className="font-black text-white text-[17px] leading-snug mb-2">
+        {alert.title}
+      </h2>
+
+      {/* Description */}
+      <p className="text-sm text-white/50 leading-relaxed flex-1 mb-5">
+        {alert.description}
+      </p>
+
+      {/* Footer */}
+      <div className="flex items-center justify-between">
+        <span className="mono-label text-[11px] text-white/28">{alert.weekOf}</span>
+        <Link
+          href={alert.learnMoreHref}
+          className="mono-label text-[11px] font-bold flex items-center gap-1 transition-opacity hover:opacity-70"
+          style={{ color: sev.color }}
+        >
+          Read Alert
+          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default function AlertsPage() {
+  return (
+    <div className="w-full overflow-x-hidden">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-16 pb-24">
+
+        {/* Hero */}
+        <div className="mb-12">
+          <div className="flex flex-wrap items-center gap-3 mb-7">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mono-label text-xs font-bold uppercase tracking-widest text-white/55">
+              <span className="relative flex h-2 w-2">
+                <span
+                  className="pulse-ring absolute inline-flex h-full w-full rounded-full opacity-75"
+                  style={{ backgroundColor: "#ff1744" }}
+                />
+                <span
+                  className="relative inline-flex rounded-full h-2 w-2"
+                  style={{ backgroundColor: "#ff1744" }}
+                />
+              </span>
+              Live Threat Feed
+            </div>
+            <span className="mono-label text-[11px] text-white/28 uppercase tracking-widest">
+              Updated bi-weekly
+            </span>
+          </div>
+
+          <h1 className="text-5xl sm:text-6xl font-black text-white mb-4 leading-tight">
+            Scam Alerts.
+            <br />
+            <span className="gradient-text-red">Stay Current.</span>
+          </h1>
+          <p className="text-white/42 text-base max-w-sm leading-relaxed">
+            New AI attack techniques drop constantly. Fresh alerts every two weeks so you know what&apos;s active right now.
+          </p>
+        </div>
+
+        {/* Grid */}
+        {ALERTS.length === 0 ? (
+          <div
+            className="rounded-2xl p-16 text-center"
+            style={{
+              background: "linear-gradient(145deg, #1e2438, #1a1f2e)",
+              border: "1px solid rgba(255,255,255,0.07)",
+            }}
+          >
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 mono-label text-[10px] font-bold uppercase tracking-widest"
+              style={{
+                background: "rgba(255,23,68,0.06)",
+                border: "1px solid rgba(255,23,68,0.18)",
+                color: "rgba(255,23,68,0.7)",
+              }}
+            >
+              First Alert Coming Soon
+            </div>
+            <p className="text-white/30 text-sm max-w-xs mx-auto leading-relaxed">
+              Check back soon — new scam alerts post bi-weekly.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {ALERTS.map((alert) => (
+              <AlertCard key={alert.id} alert={alert} />
+            ))}
+          </div>
+        )}
+
+        {ALERTS.length > 0 && (
+          <p className="mono-label text-[11px] text-white/22 mt-5 text-right">
+            {ALERTS.length} {ALERTS.length === 1 ? "alert" : "alerts"} · Updated bi-weekly · All threats verified
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
