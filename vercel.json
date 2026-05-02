@@ -1,6 +1,0 @@
-{
-  "buildCommand": "cd project-vigil && npm install && npm run build",
-  "outputDirectory": "project-vigil/.next",
-  "installCommand": "cd project-vigil && npm install",
-  "framework": "nextjs"
-}
