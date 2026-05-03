@@ -37,7 +37,7 @@ export default function Navbar() {
         }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex min-h-[76px] items-center justify-between gap-4 py-3">
+          <div className="flex min-h-[76px] items-center justify-between gap-3 py-3">
             <Link href="/" className="group flex shrink-0 items-center gap-3">
               <div
                 className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-sm font-black text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)]"
@@ -58,14 +58,14 @@ export default function Navbar() {
               </div>
             </Link>
 
-            <div className="hidden xl:flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] p-1.5">
+            <div className="hidden xl:flex items-center gap-1 rounded-full border border-white/8 bg-white/[0.03] p-1.5">
               {PRIMARY_LINKS.map((link) => {
                 const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`nav-link whitespace-nowrap ${isActive ? "nav-link-active" : ""}`}
+                    className={`nav-link whitespace-nowrap px-3.5 ${isActive ? "nav-link-active" : ""}`}
                   >
                     {link.label}
                   </Link>
@@ -73,7 +73,7 @@ export default function Navbar() {
               })}
             </div>
 
-            <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <div className="hidden lg:flex items-center gap-2.5 shrink-0">
               <Link
                 href="/trending-scams"
                 className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] ${
@@ -84,14 +84,28 @@ export default function Navbar() {
               >
                 Live Threats
               </Link>
-              <Link href="/submit-scam" className="btn-red px-4 py-2 text-sm rounded-xl">
-                + Submit a Scam
+              <Link
+                href="/feedback"
+                className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] ${
+                  pathname === "/feedback"
+                    ? "border-white/18 bg-white/[0.08] text-white"
+                    : "border-white/10 bg-white/[0.03] text-white/55 hover:border-white/18 hover:text-white"
+                }`}
+              >
+                Feedback
               </Link>
             </div>
 
             <div className="flex xl:hidden items-center gap-2">
-              <Link href="/submit-scam" className="btn-red px-3 py-2 text-xs rounded-xl">
-                + Submit
+              <Link
+                href="/feedback"
+                className={`rounded-full border px-3 py-2 text-[11px] font-bold uppercase tracking-[0.18em] ${
+                  pathname === "/feedback"
+                    ? "border-white/18 bg-white/[0.08] text-white"
+                    : "border-white/10 bg-white/[0.03] text-white/62 hover:border-white/18 hover:text-white"
+                }`}
+              >
+                Feedback
               </Link>
               <button
                 className="rounded-2xl border border-white/10 bg-white/[0.03] p-2.5 text-white/70 transition-all hover:border-white/20 hover:bg-white/[0.07] hover:text-white"
@@ -150,6 +164,12 @@ export default function Navbar() {
               </p>
             </div>
             <div className="grid gap-2 sm:grid-cols-3">
+              <Link
+                href="/submit-scam"
+                className="rounded-2xl border border-[#ff1744]/20 bg-[#ff1744]/10 px-4 py-3 text-sm font-semibold text-white transition-all hover:border-[#ff1744]/30 hover:bg-[#ff1744]/16"
+              >
+                Submit a Scam
+              </Link>
               {SECONDARY_LINKS.map((link) => (
                 <Link
                   key={link.href}

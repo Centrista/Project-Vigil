@@ -27,6 +27,7 @@ export const PRIMARY_NAV_LINKS = [
   "/risk-quiz",
   "/alerts",
   "/emergency",
+  "/pokedex",
 ] as const;
 
 export const FOOTER_GROUPS = [
