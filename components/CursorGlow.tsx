@@ -86,10 +86,10 @@ export default function CursorGlow() {
         aria-hidden
         style={{
           ...base,
-          width: 480,
-          height: 480,
-          marginLeft: -240,
-          marginTop: -240,
+          width: 550,
+          height: 550,
+          marginLeft: -275,
+          marginTop: -275,
           borderRadius: "50%",
           background:
             "radial-gradient(circle, rgba(0,212,255,0.07) 0%, rgba(0,212,255,0.025) 40%, transparent 70%)",
@@ -103,10 +103,10 @@ export default function CursorGlow() {
         aria-hidden
         style={{
           ...base,
-          width: 28,
-          height: 28,
-          marginLeft: -14,
-          marginTop: -14,
+          width: 32,
+          height: 32,
+          marginLeft: -16,
+          marginTop: -16,
           borderRadius: "50%",
           border: "1px solid rgba(255,255,255,0.28)",
           zIndex: 9998,
@@ -119,10 +119,10 @@ export default function CursorGlow() {
         aria-hidden
         style={{
           ...base,
-          width: 5,
-          height: 5,
-          marginLeft: -2.5,
-          marginTop: -2.5,
+          width: 6,
+          height: 6,
+          marginLeft: -3,
+          marginTop: -3,
           borderRadius: "50%",
           background: "rgba(255,255,255,0.88)",
           zIndex: 9999,

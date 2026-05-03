@@ -43,29 +43,11 @@ export default function FeedbackPage() {
           />
 
           <div className="premium-panel premium-panel-info overflow-hidden p-4 sm:p-5">
-            <div className="eyebrow-row">
+            <div className="eyebrow-row mb-4">
               <span className="premium-dot" />
               <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/42">
                 Embedded Form
               </span>
-            </div>
-
-            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-2xl text-sm leading-relaxed text-white/58">
-                If the embedded form feels cramped on your device, use the direct Google Forms link instead.
-              </p>
-              <Link
-                href={FEEDBACK_FORM_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="link-inline text-sm font-semibold text-white/72"
-              >
-                Open in new tab
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5h6m0 0v6m0-6L10 14" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 9v10h10" />
-                </svg>
-              </Link>
             </div>
 
             <div className="overflow-hidden rounded-[22px] border border-white/10 bg-white">
