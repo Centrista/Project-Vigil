@@ -7,6 +7,14 @@ export default function CursorGlow() {
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const supportsGlow =
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!supportsGlow) return;
+
+    document.body.classList.add("cursor-glow-enabled");
+
     let mx = -999, my = -999;
     let rx = -999, ry = -999;
     let raf: number;
@@ -53,6 +61,7 @@ export default function CursorGlow() {
     raf = requestAnimationFrame(tick);
 
     return () => {
+      document.body.classList.remove("cursor-glow-enabled");
       window.removeEventListener("mousemove", onMove);
       document.documentElement.removeEventListener("mouseleave", onLeave);
       cancelAnimationFrame(raf);

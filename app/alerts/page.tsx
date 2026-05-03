@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PageIntro from "@/components/PageIntro";
 import { ALERTS, type Alert } from "@/lib/alerts";
 
 export const metadata = {
@@ -16,12 +17,12 @@ function AlertCard({ alert }: { alert: Alert }) {
   const sev = SEVERITY[alert.severity];
   return (
     <div
-      className="group flex flex-col rounded-2xl p-5 transition-all duration-200 hover:-translate-y-0.5"
+      className="group card-hover flex flex-col rounded-[24px] p-5"
       style={{
         background: "linear-gradient(145deg, #1e2438, #1a1f2e)",
         border: "1px solid rgba(255,255,255,0.07)",
         borderLeft: `3px solid ${sev.color}`,
-        boxShadow: "0 4px 24px rgba(0,0,0,0.25)",
+        boxShadow: "0 12px 34px rgba(0,0,0,0.24)",
       }}
     >
       {/* Badges */}
@@ -75,48 +76,25 @@ function AlertCard({ alert }: { alert: Alert }) {
 export default function AlertsPage() {
   return (
     <div className="w-full overflow-x-hidden">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-16 pb-24">
+      <div className="page-frame">
+        <PageIntro
+          eyebrow="Live Threat Feed"
+          title={
+            <>
+              Scam Alerts.
+              <br />
+              <span className="gradient-text-red">Stay Current.</span>
+            </>
+          }
+          description="New AI attack techniques drop constantly. Fresh alerts every two weeks so you know what&apos;s active right now."
+          stats={[
+            { label: "Updated bi-weekly", tone: "default" },
+            { label: `${ALERTS.length} verified alerts`, tone: "danger" },
+          ]}
+        />
 
-        {/* Hero */}
-        <div className="mb-12">
-          <div className="flex flex-wrap items-center gap-3 mb-7">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mono-label text-xs font-bold uppercase tracking-widest text-white/55">
-              <span className="relative flex h-2 w-2">
-                <span
-                  className="pulse-ring absolute inline-flex h-full w-full rounded-full opacity-75"
-                  style={{ backgroundColor: "#ff1744" }}
-                />
-                <span
-                  className="relative inline-flex rounded-full h-2 w-2"
-                  style={{ backgroundColor: "#ff1744" }}
-                />
-              </span>
-              Live Threat Feed
-            </div>
-            <span className="mono-label text-[11px] text-white/28 uppercase tracking-widest">
-              Updated bi-weekly
-            </span>
-          </div>
-
-          <h1 className="text-5xl sm:text-6xl font-black text-white mb-4 leading-tight">
-            Scam Alerts.
-            <br />
-            <span className="gradient-text-red">Stay Current.</span>
-          </h1>
-          <p className="text-white/42 text-base max-w-sm leading-relaxed">
-            New AI attack techniques drop constantly. Fresh alerts every two weeks so you know what&apos;s active right now.
-          </p>
-        </div>
-
-        {/* Grid */}
         {ALERTS.length === 0 ? (
-          <div
-            className="rounded-2xl p-16 text-center"
-            style={{
-              background: "linear-gradient(145deg, #1e2438, #1a1f2e)",
-              border: "1px solid rgba(255,255,255,0.07)",
-            }}
-          >
+          <div className="premium-panel p-16 text-center">
             <div
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 mono-label text-[10px] font-bold uppercase tracking-widest"
               style={{
@@ -132,7 +110,7 @@ export default function AlertsPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {ALERTS.map((alert) => (
               <AlertCard key={alert.id} alert={alert} />
             ))}

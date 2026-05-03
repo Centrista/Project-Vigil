@@ -3,18 +3,104 @@ export const COLORS = {
   card: "#1a1f2e",
   red: "#ff1744",
   cyan: "#00d4ff",
+  orange: "#ff6d00",
+  green: "#22c55e",
   white: "#ffffff",
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Risk Quiz", href: "/risk-quiz" },
-  { label: "Guide", href: "/guide" },
-  { label: "Simulator", href: "/simulator" },
-  { label: "Stories", href: "/stories" },
-  { label: "Scam Pokédex", href: "/pokedex" },
-  { label: "Emergency", href: "/emergency" },
-  { label: "Alerts", href: "/alerts" },
-  { label: "Feedback", href: "/feedback" },
+  { label: "Trending", href: "/trending-scams", description: "Track active scam patterns.", tone: COLORS.red },
+  { label: "Guide", href: "/guide", description: "Learn every attack type.", tone: COLORS.cyan },
+  { label: "Stories", href: "/stories", description: "Read real teen experiences.", tone: "#f59e0b" },
+  { label: "Risk Quiz", href: "/risk-quiz", description: "Test your exposure.", tone: COLORS.red },
+  { label: "Alerts", href: "/alerts", description: "See the latest verified threats.", tone: COLORS.red },
+  { label: "Emergency", href: "/emergency", description: "What to do right now.", tone: COLORS.orange },
+  { label: "Simulator", href: "/simulator", description: "Practice spotting fakes.", tone: COLORS.cyan },
+  { label: "Scam Pokédex", href: "/pokedex", description: "Browse the threat catalogue.", tone: "#8b5cf6" },
+  { label: "Feedback", href: "/feedback", description: "Send product feedback.", tone: "rgba(255,255,255,0.75)" },
+] as const;
+
+export const PRIMARY_NAV_LINKS = [
+  "/trending-scams",
+  "/guide",
+  "/stories",
+  "/risk-quiz",
+  "/alerts",
+  "/emergency",
+] as const;
+
+export const FOOTER_GROUPS = [
+  {
+    title: "Learn",
+    links: [
+      { label: "Trending Scams", href: "/trending-scams" },
+      { label: "AI Scam Guide", href: "/guide" },
+      { label: "Spot the Fake", href: "/simulator" },
+      { label: "Scam Pokédex", href: "/pokedex" },
+    ],
+  },
+  {
+    title: "Practice",
+    links: [
+      { label: "AI Risk Quiz", href: "/risk-quiz" },
+      { label: "Test Knowledge", href: "/risk-quiz/results" },
+      { label: "Real Stories", href: "/stories" },
+      { label: "Scam Alerts", href: "/alerts" },
+    ],
+  },
+  {
+    title: "Act",
+    links: [
+      { label: "Emergency Guide", href: "/emergency" },
+      { label: "Submit a Scam", href: "/submit-scam" },
+      { label: "Feedback", href: "/feedback" },
+    ],
+  },
+] as const;
+
+export const HOME_DESTINATIONS = [
+  {
+    n: "01",
+    label: "Trending Scams",
+    sub: "See the scams rising right now and what makes them dangerous.",
+    href: "/trending-scams",
+    accent: COLORS.red,
+  },
+  {
+    n: "02",
+    label: "AI Scam Guide",
+    sub: "Every attack type, broken down into how it works and how to block it.",
+    href: "/guide",
+    accent: COLORS.cyan,
+  },
+  {
+    n: "03",
+    label: "AI Risk Quiz",
+    sub: "Discover exactly where your instincts are strong and where they fail.",
+    href: "/risk-quiz",
+    accent: "#f97316",
+  },
+  {
+    n: "04",
+    label: "Real Stories",
+    sub: "Read what happened to other teens before the same tactics hit you.",
+    href: "/stories",
+    accent: "#f59e0b",
+  },
+  {
+    n: "05",
+    label: "Scam Alerts",
+    sub: "Stay current on the newest attack patterns showing up right now.",
+    href: "/alerts",
+    accent: "#fb7185",
+  },
+  {
+    n: "06",
+    label: "Emergency Guide",
+    sub: "Move fast when something feels off and lock down the damage early.",
+    href: "/emergency",
+    accent: "#ff6d00",
+  },
 ] as const;
 
 export const SCAM_TYPES = [

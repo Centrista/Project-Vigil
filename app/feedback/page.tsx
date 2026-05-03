@@ -1,4 +1,4 @@
-import Link from "next/link";
+import UtilityPageTemplate from "@/components/UtilityPageTemplate";
 
 export const metadata = {
   title: "Feedback — Project Vigil",
@@ -7,19 +7,22 @@ export const metadata = {
 
 export default function FeedbackPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-24 text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-bold uppercase tracking-widest text-white/60 mb-8">
-        📝 Feedback
-      </div>
-      <h1 className="text-5xl font-black text-white mb-4">Feedback</h1>
-      <p className="text-white/45 text-lg mb-12 max-w-md mx-auto leading-relaxed">
-        Suggestions, bug reports, or anything else — we want to hear it.
-      </p>
-      <div className="rounded-2xl glass p-12 mb-8">
-        <div className="text-4xl mb-4">🚧</div>
-        <h2 className="text-lg font-bold text-white mb-2">Coming Soon</h2>
-      </div>
-      <Link href="/" className="text-sm font-semibold hover:underline" style={{ color: "#ff1744" }}>← Home</Link>
-    </div>
+    <UtilityPageTemplate
+      eyebrow="Feedback"
+      title="Feedback"
+      description="Suggestions, bug reports, or anything else — we want to hear it."
+      previewTitle="A better feedback loop is coming."
+      previewBody="The feedback space is being prepared to accept product notes, bug reports, and trust signals from users without making the process feel heavy or formal."
+      bullets={[
+        "Fast reporting for broken flows or confusing guidance.",
+        "A cleaner route for product suggestions and missing scam coverage.",
+        "Structured triage so urgent issues stand out from general notes.",
+      ]}
+      primaryHref="/trending-scams"
+      primaryLabel="Browse Trending Scams"
+      secondaryHref="/guide"
+      secondaryLabel="Open the Guide"
+      accentTone="info"
+    />
   );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PageIntro from "@/components/PageIntro";
 import { POKEDEX_ENTRIES, type PokedexEntry } from "@/lib/pokedex";
 
 export const metadata = {
@@ -10,12 +11,12 @@ function PokedexCard({ entry }: { entry: PokedexEntry }) {
   const entryNum = String(entry.id).padStart(3, "0");
   return (
     <div
-      className="flex flex-col rounded-xl overflow-hidden transition-all duration-200 hover:-translate-y-1"
+      className="card-hover flex flex-col overflow-hidden rounded-[24px]"
       style={{
         border: `2px solid ${entry.typeColor}35`,
         borderTop: `4px solid ${entry.typeColor}`,
         background: "linear-gradient(160deg, #1e2438 0%, #1a1f2e 100%)",
-        boxShadow: `0 4px 32px rgba(0,0,0,0.3), 0 0 0 0 ${entry.typeColor}00`,
+        boxShadow: `0 14px 38px rgba(0,0,0,0.26), 0 0 0 0 ${entry.typeColor}00`,
       }}
     >
       {/* Header band */}
@@ -150,45 +151,25 @@ function PokedexCard({ entry }: { entry: PokedexEntry }) {
 export default function PokedexPage() {
   return (
     <div className="w-full overflow-x-hidden">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-16 pb-24">
-
-        {/* Hero */}
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mono-label text-xs font-bold uppercase tracking-widest text-white/55 mb-7">
-            🗂️ Threat Catalogue
-          </div>
-          <div className="flex items-end gap-4 mb-4 flex-wrap">
-            <h1 className="text-5xl sm:text-6xl font-black text-white leading-tight">
-              Scam<br />
+      <div className="page-frame">
+        <PageIntro
+          eyebrow="Threat Catalogue"
+          title={
+            <>
+              Scam
+              <br />
               <span className="gradient-text-red">Pokédex.</span>
-            </h1>
-            {POKEDEX_ENTRIES.length > 0 && (
-              <span
-                className="mono-label text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-lg mb-2"
-                style={{
-                  color: "rgba(255,255,255,0.45)",
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                }}
-              >
-                {POKEDEX_ENTRIES.length} / 16+ catalogued
-              </span>
-            )}
-          </div>
-          <p className="text-white/42 text-base max-w-sm leading-relaxed">
-            Every AI-powered scam type catalogued. Know its strengths, its weaknesses, and where it hunts.
-          </p>
-        </div>
+            </>
+          }
+          description="Every AI-powered scam type catalogued. Know its strengths, its weaknesses, and where it hunts."
+          stats={[
+            { label: `${POKEDEX_ENTRIES.length} / 16+ catalogued`, tone: "default" },
+            { label: "Field guide format", tone: "info" },
+          ]}
+        />
 
-        {/* Grid */}
         {POKEDEX_ENTRIES.length === 0 ? (
-          <div
-            className="rounded-2xl p-16 text-center"
-            style={{
-              background: "linear-gradient(145deg, #1e2438, #1a1f2e)",
-              border: "1px solid rgba(255,255,255,0.07)",
-            }}
-          >
+          <div className="premium-panel p-16 text-center">
             <div className="mono-label text-2xl font-black text-white/10 mb-3 tracking-widest">
               #000
             </div>
@@ -200,7 +181,7 @@ export default function PokedexPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {POKEDEX_ENTRIES.map((entry) => (
               <PokedexCard key={entry.id} entry={entry} />
             ))}

@@ -18,7 +18,7 @@ export default function StoryCard({ story, isLast = false }: StoryCardProps) {
   return (
     <Link
       href={`/stories/${story.slug}`}
-      className="group block py-6 transition-all duration-200 hover:bg-white/[0.025] -mx-4 px-4 rounded-xl"
+      className="group block -mx-4 rounded-[22px] px-4 py-6 transition-all duration-200 hover:bg-white/[0.03]"
       style={{ borderBottom: isLast ? "none" : "1px solid rgba(255,255,255,0.055)" }}
     >
       <div className="flex items-start gap-4">
@@ -43,7 +43,7 @@ export default function StoryCard({ story, isLast = false }: StoryCardProps) {
           </div>
 
           {/* Title */}
-          <h2 className="font-black text-white text-xl leading-tight mb-2 group-hover:text-white/90 transition-colors">
+          <h2 className="mb-2 text-xl font-black leading-tight text-white transition-colors group-hover:text-white/90">
             {story.title}
           </h2>
 

@@ -30,14 +30,7 @@ export default function GuideCatalog() {
 
   return (
     <div>
-      {/* ── Category tabs ── */}
-      <div
-        className="rounded-2xl p-1.5 mb-8 inline-flex flex-wrap gap-1"
-        style={{
-          background: "rgba(255,255,255,0.04)",
-          border: "1px solid rgba(255,255,255,0.08)",
-        }}
-      >
+      <div className="mb-8 inline-flex flex-wrap gap-2 rounded-full border border-white/8 bg-white/[0.03] p-1.5">
         {TABS.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
@@ -45,7 +38,7 @@ export default function GuideCatalog() {
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 whitespace-nowrap"
+              className="flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-bold transition-all duration-200 whitespace-nowrap"
               style={
                 isActive
                   ? {
@@ -88,10 +81,9 @@ export default function GuideCatalog() {
         })}
       </div>
 
-      {/* ── Category description strip ── */}
       {activeTab !== "all" && (
         <div
-          className="flex items-center gap-3 rounded-xl px-4 py-3 mb-7 fade-up"
+          className="fade-up mb-7 flex items-center gap-3 rounded-[20px] px-4 py-4"
           style={{
             background: `${CATEGORY_META[activeTab].color}08`,
             border: `1px solid ${CATEGORY_META[activeTab].color}22`,
@@ -110,8 +102,7 @@ export default function GuideCatalog() {
         </div>
       )}
 
-      {/* ── Cards grid ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((entry) => (
           <GuideCard key={entry.slug} entry={entry} />
         ))}

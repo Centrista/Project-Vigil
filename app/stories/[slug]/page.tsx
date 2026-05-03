@@ -34,12 +34,11 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
 
   return (
     <div className="w-full overflow-x-hidden">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-14 pb-24">
+      <div className="page-frame page-frame-narrow pt-14">
 
-        {/* Back link */}
         <Link
           href="/stories"
-          className="inline-flex items-center gap-1.5 mono-label text-xs text-white/30 hover:text-white/60 transition-colors mb-10"
+          className="link-inline mono-label mb-10 text-xs text-white/34"
         >
           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -47,7 +46,6 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
           All Stories
         </Link>
 
-        {/* Story header */}
         <div className="mb-10">
           <div className="flex items-center gap-2.5 mb-5 flex-wrap">
             <span
@@ -65,13 +63,12 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
             <span className="mono-label text-[10px] text-white/28">{story.submittedAt}</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
+          <h1 className="mb-6 text-4xl font-black leading-tight text-white sm:text-5xl">
             {story.title}
           </h1>
 
-          {/* Pull quote */}
           <blockquote
-            className="text-xl sm:text-2xl italic leading-relaxed mb-4 pl-5"
+            className="mb-4 pl-5 text-xl italic leading-relaxed sm:text-2xl"
             style={{
               color: "rgba(255,255,255,0.65)",
               borderLeft: `3px solid ${story.tagColor}`,
@@ -84,18 +81,13 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
           </p>
         </div>
 
-        {/* Divider */}
-        <div className="h-px mb-10" style={{ background: "rgba(255,255,255,0.07)" }} />
+        <div className="divider-line mb-10" />
 
-        {/* Two-column layout */}
         <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-10">
-
-          {/* Sidebar — Quick Facts */}
           <aside className="mb-10 lg:mb-0">
             <div
-              className="rounded-xl p-5 sticky top-24"
+              className="premium-panel sticky top-28 p-5"
               style={{
-                background: "linear-gradient(145deg, #1e2438, #1a1f2e)",
                 border: `1px solid ${story.tagColor}22`,
                 borderLeft: `3px solid ${story.tagColor}`,
               }}
@@ -117,22 +109,21 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
             </div>
           </aside>
 
-          {/* Story body */}
           <div>
-            <div className="space-y-5">
+            <div className="premium-panel p-6 sm:p-8">
+              <div className="space-y-5">
               {story.story.map((paragraph, i) => (
                 <p key={i} className="text-[15px] text-white/75 leading-relaxed">
                   {paragraph}
                 </p>
               ))}
             </div>
+            </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="h-px my-14" style={{ background: "rgba(255,255,255,0.07)" }} />
+        <div className="divider-line my-14" />
 
-        {/* Red Flags Detected */}
         <div className="mb-10">
           <div className="flex items-center gap-2.5 mb-5">
             <span className="mono-label text-xs font-bold uppercase tracking-widest" style={{ color: "#ff1744" }}>
@@ -147,7 +138,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
             {story.redFlags.map((flag) => (
               <div
                 key={flag.label}
-                className="flex items-center gap-3 px-4 py-3.5 rounded-xl"
+                className="flex items-center gap-3 rounded-[20px] px-4 py-3.5"
                 style={{
                   background: "rgba(255,23,68,0.05)",
                   border: "1px solid rgba(255,23,68,0.18)",
@@ -169,10 +160,9 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
           </div>
         </div>
 
-        {/* What to do instead */}
         <div className="mb-14">
           <div
-            className="rounded-xl px-5 py-5"
+            className="rounded-[24px] px-5 py-5"
             style={{
               background: "rgba(34,197,94,0.05)",
               border: "1px solid rgba(34,197,94,0.2)",
@@ -197,7 +187,6 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
           </div>
         </div>
 
-        {/* Story navigation */}
         <div className="flex items-center justify-between gap-4">
           {prevStory ? (
             <Link

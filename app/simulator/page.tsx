@@ -1,4 +1,4 @@
-import Link from "next/link";
+import UtilityPageTemplate from "@/components/UtilityPageTemplate";
 
 export const metadata = {
   title: "Spot the Fake — Project Vigil",
@@ -7,19 +7,22 @@ export const metadata = {
 
 export default function SimulatorPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-24 text-center">
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-bold uppercase tracking-widest text-white/60 mb-8">
-        🕹️ AI Detection Simulator
-      </div>
-      <h1 className="text-5xl font-black text-white mb-4">Spot the Fake</h1>
-      <p className="text-white/45 text-lg mb-12 max-w-md mx-auto leading-relaxed">
-        Real vs. AI-generated voices, messages, and faces. Train your instincts before scammers test them.
-      </p>
-      <div className="rounded-2xl glass p-12 mb-8">
-        <div className="text-4xl mb-4">🚧</div>
-        <h2 className="text-lg font-bold text-white mb-2">Coming Soon</h2>
-      </div>
-      <Link href="/" className="text-sm font-semibold hover:underline" style={{ color: "#ff1744" }}>← Home</Link>
-    </div>
+    <UtilityPageTemplate
+      eyebrow="AI Detection Simulator"
+      title="Spot the Fake"
+      description="Real vs. AI-generated voices, messages, and faces. Train your instincts before scammers test them."
+      previewTitle="Interactive detection drills are on deck."
+      previewBody="This training space is being shaped into a premium practice lab where each drill teaches the tells behind fake audio, fake video, and fake urgency."
+      bullets={[
+        "Voice, message, and deepfake practice rounds with instant feedback.",
+        "Scenario-based scoring so you can see where your instinct breaks.",
+        "Clear jump-off paths into the guide and quiz after every drill.",
+      ]}
+      primaryHref="/guide"
+      primaryLabel="Study the Guide"
+      secondaryHref="/risk-quiz"
+      secondaryLabel="Take the Quiz"
+      accentTone="info"
+    />
   );
 }
