@@ -37,43 +37,47 @@ export default function Navbar() {
         }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex min-h-[76px] items-center justify-between gap-3 py-3">
-            <Link href="/" className="group flex shrink-0 items-center gap-3">
-              <div
-                className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-sm font-black text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)]"
-                style={{ letterSpacing: "0.12em" }}
-              >
-                PV
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[15px] font-black uppercase tracking-[0.22em] text-white transition-opacity duration-200 group-hover:opacity-90">
-                    Project Vigil
-                  </span>
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#ff1744]" />
+          <div className="flex min-h-[76px] items-center gap-3 py-3 xl:grid xl:grid-cols-[minmax(220px,1fr)_minmax(0,1.85fr)_minmax(220px,1fr)] xl:gap-5">
+            <div className="flex min-w-0 items-center xl:justify-start">
+              <Link href="/" className="group flex shrink-0 items-center gap-3">
+                <div
+                  className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-sm font-black text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)]"
+                  style={{ letterSpacing: "0.12em" }}
+                >
+                  PV
                 </div>
-                <p className="mono-label text-[10px] uppercase tracking-[0.22em] text-white/35">
-                  AI Scam Defense
-                </p>
-              </div>
-            </Link>
-
-            <div className="hidden xl:flex items-center gap-1 rounded-full border border-white/8 bg-white/[0.03] p-1.5">
-              {PRIMARY_LINKS.map((link) => {
-                const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`nav-link whitespace-nowrap px-3.5 ${isActive ? "nav-link-active" : ""}`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[15px] font-black uppercase tracking-[0.22em] text-white transition-opacity duration-200 group-hover:opacity-90">
+                      Project Vigil
+                    </span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#ff1744]" />
+                  </div>
+                  <p className="mono-label text-[10px] uppercase tracking-[0.22em] text-white/35">
+                    AI Scam Defense
+                  </p>
+                </div>
+              </Link>
             </div>
 
-            <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+            <div className="hidden min-w-0 items-center justify-center xl:flex">
+              <div className="flex w-full items-center justify-center rounded-full border border-white/8 bg-white/[0.03] p-1.5">
+                {PRIMARY_LINKS.map((link) => {
+                  const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`nav-link whitespace-nowrap px-3 xl:px-3.5 2xl:px-4 ${isActive ? "nav-link-active" : ""}`}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="hidden min-w-0 items-center justify-end gap-2.5 shrink-0 lg:flex">
               <Link
                 href="/trending-scams"
                 className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] ${

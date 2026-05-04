@@ -24,6 +24,7 @@ export const PRIMARY_NAV_LINKS = [
   "/risk-quiz",
   "/trending-scams",
   "/guide",
+  "/simulator",
   "/stories",
   "/alerts",
   "/emergency",
