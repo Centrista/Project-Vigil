@@ -36,9 +36,9 @@ export default function Navbar() {
           boxShadow: scrolled ? "0 14px 40px rgba(0,0,0,0.28)" : "none",
         }}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex min-h-[76px] items-center gap-3 py-3 xl:grid xl:grid-cols-[minmax(220px,1fr)_minmax(0,1.85fr)_minmax(220px,1fr)] xl:gap-5">
-            <div className="flex min-w-0 items-center xl:justify-start">
+        <div className="mx-auto w-full max-w-[1760px] px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+          <div className="flex min-h-[76px] items-center gap-3 py-3 xl:grid xl:grid-cols-[max-content_minmax(0,1fr)_max-content] xl:items-center xl:gap-7 2xl:gap-9">
+            <div className="flex min-w-0 items-center xl:justify-self-start">
               <Link href="/" className="group flex shrink-0 items-center gap-3">
                 <div
                   className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-sm font-black text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)]"
@@ -60,7 +60,7 @@ export default function Navbar() {
               </Link>
             </div>
 
-            <div className="hidden min-w-0 items-center justify-center xl:flex">
+            <div className="hidden min-w-0 items-center justify-center xl:flex xl:w-full xl:justify-self-stretch">
               <div className="flex w-full items-center justify-center rounded-full border border-white/8 bg-white/[0.03] p-1.5">
                 {PRIMARY_LINKS.map((link) => {
                   const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
@@ -77,7 +77,7 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="hidden min-w-0 items-center justify-end gap-2.5 shrink-0 lg:flex">
+            <div className="hidden min-w-0 items-center justify-end gap-2.5 shrink-0 lg:flex xl:justify-self-end">
               <Link
                 href="/trending-scams"
                 className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] ${
