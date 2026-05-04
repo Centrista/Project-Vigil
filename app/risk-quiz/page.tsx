@@ -25,11 +25,9 @@ export default function RiskQuizPage() {
             title={
               <>
                 Take the scam pre-quiz
-                <br />
-                <span className="gradient-text-red">before the knowledge test.</span>
               </>
             }
-            description="Start with the embedded Google Form below, then move into the in-site knowledge check once you&apos;ve finished."
+            description="Start with the embedded Google Form below, then move into the post-quiz follow-up once you&apos;re ready."
             align="left"
             actions={
               <>
@@ -44,15 +42,15 @@ export default function RiskQuizPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0-5 5m5-5H6" />
                   </svg>
                 </Link>
-                <Link href="/risk-quiz/results" className="btn-ghost px-8 py-4 text-base rounded-2xl">
-                  Continue to Knowledge Test
+                <Link href="/risk-quiz/post-quiz" className="btn-ghost px-8 py-4 text-base rounded-2xl">
+                  Go to Post Quiz
                 </Link>
               </>
             }
             stats={[
               { label: "Embedded pre-quiz", tone: "info" },
               { label: "Anonymous", tone: "default" },
-              { label: "Knowledge test follows", tone: "danger" },
+              { label: "Post quiz follows", tone: "danger" },
             ]}
           />
 
@@ -79,7 +77,7 @@ export default function RiskQuizPage() {
             </div>
 
             <p className="mb-4 max-w-2xl text-sm leading-relaxed text-white/46">
-              If the embedded form feels cramped on your device, use the direct Google Forms link instead, then come back here for the in-site knowledge check.
+              If the embedded form feels cramped on your device, use the direct Google Forms link instead, then come back here to continue the quiz flow.
             </p>
 
             <div className="overflow-hidden rounded-[22px] border border-white/10 bg-white">

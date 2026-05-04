@@ -9,10 +9,10 @@ export const COLORS = {
 } as const;
 
 export const NAV_LINKS = [
+  { label: "Pre & Post Quiz", href: "/risk-quiz", description: "Complete the quiz flow.", tone: COLORS.red },
   { label: "Trending", href: "/trending-scams", description: "Track active scam patterns.", tone: COLORS.red },
   { label: "Guide", href: "/guide", description: "Learn every attack type.", tone: COLORS.cyan },
   { label: "Stories", href: "/stories", description: "Read real teen experiences.", tone: "#f59e0b" },
-  { label: "Risk Quiz", href: "/risk-quiz", description: "Test your exposure.", tone: COLORS.red },
   { label: "Alerts", href: "/alerts", description: "See the latest verified threats.", tone: COLORS.red },
   { label: "Emergency", href: "/emergency", description: "What to do right now.", tone: COLORS.orange },
   { label: "Simulator", href: "/simulator", description: "Practice spotting fakes.", tone: COLORS.cyan },
@@ -21,10 +21,10 @@ export const NAV_LINKS = [
 ] as const;
 
 export const PRIMARY_NAV_LINKS = [
+  "/risk-quiz",
   "/trending-scams",
   "/guide",
   "/stories",
-  "/risk-quiz",
   "/alerts",
   "/emergency",
   "/pokedex",
@@ -43,8 +43,8 @@ export const FOOTER_GROUPS = [
   {
     title: "Practice",
     links: [
-      { label: "AI Risk Quiz", href: "/risk-quiz" },
-      { label: "Test Knowledge", href: "/risk-quiz/results" },
+      { label: "Pre Quiz", href: "/risk-quiz" },
+      { label: "Post Quiz", href: "/risk-quiz/post-quiz" },
       { label: "Real Stories", href: "/stories" },
       { label: "Scam Alerts", href: "/alerts" },
     ],

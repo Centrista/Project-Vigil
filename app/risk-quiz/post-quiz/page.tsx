@@ -4,7 +4,7 @@ import QuizTabs from "@/components/QuizTabs";
 
 export const metadata = {
   title: "Post Quiz — Project Vigil",
-  description: "Finish the follow-up post quiz after completing the knowledge check.",
+  description: "Finish the follow-up post quiz to complete the assessment flow.",
 };
 
 const POST_QUIZ_FORM_URL =
@@ -23,7 +23,7 @@ export default function PostQuizPage() {
             <>
               Finish the follow-up
               <br />
-              <span className="gradient-text-red">after the knowledge test.</span>
+              <span className="gradient-text-red">to complete the flow.</span>
             </>
           }
           description="Use the embedded Google Form below to complete the post-quiz step and close out the full assessment flow."
@@ -46,8 +46,8 @@ export default function PostQuizPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0-5 5m5-5H6" />
                 </svg>
               </Link>
-              <Link href="/risk-quiz/results" className="btn-ghost px-8 py-4 text-base rounded-2xl">
-                Back to Knowledge Test
+              <Link href="/risk-quiz" className="btn-ghost px-8 py-4 text-base rounded-2xl">
+                Back to Pre Quiz
               </Link>
             </>
           }

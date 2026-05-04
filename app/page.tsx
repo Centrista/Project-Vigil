@@ -160,8 +160,8 @@ export default function Home() {
                 </p>
               </div>
               <div className="hero-actions lg:justify-end">
-                <Link href="/risk-quiz/results" className="btn-ghost px-6 py-3 text-sm">
-                  Test Your Knowledge
+                <Link href="/risk-quiz" className="btn-ghost px-6 py-3 text-sm">
+                  Start Pre Quiz
                 </Link>
                 <Link href="/guide" className="btn-red px-6 py-3 text-sm">
                   Study the Attacks
