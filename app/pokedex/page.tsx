@@ -54,13 +54,14 @@ function PokedexCard({ entry }: { entry: PokedexEntry }) {
         </div>
         <div className="relative flex items-center justify-center py-3">
           <div
-            className="w-16 h-16 rounded-xl flex items-center justify-center text-4xl"
+            className="mono-label flex h-16 w-16 items-center justify-center rounded-xl text-sm font-black tracking-[0.2em]"
             style={{
               background: `${entry.typeColor}12`,
               border: `1px solid ${entry.typeColor}25`,
+              color: `${entry.typeColor}cc`,
             }}
           >
-            {entry.emoji}
+            {entryNum}
           </div>
         </div>
       </div>

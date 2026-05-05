@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 interface ScamCardProps {
-  icon?: string;
   title: string;
   description: string;
   warning?: string;
@@ -13,7 +12,6 @@ interface ScamCardProps {
 }
 
 export default function ScamCard({
-  icon,
   title,
   description,
   warning,
@@ -38,9 +36,6 @@ export default function ScamCard({
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 flex-1">
-          {icon && (
-            <span className="text-2xl shrink-0 mt-0.5">{icon}</span>
-          )}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1.5">
               <h3 className="font-bold text-white text-base">{title}</h3>

@@ -16,7 +16,7 @@ export default function PostQuizPage() {
     <div className="w-full overflow-x-hidden">
       <QuizTabs active="post" />
 
-      <div className="page-frame page-frame-tight pt-14 pb-28">
+      <div className="page-frame page-frame-tight pt-8 pb-28">
         <PageIntro
           eyebrow="Post Quiz"
           title={

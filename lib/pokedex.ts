@@ -3,7 +3,6 @@ export interface PokedexEntry {
   name: string;
   type: string;
   typeColor: string;
-  emoji: string;
   description: string;
   strengths: string[];
   weaknesses: string[];
@@ -18,7 +17,6 @@ export interface PokedexEntry {
 //   name: "VoiceJack",
 //   type: "Deepfake",
 //   typeColor: "#ff6d00",
-//   emoji: "🎙️",
 //   description: "Clones a family member's voice from public audio in under 30 seconds, then calls the target pretending to be in distress.",
 //   strengths: [
 //     "Voice indistinguishable from real person",

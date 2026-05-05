@@ -206,7 +206,7 @@ export default function KnowledgeQuiz() {
                     className="ml-auto mono-label text-xs font-black"
                     style={{ color: isCorrect ? "#22c55e" : "#ff1744" }}
                   >
-                    {isCorrect ? "✓ CORRECT" : "✗ WRONG"}
+                    {isCorrect ? "CORRECT" : "WRONG"}
                   </span>
                 )}
               </div>

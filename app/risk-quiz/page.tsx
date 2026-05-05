@@ -19,7 +19,7 @@ export default function RiskQuizPage() {
       <div className="relative overflow-hidden bg-grid">
         <div className="orb absolute -top-20 right-0 w-80 h-80 opacity-15" style={{ backgroundColor: "#ff1744" }} />
 
-        <div className="page-frame page-frame-tight relative z-10 pb-28 pt-14">
+        <div className="page-frame page-frame-tight relative z-10 pb-28 pt-8">
           <PageIntro
             eyebrow="AI Scam Risk Assessment"
             title={
