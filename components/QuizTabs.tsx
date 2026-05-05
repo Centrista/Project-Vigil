@@ -1,11 +1,12 @@
 import Link from "next/link";
 
 interface QuizTabsProps {
-  active: "pre" | "post";
+  active: "vulnerability" | "pre" | "post";
 }
 
 export default function QuizTabs({ active }: QuizTabsProps) {
   const tabs = [
+    { id: "vulnerability" as const, label: "Vulnerability Quiz", href: "/risk-quiz/vulnerability" },
     { id: "pre" as const, label: "Pre Quiz", href: "/risk-quiz" },
     { id: "post" as const, label: "Post Quiz", href: "/risk-quiz/post-quiz" },
   ];
