@@ -169,7 +169,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
             }}
           >
             <p className="mono-label text-xs font-black uppercase tracking-widest mb-4" style={{ color: "#22c55e" }}>
-              ✓ What to do instead
+              What to do instead
             </p>
             <ul className="space-y-2.5">
               {story.whatToDoInstead.map((step, i) => (

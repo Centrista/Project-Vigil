@@ -28,6 +28,7 @@ function Section({
 
 export default function GuideCard({ entry }: { entry: GuideEntry }) {
   const [expanded, setExpanded] = useState(false);
+  const entryBadge = String(entry.id).padStart(2, "0");
 
   return (
     <div
@@ -54,13 +55,14 @@ export default function GuideCard({ entry }: { entry: GuideEntry }) {
         <div className="flex items-start gap-3">
           {/* Icon box */}
           <div
-            className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center text-2xl"
+            className="mono-label shrink-0 flex h-11 w-11 items-center justify-center rounded-xl text-[11px] font-black tracking-[0.18em]"
             style={{
               background: `${entry.categoryColor}15`,
               border: `1px solid ${entry.categoryColor}30`,
+              color: `${entry.categoryColor}cc`,
             }}
           >
-            {entry.icon}
+            {entryBadge}
           </div>
 
           {/* Text block */}

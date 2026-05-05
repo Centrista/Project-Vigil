@@ -11,21 +11,27 @@ export default function QuizTabs({ active }: QuizTabsProps) {
   ];
 
   return (
-    <div
-      className="sticky top-[76px] z-40 w-full border-b border-white/8"
-      style={{ backgroundColor: "rgba(9,16,33,0.88)", backdropFilter: "blur(16px)" }}
-    >
-      <div className="mx-auto max-w-3xl px-4 py-3 sm:px-6 lg:px-8">
-        <div className="-mx-4 overflow-x-auto px-4 [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden">
-          <div className="inline-flex min-w-full items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] p-1.5 sm:min-w-0">
+    <div className="sticky top-[74px] z-40 w-full">
+      <div className="mx-auto max-w-3xl px-4 pb-1 pt-2 sm:px-6 sm:pt-2.5 lg:px-8">
+        <div className="flex justify-center">
+          <div
+            className="inline-flex min-w-[280px] items-center gap-1 rounded-full border border-white/8 p-1"
+            style={{
+              backgroundColor: "rgba(15, 24, 40, 0.78)",
+              backdropFilter: "blur(16px)",
+              boxShadow: "0 12px 28px rgba(0,0,0,0.18)",
+            }}
+          >
             {tabs.map((tab) => {
               const isActive = tab.id === active;
               return (
                 <Link
                   key={tab.id}
                   href={tab.href}
-                  className={`relative flex min-w-[140px] flex-1 items-center justify-center rounded-full px-4 py-3 text-sm font-semibold transition-all duration-150 ${
-                    isActive ? "nav-link-active bg-white/[0.06] text-white" : "text-white/42 hover:bg-white/[0.05] hover:text-white/88"
+                  className={`flex min-w-[132px] flex-1 items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition-all duration-150 ${
+                    isActive
+                      ? "border border-white/10 bg-white/[0.08] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+                      : "text-white/40 hover:bg-white/[0.04] hover:text-white/78"
                   }`}
                 >
                   <span className="whitespace-nowrap">{tab.label}</span>
