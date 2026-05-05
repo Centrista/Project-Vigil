@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
-import QuizTabs from "@/components/QuizTabs";
+import QuizSideSwitcher from "@/components/QuizSideSwitcher";
 
 export const metadata = {
   title: "AI Scam Risk Quiz — Project Vigil",
@@ -14,7 +14,7 @@ const PRE_QUIZ_FORM_EMBED_URL = `${PRE_QUIZ_FORM_URL}?embedded=true`;
 export default function RiskQuizPage() {
   return (
     <div className="w-full overflow-x-hidden">
-      <QuizTabs active="pre" />
+      <QuizSideSwitcher active="pre" />
 
       <div className="relative overflow-hidden bg-grid">
         <div className="orb absolute -top-20 right-0 w-80 h-80 opacity-15" style={{ backgroundColor: "#ff1744" }} />

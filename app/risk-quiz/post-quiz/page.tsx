@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
-import QuizTabs from "@/components/QuizTabs";
+import QuizSideSwitcher from "@/components/QuizSideSwitcher";
 
 export const metadata = {
   title: "Post Quiz — Project Vigil",
@@ -14,7 +14,7 @@ const POST_QUIZ_FORM_EMBED_URL = `${POST_QUIZ_FORM_URL}?embedded=true`;
 export default function PostQuizPage() {
   return (
     <div className="w-full overflow-x-hidden">
-      <QuizTabs active="post" />
+      <QuizSideSwitcher active="post" />
 
       <div className="page-frame page-frame-tight pt-2 pb-28">
         <PageIntro
