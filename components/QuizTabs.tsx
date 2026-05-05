@@ -11,9 +11,9 @@ export default function QuizTabs({ active }: QuizTabsProps) {
   ];
 
   return (
-    <div className="sticky top-[76px] z-40 w-full">
+    <div className="sticky top-[76px] z-40 w-full -mt-1">
       <div
-        className="-mt-px border-b border-white/8"
+        className="border-b border-white/8"
         style={{ backgroundColor: "rgba(9,16,33,0.9)", backdropFilter: "blur(16px)" }}
       >
         <div className="mx-auto max-w-3xl px-4 pb-0 pt-0 sm:px-6 lg:px-8">
