@@ -16,7 +16,7 @@ export default function QuizTabs({ active }: QuizTabsProps) {
         className="-mt-px border-b border-white/8"
         style={{ backgroundColor: "rgba(9,16,33,0.9)", backdropFilter: "blur(16px)" }}
       >
-        <div className="mx-auto max-w-3xl px-4 py-2 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl px-4 pb-2 pt-0 sm:px-6 lg:px-8">
           <div className="flex justify-center">
             <div
               className="inline-flex min-w-[280px] items-center gap-1 rounded-full border border-white/8 p-1"
