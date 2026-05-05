@@ -12,7 +12,7 @@ export default function QuizTabs({ active }: QuizTabsProps) {
   ];
 
   return (
-    <div className="sticky z-40 w-full" style={{ top: "76px", marginTop: "-16px" }}>
+    <div className="sticky z-40 w-full" style={{ top: "76px", marginTop: "-40px" }}>
       <div
         className="border-b border-white/8"
         style={{ backgroundColor: "rgba(9,16,33,0.9)", backdropFilter: "blur(16px)" }}
