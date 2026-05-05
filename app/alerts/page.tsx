@@ -91,16 +91,6 @@ export default function AlertsPage() {
             { label: "Updated bi-weekly", tone: "default" },
             { label: `${ALERTS.length} verified alerts`, tone: "danger" },
           ]}
-          actions={
-            <>
-              <Link href="/submit-scam" className="btn-red px-6 py-3 text-sm">
-                Submit a Scam
-              </Link>
-              <Link href="/guide" className="btn-ghost px-6 py-3 text-sm">
-                Browse Guide
-              </Link>
-            </>
-          }
         />
 
         {ALERTS.length === 0 ? (

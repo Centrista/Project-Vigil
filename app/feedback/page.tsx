@@ -26,19 +26,14 @@ export default function FeedbackPage() {
               { label: "Opens in place", tone: "success" },
             ]}
             actions={
-              <>
-                <Link
-                  href={FEEDBACK_FORM_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-red px-6 py-3 text-sm"
-                >
-                  Open in Google Forms
-                </Link>
-                <Link href="/trending-scams" className="btn-ghost px-6 py-3 text-sm">
-                  Browse Trending Scams
-                </Link>
-              </>
+              <Link
+                href={FEEDBACK_FORM_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-red px-6 py-3 text-sm"
+              >
+                Open in Google Forms
+              </Link>
             }
           />
 

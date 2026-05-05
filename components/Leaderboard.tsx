@@ -2,13 +2,12 @@ interface LeaderboardEntry {
   rank: number;
   name: string;
   score: number;
-  badge?: string;
 }
 
 const PLACEHOLDER_DATA: LeaderboardEntry[] = [
-  { rank: 1, name: "ScamBuster99", score: 2850, badge: "🥇" },
-  { rank: 2, name: "VigilantV", score: 2610, badge: "🥈" },
-  { rank: 3, name: "SafeKid_22", score: 2400, badge: "🥉" },
+  { rank: 1, name: "ScamBuster99", score: 2850 },
+  { rank: 2, name: "VigilantV", score: 2610 },
+  { rank: 3, name: "SafeKid_22", score: 2400 },
   { rank: 4, name: "NetGuard", score: 2200 },
   { rank: 5, name: "PhishSlayer", score: 2100 },
   { rank: 6, name: "TruthSeeker", score: 1950 },
@@ -38,10 +37,15 @@ export default function Leaderboard() {
             key={entry.rank}
             className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition-colors"
           >
-            <span className="w-7 text-center text-sm font-bold">
-              {entry.badge ?? (
-                <span className="text-white/30">#{entry.rank}</span>
-              )}
+            <span
+              className="inline-flex h-7 w-7 items-center justify-center rounded-full border text-[11px] font-black"
+              style={{
+                borderColor: entry.rank <= 3 ? "rgba(255,255,255,0.14)" : "rgba(255,255,255,0.08)",
+                color: entry.rank <= 3 ? "#ffffff" : "rgba(255,255,255,0.3)",
+                background: entry.rank <= 3 ? "rgba(255,255,255,0.06)" : "transparent",
+              }}
+            >
+              {entry.rank}
             </span>
             <span className="flex-1 text-sm font-medium text-white/80">{entry.name}</span>
             <span className="text-sm font-bold tabular-nums" style={{ color: "#00d4ff" }}>

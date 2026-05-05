@@ -1,4 +1,3 @@
-import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 
 export const metadata = {
@@ -36,16 +35,6 @@ export default function EmergencyPage() {
               { label: "Keep evidence", tone: "default" },
               { label: "Lock down accounts", tone: "warm" },
             ]}
-            actions={
-              <>
-                <Link href="/alerts" className="btn-red px-6 py-3 text-sm">
-                  Check Current Alerts
-                </Link>
-                <Link href="/guide" className="btn-ghost px-6 py-3 text-sm">
-                  Open the Guide
-                </Link>
-              </>
-            }
           />
 
           <div className="premium-panel premium-panel-danger p-6 sm:p-8">

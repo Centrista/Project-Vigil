@@ -22,10 +22,6 @@ export default function SubmitScamPage() {
         "Fields tailored to voice clones, deepfakes, phishing, and romance bots.",
         "A cleaner bridge between user reports and the alerts/trending pipeline.",
       ]}
-      primaryHref="/alerts"
-      primaryLabel="View Scam Alerts"
-      secondaryHref="/feedback"
-      secondaryLabel="Send Feedback"
       accentTone="info"
     />
   );

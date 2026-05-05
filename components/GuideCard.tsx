@@ -104,12 +104,12 @@ export default function GuideCard({ entry }: { entry: GuideEntry }) {
           style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
         >
           {/* What Is It */}
-          <Section label="📖 What Is It" accentColor={entry.categoryColor}>
+          <Section label="What It Is" accentColor={entry.categoryColor}>
             <p className="text-sm text-white/62 leading-relaxed">{entry.whatIsIt}</p>
           </Section>
 
           {/* How It Works */}
-          <Section label="⚙️ How It Works" accentColor={entry.categoryColor}>
+          <Section label="How It Works" accentColor={entry.categoryColor}>
             <ol className="space-y-2">
               {entry.howItWorks.map((step, i) => (
                 <li key={i} className="flex items-start gap-2.5">
@@ -129,7 +129,7 @@ export default function GuideCard({ entry }: { entry: GuideEntry }) {
           </Section>
 
           {/* Red Flags */}
-          <Section label="🚩 Red Flags" accentColor="#ff1744">
+          <Section label="Red Flags" accentColor="#ff1744">
             <ul className="space-y-2">
               {entry.redFlags.map((flag, i) => (
                 <li key={i} className="flex items-start gap-2.5">
@@ -144,7 +144,7 @@ export default function GuideCard({ entry }: { entry: GuideEntry }) {
           </Section>
 
           {/* What To Do */}
-          <Section label="✅ What To Do" accentColor="#22c55e">
+          <Section label="What To Do" accentColor="#22c55e">
             <ul className="space-y-2">
               {entry.whatToDo.map((action, i) => (
                 <li key={i} className="flex items-start gap-2.5">
@@ -159,7 +159,7 @@ export default function GuideCard({ entry }: { entry: GuideEntry }) {
           </Section>
 
           {/* By The Numbers */}
-          <Section label="📊 By The Numbers" accentColor={entry.categoryColor}>
+          <Section label="By The Numbers" accentColor={entry.categoryColor}>
             <div
               className="rounded-xl p-4"
               style={{
@@ -174,7 +174,7 @@ export default function GuideCard({ entry }: { entry: GuideEntry }) {
           </Section>
 
           {/* Teen Story */}
-          <Section label="💬 Real Story" accentColor="#ffa700">
+          <Section label="Real Story" accentColor="#ffa700">
             <div
               className="rounded-xl p-4 relative"
               style={{

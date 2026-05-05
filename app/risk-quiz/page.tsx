@@ -30,22 +30,17 @@ export default function RiskQuizPage() {
             description="Start with the embedded Google Form below, then move into the post-quiz follow-up once you&apos;re ready."
             align="left"
             actions={
-              <>
-                <Link
-                  href={PRE_QUIZ_FORM_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-red px-8 py-4 text-base rounded-2xl"
-                >
-                  Open in Google Forms
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0-5 5m5-5H6" />
-                  </svg>
-                </Link>
-                <Link href="/risk-quiz/post-quiz" className="btn-ghost px-8 py-4 text-base rounded-2xl">
-                  Go to Post Quiz
-                </Link>
-              </>
+              <Link
+                href={PRE_QUIZ_FORM_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-red px-8 py-4 text-base rounded-2xl"
+              >
+                Open in Google Forms
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0-5 5m5-5H6" />
+                </svg>
+              </Link>
             }
             stats={[
               { label: "Embedded pre-quiz", tone: "info" },
@@ -55,25 +50,13 @@ export default function RiskQuizPage() {
           />
 
           <div className="premium-panel premium-panel-info mt-10 overflow-hidden p-4 sm:p-5">
-            <div className="eyebrow-row mb-4 flex-wrap justify-between gap-3">
+            <div className="eyebrow-row mb-4">
               <div className="flex items-center gap-2">
                 <span className="premium-dot" />
                 <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/42">
                   Embedded Pre-Quiz
                 </span>
               </div>
-              <Link
-                href={PRE_QUIZ_FORM_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="mono-label inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/54 transition-colors hover:text-white"
-              >
-                Open in new tab
-                <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5h5m0 0v5m0-5L10 14" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M19 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4" />
-                </svg>
-              </Link>
             </div>
 
             <p className="mb-4 max-w-2xl text-sm leading-relaxed text-white/46">

@@ -78,7 +78,7 @@ function PokedexCard({ entry }: { entry: PokedexEntry }) {
         {entry.strengths.length > 0 && (
           <div className="mb-3">
             <div className="mono-label text-[10px] font-black uppercase tracking-widest text-white/30 mb-1.5">
-              ⚡ Why It Works
+              Why It Works
             </div>
             <ul className="space-y-1">
               {entry.strengths.map((s, i) => (
@@ -95,7 +95,7 @@ function PokedexCard({ entry }: { entry: PokedexEntry }) {
         {entry.weaknesses.length > 0 && (
           <div className="mb-3">
             <div className="mono-label text-[10px] font-black uppercase tracking-widest text-white/30 mb-1.5">
-              🛡 Red Flags
+              Red Flags
             </div>
             <ul className="space-y-1">
               {entry.weaknesses.map((w, i) => (
@@ -112,7 +112,7 @@ function PokedexCard({ entry }: { entry: PokedexEntry }) {
         {entry.habitat.length > 0 && (
           <div className="mb-4">
             <div className="mono-label text-[10px] font-black uppercase tracking-widest text-white/30 mb-1.5">
-              📍 Habitat
+              Habitat
             </div>
             <div className="flex flex-wrap gap-1.5">
               {entry.habitat.map((h, i) => (

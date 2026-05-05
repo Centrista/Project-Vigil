@@ -18,10 +18,6 @@ export default function SimulatorPage() {
         "Scenario-based scoring so you can see where your instinct breaks.",
         "Clear jump-off paths into the guide and quiz after every drill.",
       ]}
-      primaryHref="/guide"
-      primaryLabel="Study the Guide"
-      secondaryHref="/risk-quiz"
-      secondaryLabel="Take the Quiz"
       accentTone="info"
     />
   );

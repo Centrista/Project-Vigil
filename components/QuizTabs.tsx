@@ -6,8 +6,8 @@ interface QuizTabsProps {
 
 export default function QuizTabs({ active }: QuizTabsProps) {
   const tabs = [
-    { id: "pre" as const, label: "Pre Quiz", href: "/risk-quiz", icon: "🎯" },
-    { id: "post" as const, label: "Post Quiz", href: "/risk-quiz/post-quiz", icon: "✅" },
+    { id: "pre" as const, label: "Pre Quiz", href: "/risk-quiz" },
+    { id: "post" as const, label: "Post Quiz", href: "/risk-quiz/post-quiz" },
   ];
 
   return (
@@ -24,11 +24,10 @@ export default function QuizTabs({ active }: QuizTabsProps) {
                 <Link
                   key={tab.id}
                   href={tab.href}
-                  className={`relative flex shrink-0 items-center gap-2 rounded-full px-3.5 py-3 text-sm font-semibold transition-all duration-150 sm:px-4 ${
+                  className={`relative flex min-w-[140px] flex-1 items-center justify-center rounded-full px-4 py-3 text-sm font-semibold transition-all duration-150 ${
                     isActive ? "nav-link-active bg-white/[0.06] text-white" : "text-white/42 hover:bg-white/[0.05] hover:text-white/88"
                   }`}
                 >
-                  <span>{tab.icon}</span>
                   <span className="whitespace-nowrap">{tab.label}</span>
                 </Link>
               );

@@ -15,7 +15,7 @@ interface Question {
 const QUESTIONS: Question[] = [
   {
     n: 1,
-    tag: "🎙️ Voice Cloning",
+    tag: "Voice Cloning",
     scenario:
       "Your mom calls in a panic saying she needs $200 wired immediately. The voice sounds exactly like her — same tone, same accent, same way she says your name.",
     options: [
@@ -30,7 +30,7 @@ const QUESTIONS: Question[] = [
   },
   {
     n: 2,
-    tag: "📧 AI Phishing",
+    tag: "AI Phishing",
     scenario:
       "An email arrives with your real name, your school, and your teacher's name. It asks you to click a link to verify your student account. Zero typos. Looks completely official.",
     options: [
@@ -45,7 +45,7 @@ const QUESTIONS: Question[] = [
   },
   {
     n: 3,
-    tag: "🎭 Deepfake Interview",
+    tag: "Deepfake Interview",
     scenario:
       "A job on Instagram DMs you $25/hr remote work. During the video interview the face on screen looks slightly off around the edges. They ask for your SSN for 'tax forms' before your first day.",
     options: [
@@ -60,7 +60,7 @@ const QUESTIONS: Question[] = [
   },
   {
     n: 4,
-    tag: "💔 Romance Bot",
+    tag: "Romance Bot",
     scenario:
       "You've been messaging someone on Instagram for 3 weeks. Great conversations every day. They suddenly have an emergency and ask for a $50 gift card. You've never done a live video call.",
     options: [
@@ -75,7 +75,7 @@ const QUESTIONS: Question[] = [
   },
   {
     n: 5,
-    tag: "📞 AI Robocall",
+    tag: "AI Robocall",
     scenario:
       "A caller says they're from your bank. Your account was compromised and they need you to confirm your card number to re-secure it. They already know your name and the last 4 digits of your card.",
     options: [
@@ -94,21 +94,18 @@ const PROFILES = [
   {
     min: 5,
     level: "Digital Defender",
-    emoji: "🛡️",
     color: "#00d4ff",
     desc: "You think before you act. You understand how AI weaponizes urgency. Keep this mindset — and teach someone else.",
   },
   {
     min: 3,
     level: "Cautious Clicker",
-    emoji: "👀",
     color: "#ffa700",
     desc: "Your instincts are mostly right but AI's best attacks still have angles on you. Study the ones you missed.",
   },
   {
     min: 0,
     level: "Easy Target",
-    emoji: "🎯",
     color: "#ff1744",
     desc: "The AI scams that fooled you work because they exploit real emotions. Now you know how — that's the first defense.",
   },
@@ -320,7 +317,10 @@ export default function KnowledgeQuiz() {
               background: `linear-gradient(135deg, ${profile.color}10 0%, rgba(26,31,46,0) 60%)`,
             }}
           >
-            <div className="text-5xl mb-4">{profile.emoji}</div>
+            <div
+              className="mx-auto mb-5 h-1.5 w-24 rounded-full"
+              style={{ background: `linear-gradient(90deg, ${profile.color}, rgba(255,255,255,0.14))` }}
+            />
             <div
               className="mono-label text-xs font-bold uppercase tracking-widest mb-2"
               style={{ color: profile.color }}
