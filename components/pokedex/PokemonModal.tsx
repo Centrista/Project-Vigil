@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import PokemonDetailPanel from "@/components/pokedex/PokemonDetailPanel";
+import { playWhooshSound } from "@/lib/sounds";
 import type { PokemonScam } from "@/lib/pokedex";
 
 const CLOSE_DURATION_MS = 360;
@@ -32,6 +33,13 @@ export default function PokemonModal({
       return;
     }
 
+    // Play close whoosh sound
+    try {
+      playWhooshSound('close');
+    } catch (error) {
+      // Silently ignore sound errors
+    }
+
     setIsClosing(true);
     window.setTimeout(() => {
       onCloseComplete();
@@ -41,6 +49,13 @@ export default function PokemonModal({
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    
+    // Play open whoosh sound
+    try {
+      playWhooshSound('open');
+    } catch (error) {
+      // Silently ignore sound errors (autoplay policy restrictions)
+    }
 
     return () => {
       document.body.style.overflow = previousOverflow;
