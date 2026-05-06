@@ -1223,8 +1223,8 @@ h4 {
 .pokedex-card-body {
   margin-top: auto;
   display: grid;
-  gap: 0.22rem;
-  padding: 0.72rem 0.78rem 0.76rem;
+  gap: 0.35rem;
+  padding: 0.85rem 0.78rem 0.85rem;
   border-radius: 18px;
   border: 1px solid rgba(255, 222, 128, 0.46);
   background: linear-gradient(180deg, rgba(255, 248, 222, 0.98) 0%, rgba(245, 228, 169, 0.94) 100%);
@@ -1239,10 +1239,11 @@ h4 {
 }
 
 .pokedex-card-tagline {
-  color: rgba(20, 33, 56, 0.92);
-  font-size: 0.78rem;
-  line-height: 1.4;
-  font-weight: 700;
+  color: rgba(20, 33, 56, 0.96);
+  font-size: 1.15rem;
+  line-height: 1.3;
+  font-weight: 900;
+  letter-spacing: -0.02em;
 }
 
 .pokedex-card-caption {
