@@ -113,7 +113,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        </ScrollReveal>
       </section>
 
       <section className="page-section">
@@ -160,7 +159,6 @@ export default function Home() {
       <section className="page-section">
         <div className="page-frame">
           <ScrollReveal>
-        <div className="page-frame">
           <div className="premium-panel overflow-hidden">
             <div className="grid gap-8 border-b border-white/8 px-6 py-7 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
               <div>
@@ -216,6 +214,7 @@ export default function Home() {
               </svg>
             </span>
           </Link>
+          </ScrollReveal>
         </div>
       </section>
     </div>
