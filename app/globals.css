@@ -1833,6 +1833,54 @@ h4 {
   }
 }
 
+/* ── WARM LIGHT ACCENTS ── */
+.warm-panel {
+  background: linear-gradient(180deg, rgba(255,250,232,0.98) 0%, rgba(244,231,183,0.94) 100%);
+  border-color: rgba(255,222,128,0.5) !important;
+  color: #1d2a43;
+}
+
+.card-rail-link-warm {
+  background: rgba(255,248,222,0.96);
+  border-color: rgba(255,222,128,0.4) !important;
+  color: #131b30;
+}
+
+.premium-panel-amber {
+  border-color: rgba(255,109,0,0.22) !important;
+  background: linear-gradient(180deg, rgba(255,109,0,0.09) 0%, rgba(18,25,43,0.96) 100%);
+}
+
+.scam-card-surface {
+  background-color: rgba(28,35,56,0.92);
+  border-top: 1px solid rgba(255,224,112,0.12);
+}
+
+/* Scroll reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes card-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.pokedex-card:hover {
+  animation: card-float 3s ease-in-out infinite;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .surface-grid-3 {

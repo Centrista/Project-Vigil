@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ScamDemo from "@/components/ScamDemo";
+import ScrollReveal from "@/components/ScrollReveal";
 import { ALERTS } from "@/lib/alerts";
 import { GUIDE_ENTRIES } from "@/lib/guide-data";
 import { HOME_DESTINATIONS, SCAM_TYPES } from "@/lib/constants";
@@ -112,22 +113,30 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       <section className="page-section">
+        <ScrollReveal>
+        <ScrollReveal>
         <div className="page-frame">
-          <div className="premium-panel overflow-hidden">
-            <div className="grid gap-6 border-b border-white/8 px-6 py-6 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <div className="warm-panel overflow-hidden">
+            <div className="grid gap-6 border-b border-[rgba(255,222,128,0.3)] px-6 py-6 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
               <div>
-                <div className="hero-kicker mb-4">Choose your path</div>
+                <div className="hero-kicker mb-4" style={{ color: "#9d7d2d" }}>Choose your path</div>
                 <h2 className="section-title mb-3 max-w-sm">Start where you need clarity most.</h2>
                 <p className="section-copy max-w-md">
                   Learn the attacks, test yourself, scan current threats, or move straight into response mode.
                 </p>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {HOME_DESTINATIONS.map((item) => (
-                  <Link key={item.href} href={item.href} className="card-rail-link group">
+                {HOME_DESTINATIONS.map((item, index) => (
+                  <Link 
+                    key={item.href} 
+                    href={item.href} 
+                    className="card-rail-link-warm group fade-up"
+                    style={{ animationDelay: `${index * 80}ms` }}
+                  >
                     <div className="flex items-center justify-between gap-3">
                       <span className="mono-label text-xs font-black" style={{ color: item.accent }}>
                         {item.n}
@@ -146,9 +155,11 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       <section className="page-section">
+        <ScrollReveal>
         <div className="page-frame">
           <div className="premium-panel overflow-hidden">
             <div className="grid gap-8 border-b border-white/8 px-6 py-7 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
@@ -173,13 +184,15 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       <section className="page-section">
+        <ScrollReveal>
         <div className="page-frame">
           <Link
             href="/emergency"
-            className="premium-panel premium-panel-danger group flex flex-col gap-5 px-6 py-6 sm:px-8 lg:flex-row lg:items-center"
+            className="premium-panel premium-panel-amber group flex flex-col gap-5 px-6 py-6 sm:px-8 lg:flex-row lg:items-center"
           >
             <div className="flex items-center gap-4">
               <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-[#ff1744]/18 bg-[#ff1744]/10">

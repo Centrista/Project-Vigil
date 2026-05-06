@@ -118,7 +118,7 @@ export default function TrendingScamCard({
 
       <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-[20px] border border-white/10 bg-white/[0.03] p-4">
+          <div className="rounded-[20px] border border-[rgba(255,224,112,0.15)] bg-[rgba(255,248,222,0.07)] p-4">
             <div className="mono-label mb-2 text-[10px] uppercase tracking-[0.22em] text-white/34">Reports this week</div>
             <div className="flex items-center gap-2">
               <span className="text-2xl font-black text-white">{item.reportsThisWeek}</span>
@@ -127,7 +127,7 @@ export default function TrendingScamCard({
               </span>
             </div>
           </div>
-          <div className="rounded-[20px] border border-white/10 bg-white/[0.03] p-4">
+          <div className="rounded-[20px] border border-[rgba(255,224,112,0.15)] bg-[rgba(255,248,222,0.07)] p-4">
             <div className="mono-label mb-2 text-[10px] uppercase tracking-[0.22em] text-white/34">Last reported</div>
             <div className="text-base font-semibold text-white">{item.reportedAt}</div>
             <div className="mt-1 text-xs text-white/34">Placeholder verification timestamp</div>
@@ -138,7 +138,7 @@ export default function TrendingScamCard({
           <div className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-semibold text-white/72">
             7-day spike
           </div>
-          <div className="pointer-events-none absolute right-0 top-[calc(100%+0.75rem)] hidden w-40 rounded-2xl border border-white/10 bg-[#0f1426]/95 p-3 shadow-[0_18px_36px_rgba(0,0,0,0.42)] group-hover:block">
+          <div className="pointer-events-none absolute right-0 top-[calc(100%+0.75rem)] hidden w-40 rounded-2xl border border-[rgba(255,224,112,0.2)] bg-[rgba(28,35,56,0.95)] p-3 shadow-[0_18px_36px_rgba(0,0,0,0.42)] group-hover:block">
             <div className="mb-2 flex items-end gap-1">
               {[28, 18, 36, 42, 24, 48, 30].map((height, barIndex) => (
                 <div

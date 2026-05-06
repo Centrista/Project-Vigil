@@ -28,10 +28,10 @@ const THREAT_META: Record<
 > = {
   critical: {
     label: "CRITICAL",
-    tone: "rgba(255,23,68,0.12)",
-    border: "rgba(255,23,68,0.28)",
-    fill: "linear-gradient(90deg, #ff1744 0%, #ff4d6d 100%)",
-    chip: "premium-chip premium-chip-danger",
+    tone: "rgba(255,109,0,0.12)",
+    border: "rgba(255,109,0,0.28)",
+    fill: "linear-gradient(90deg, #ff6d00 0%, #ffa500 100%)",
+    chip: "premium-chip premium-chip-warm",
     pulseClass: "threat-heartbeat",
   },
   high: {

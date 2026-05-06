@@ -31,8 +31,7 @@ export default function ScamCard({
 
   return (
     <div
-      className="rounded-xl border border-white/10 p-5 transition-all duration-200 hover:border-white/20"
-      style={{ backgroundColor: "#1a1f2e" }}
+      className="scam-card-surface rounded-xl border border-white/10 p-5 transition-all duration-200 hover:border-white/20"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 flex-1">
