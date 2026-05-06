@@ -1,4 +1,4 @@
-export function playWhooshSound(type: 'open' | 'close' = 'open') {
+export function playWhooshSound(type: 'open' | 'close' | 'smoosh' = 'open') {
   // Only play if user has interacted with the page (browser autoplay policy)
   const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
 
@@ -45,7 +45,7 @@ export function playWhooshSound(type: 'open' | 'close' = 'open') {
     noiseGain.gain.exponentialRampToValueAtTime(0.01, now + duration);
 
     noiseSource.start(now);
-  } else {
+  } else if (type === 'close') {
     // Whoosh close: frequency sweep down with quick decay
     const now = audioContext.currentTime;
     const duration = 0.25;
@@ -66,5 +66,50 @@ export function playWhooshSound(type: 'open' | 'close' = 'open') {
 
     oscillator.start(now);
     oscillator.stop(now + duration);
+  } else if (type === 'smoosh') {
+    // Smoosh/squish sound: low frequency impact with rapid pitch drop
+    const now = audioContext.currentTime;
+    const duration = 0.2;
+
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.type = 'sine';
+    // Quick pitch drop from mid to very low for that compression/squish effect
+    oscillator.frequency.setValueAtTime(280, now);
+    oscillator.frequency.exponentialRampToValueAtTime(120, now + duration * 0.15);
+    oscillator.frequency.exponentialRampToValueAtTime(60, now + duration);
+
+    gainNode.gain.setValueAtTime(0.35, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.02, now + duration);
+
+    oscillator.start(now);
+    oscillator.stop(now + duration);
+
+    // Add compressed noise for texture
+    const noiseBuffer = audioContext.createBuffer(
+      1,
+      audioContext.sampleRate * duration,
+      audioContext.sampleRate
+    );
+    const noiseData = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < noiseBuffer.length; i++) {
+      // More compressed noise for squish effect
+      noiseData[i] = (Math.random() * 2 - 1) * (1 - i / noiseBuffer.length);
+    }
+
+    const noiseSource = audioContext.createBufferSource();
+    const noiseGain = audioContext.createGain();
+    noiseSource.buffer = noiseBuffer;
+    noiseSource.connect(noiseGain);
+    noiseGain.connect(audioContext.destination);
+
+    noiseGain.gain.setValueAtTime(0.2, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, now + duration);
+
+    noiseSource.start(now);
   }
 }

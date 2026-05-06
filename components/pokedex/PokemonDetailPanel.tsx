@@ -4,6 +4,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import PokemonRarityStars from "@/components/pokedex/PokemonRarityStars";
+import { playWhooshSound } from "@/lib/sounds";
 import type { PokemonScam } from "@/lib/pokedex";
 import { POKEDEX_TYPE_META } from "@/lib/pokedex";
 
@@ -69,7 +70,17 @@ export default function PokemonDetailPanel({
 
   useEffect(() => {
     setThreatReady(false);
-    const timer = window.setTimeout(() => setThreatReady(true), 90);
+    const timer = window.setTimeout(() => {
+      setThreatReady(true);
+      // Play smoosh sound for high threat levels
+      if (entry.threatLevel >= 4) {
+        try {
+          playWhooshSound('smoosh');
+        } catch (error) {
+          // Silently ignore sound errors
+        }
+      }
+    }, 90);
 
     return () => window.clearTimeout(timer);
   }, [entry.slug]);
