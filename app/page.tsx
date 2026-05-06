@@ -117,9 +117,8 @@ export default function Home() {
       </section>
 
       <section className="page-section">
-        <ScrollReveal>
-        <ScrollReveal>
         <div className="page-frame">
+          <ScrollReveal>
           <div className="warm-panel overflow-hidden">
             <div className="grid gap-6 border-b border-[rgba(255,222,128,0.3)] px-6 py-6 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
               <div>
@@ -154,12 +153,13 @@ export default function Home() {
               </div>
             </div>
           </div>
+          </ScrollReveal>
         </div>
-        </ScrollReveal>
       </section>
 
       <section className="page-section">
-        <ScrollReveal>
+        <div className="page-frame">
+          <ScrollReveal>
         <div className="page-frame">
           <div className="premium-panel overflow-hidden">
             <div className="grid gap-8 border-b border-white/8 px-6 py-7 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
@@ -183,13 +183,13 @@ export default function Home() {
               <ScamDemo />
             </div>
           </div>
+          </ScrollReveal>
         </div>
-        </ScrollReveal>
       </section>
 
       <section className="page-section">
-        <ScrollReveal>
         <div className="page-frame">
+          <ScrollReveal>
           <Link
             href="/emergency"
             className="premium-panel premium-panel-amber group flex flex-col gap-5 px-6 py-6 sm:px-8 lg:flex-row lg:items-center"
