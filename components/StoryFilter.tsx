@@ -40,10 +40,10 @@ export default function StoryFilter({ stories }: StoryFilterProps) {
             <button
               key={tag}
               onClick={() => setActive(tag)}
-              className={`flex-shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-150 ${isActive ? "filter-pill-active" : "border-white/10 bg-white/[0.03] text-white/52 hover:border-white/18 hover:bg-white/[0.05] hover:text-white"}`}
+              className={`flex-shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-150 ${isActive ? "story-filter-pill-active" : "story-filter-pill"}`}
             >
               <span>{tag}</span>
-              <span className={`ml-2 rounded-full px-2 py-0.5 mono-label text-[10px] ${isActive ? "bg-white/10 text-white/88" : "bg-white/[0.06] text-white/35"}`}>
+              <span className={`ml-2 rounded-full px-2 py-0.5 mono-label text-[10px] ${isActive ? "bg-[rgba(150,110,20,0.15)] text-[#131b30]" : "bg-[rgba(180,140,60,0.12)] text-[rgba(20,33,56,0.45)]"}`}>
                 {counts[tag]}
               </span>
             </button>
@@ -52,22 +52,23 @@ export default function StoryFilter({ stories }: StoryFilterProps) {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="premium-panel p-12 text-center">
-          <p className="text-sm text-white/34">No stories in this category yet.</p>
+        <div className="warm-panel p-12 text-center">
+          <p className="text-sm text-[rgba(20,33,56,0.45)]">No stories in this category yet.</p>
         </div>
       ) : (
-        <div className="premium-panel overflow-hidden px-4">
+        <div className="warm-panel overflow-hidden px-4">
           {filtered.map((story, i) => (
             <StoryCard
               key={story.slug}
               story={story}
               isLast={i === filtered.length - 1}
+              animIndex={i}
             />
           ))}
         </div>
       )}
 
-      <p className="mono-label text-[11px] text-white/22 mt-4 text-right">
+      <p className="mono-label text-[11px] text-[rgba(89,72,24,0.5)] mt-4 text-right">
         {filtered.length} {filtered.length === 1 ? "story" : "stories"} · All accounts anonymous
       </p>
     </div>
