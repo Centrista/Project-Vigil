@@ -17,12 +17,12 @@ function AlertCard({ alert }: { alert: Alert }) {
   const sev = SEVERITY[alert.severity];
   return (
     <div
-      className="group card-hover flex flex-col rounded-[24px] p-5"
+      className="group card-hover entrance-stagger flex flex-col rounded-[24px] p-5"
       style={{
-        background: "linear-gradient(145deg, #1e2438, #1a1f2e)",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "linear-gradient(145deg, rgba(28,36,58,0.96), rgba(20,28,48,0.98))",
+        border: "1px solid rgba(255,255,255,0.09)",
         borderLeft: `3px solid ${sev.color}`,
-        boxShadow: "0 12px 34px rgba(0,0,0,0.24)",
+        boxShadow: "0 12px 34px rgba(0,0,0,0.20)",
       }}
     >
       {/* Badges */}

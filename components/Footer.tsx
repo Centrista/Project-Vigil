@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer
       className="mt-auto border-t border-white/10"
-      style={{ backgroundColor: "rgba(9,16,33,0.92)" }}
+      style={{ backgroundColor: "rgba(12,22,40,0.94)" }}
     >
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
@@ -24,7 +24,7 @@ export default function Footer() {
             </p>
             <div className="hero-stats">
               <span className="premium-chip premium-chip-danger">AI Scam Defense Platform</span>
-              <span className="premium-chip">Built for teens</span>
+              <span className="premium-chip premium-chip-purple">Built for teens</span>
             </div>
           </div>
 

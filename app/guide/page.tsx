@@ -13,12 +13,16 @@ export default function GuidePage() {
     <div className="w-full overflow-x-hidden">
       <section className="relative overflow-hidden bg-grid">
         <div
-          className="orb absolute -top-40 -left-40 w-[520px] h-[520px] opacity-[0.12]"
+          className="orb orb-drift absolute -top-40 -left-40 w-[520px] h-[520px] opacity-[0.14]"
           style={{ backgroundColor: "#ff1744" }}
         />
         <div
-          className="orb absolute -top-10 right-0 w-[400px] h-[400px] opacity-[0.07]"
-          style={{ backgroundColor: "#00d4ff" }}
+          className="orb orb-drift absolute -top-10 right-0 w-[400px] h-[400px] opacity-[0.09]"
+          style={{ backgroundColor: "#00d4ff", animationDelay: "6s" }}
+        />
+        <div
+          className="orb orb-drift absolute bottom-0 left-1/2 w-[280px] h-[280px] opacity-[0.06]"
+          style={{ backgroundColor: "#a855f7", animationDelay: "3s" }}
         />
 
         <div className="page-frame relative z-10 pb-12">

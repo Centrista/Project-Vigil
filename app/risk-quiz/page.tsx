@@ -17,7 +17,8 @@ export default function RiskQuizPage() {
       <QuizSideSwitcher active="pre" />
 
       <div className="relative overflow-hidden bg-grid">
-        <div className="orb absolute -top-20 right-0 w-80 h-80 opacity-15" style={{ backgroundColor: "#ff1744" }} />
+        <div className="orb orb-drift absolute -top-20 right-0 w-80 h-80 opacity-[0.16]" style={{ backgroundColor: "#ff1744" }} />
+        <div className="orb orb-drift absolute bottom-10 left-0 w-64 h-64 opacity-[0.07]" style={{ backgroundColor: "#a855f7", animationDelay: "7s" }} />
 
         <div className="page-frame page-frame-tight relative z-10 pb-28 pt-2">
           <PageIntro

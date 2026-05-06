@@ -16,12 +16,16 @@ export default function PokedexPage() {
     <div className="w-full overflow-x-hidden">
       <section className="relative overflow-hidden bg-grid-soft">
         <div
-          className="orb absolute -top-32 left-0 h-[360px] w-[360px] opacity-[0.14]"
+          className="orb orb-drift absolute -top-32 left-0 h-[360px] w-[360px] opacity-[0.15]"
           style={{ backgroundColor: "#ff1744" }}
         />
         <div
-          className="orb absolute top-12 right-0 h-[420px] w-[420px] opacity-[0.1]"
-          style={{ backgroundColor: "#00d4ff" }}
+          className="orb orb-drift absolute top-12 right-0 h-[420px] w-[420px] opacity-[0.11]"
+          style={{ backgroundColor: "#00d4ff", animationDelay: "4s" }}
+        />
+        <div
+          className="orb orb-drift absolute bottom-0 left-1/2 h-[240px] w-[240px] opacity-[0.07]"
+          style={{ backgroundColor: "#a855f7", animationDelay: "8s" }}
         />
 
         <div className="page-frame relative z-10 pb-10">

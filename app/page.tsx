@@ -8,17 +8,18 @@ import { STORIES } from "@/lib/stories";
 
 const SIGNALS = [
   { label: "Scams mapped", value: `${GUIDE_ENTRIES.length}+`, tone: "premium-chip premium-chip-info" },
-  { label: "Stories logged", value: String(STORIES.length), tone: "premium-chip premium-chip-warm" },
+  { label: "Stories logged", value: String(STORIES.length), tone: "premium-chip premium-chip-purple" },
   { label: "Active alerts", value: String(ALERTS.length || 0), tone: "premium-chip premium-chip-danger" },
-  { label: "Attack types", value: String(SCAM_TYPES.length), tone: "premium-chip" },
+  { label: "Attack types", value: String(SCAM_TYPES.length), tone: "premium-chip premium-chip-amber" },
 ];
 
 export default function Home() {
   return (
     <div className="w-full overflow-x-hidden">
       <section className="relative overflow-hidden bg-grid">
-        <div className="orb absolute -left-32 top-0 h-[440px] w-[440px] opacity-[0.16]" style={{ backgroundColor: "#ff1744" }} />
-        <div className="orb absolute right-0 top-8 h-[360px] w-[360px] opacity-[0.1]" style={{ backgroundColor: "#00d4ff" }} />
+        <div className="orb orb-drift absolute -left-32 top-0 h-[440px] w-[440px] opacity-[0.18]" style={{ backgroundColor: "#ff1744" }} />
+        <div className="orb orb-drift absolute right-0 top-8 h-[360px] w-[360px] opacity-[0.12]" style={{ backgroundColor: "#00d4ff", animationDelay: "4s" }} />
+        <div className="orb orb-drift absolute left-1/2 bottom-0 h-[300px] w-[300px] opacity-[0.07]" style={{ backgroundColor: "#a855f7", animationDelay: "8s" }} />
 
         <div className="page-frame">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
@@ -45,7 +46,7 @@ export default function Home() {
               </p>
 
               <div className="hero-actions mt-8 fade-up fade-up-delay-3">
-                <Link href="/risk-quiz" className="btn-red px-8 py-4 text-base rounded-2xl">
+                <Link href="/risk-quiz" className="btn-red glow-breathe px-8 py-4 text-base rounded-2xl">
                   Test My AI Scam IQ
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0-5 5m5-5H6" />
@@ -65,7 +66,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="premium-panel p-6 sm:p-7">
+            <div className="premium-panel float-y p-6 sm:p-7">
               <div className="eyebrow-row">
                 <span className="premium-dot" />
                 <span className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/40">
@@ -129,11 +130,11 @@ export default function Home() {
               </div>
               <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {HOME_DESTINATIONS.map((item, index) => (
-                  <Link 
-                    key={item.href} 
-                    href={item.href} 
-                    className="card-rail-link-warm group fade-up"
-                    style={{ animationDelay: `${index * 80}ms` }}
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="card-rail-link-warm group entrance-stagger"
+                    style={{ "--stagger-delay": `${index * 90}ms` } as React.CSSProperties}
                   >
                     <div className="flex items-center justify-between gap-3">
                       <span className="mono-label text-xs font-black" style={{ color: item.accent }}>
