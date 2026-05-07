@@ -102,7 +102,7 @@ export default function TrendingScamCard({
           </div>
 
           <h3 className="mb-2 text-2xl font-black leading-tight text-white">{item.name}</h3>
-          <p className="max-w-md text-sm leading-relaxed text-white/52">{item.summary}</p>
+          <p className="max-w-md text-sm leading-relaxed text-white/64">{item.summary}</p>
         </div>
 
         <div className="flex flex-col items-end gap-2">
@@ -119,7 +119,7 @@ export default function TrendingScamCard({
       <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="rounded-[24px] border border-[rgba(255,224,112,0.15)] bg-[rgba(255,248,222,0.07)] p-4">
-            <div className="mono-label mb-2 text-[10px] uppercase tracking-[0.22em] text-white/34">Reports this week</div>
+            <div className="mono-label mb-2 text-[10px] uppercase tracking-[0.22em] text-white/52">Reports this week</div>
             <div className="flex items-center gap-2">
               <span className="text-2xl font-black text-white">{item.reportsThisWeek}</span>
               <span className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-bold ${item.reportsDelta > 30 ? "trend-bounce" : ""}`} style={{ color: accent.color, background: accent.background }}>
@@ -128,9 +128,9 @@ export default function TrendingScamCard({
             </div>
           </div>
           <div className="rounded-[24px] border border-[rgba(255,224,112,0.15)] bg-[rgba(255,248,222,0.07)] p-4">
-            <div className="mono-label mb-2 text-[10px] uppercase tracking-[0.22em] text-white/34">Last reported</div>
+            <div className="mono-label mb-2 text-[10px] uppercase tracking-[0.22em] text-white/52">Last reported</div>
             <div className="text-base font-semibold text-white">{item.reportedAt}</div>
-            <div className="mt-1 text-xs text-white/34">Placeholder verification timestamp</div>
+            <div className="mt-1 text-xs text-white/52">Placeholder verification timestamp</div>
           </div>
         </div>
 
@@ -152,7 +152,7 @@ export default function TrendingScamCard({
                 />
               ))}
             </div>
-            <div className="text-xs text-white/38">Visual placeholder spike chart</div>
+            <div className="text-xs text-white/52">Visual placeholder spike chart</div>
           </div>
         </div>
       </div>
@@ -170,7 +170,7 @@ export default function TrendingScamCard({
               }}
             />
           ))}
-          <span className="text-xs text-white/36">Threat movement</span>
+          <span className="text-xs text-white/52">Threat movement</span>
         </div>
 
         <Link

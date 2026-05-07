@@ -53,7 +53,7 @@ export default function Footer() {
           <p className="text-xs text-white/46">
             © 2026 Project Vigil. Built to protect the next generation from AI-powered fraud.
           </p>
-          <p className="text-xs text-white/38">
+          <p className="text-xs text-white/44">
             Not affiliated with any government agency.
           </p>
         </div>

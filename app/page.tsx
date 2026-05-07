@@ -27,7 +27,7 @@ export default function Home() {
               <div className="hero-kicker fade-up">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="pulse-ring absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: "#ff1744" }} />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#ff1744" }} />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full neon-flicker" style={{ backgroundColor: "#ff1744" }} />
                 </span>
                 AI Scam Defense · Project Vigil
               </div>
@@ -46,7 +46,7 @@ export default function Home() {
               </p>
 
               <div className="hero-actions mt-8 fade-up fade-up-delay-3">
-                <Link href="/risk-quiz" className="btn-red glow-breathe px-8 py-4 text-base rounded-2xl">
+                <Link href="/risk-quiz" className="btn-red spring-btn glow-breathe px-8 py-4 text-base rounded-2xl">
                   Test My AI Scam IQ
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0-5 5m5-5H6" />
@@ -58,8 +58,8 @@ export default function Home() {
               </div>
 
               <div className="hero-stats mt-8 fade-up fade-up-delay-3">
-                {SIGNALS.map((signal) => (
-                  <span key={signal.label} className={signal.tone}>
+                {SIGNALS.map((signal, i) => (
+                  <span key={signal.label} className={`${signal.tone} chip-enter chip-enter-delay-${i + 1 <= 4 ? i + 1 : 4}`}>
                     {signal.value} {signal.label}
                   </span>
                 ))}
@@ -69,7 +69,7 @@ export default function Home() {
             <div className="premium-panel float-y p-6 sm:p-7">
               <div className="eyebrow-row">
                 <span className="premium-dot" />
-                <span className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/40">
+                <span className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/56">
                   Signal Brief
                 </span>
               </div>
@@ -123,8 +123,8 @@ export default function Home() {
             <div className="grid gap-6 border-b border-[rgba(255,210,100,0.14)] px-6 py-6 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
               <div>
                 <div className="hero-kicker mb-4" style={{ color: "#e8c96a" }}>Choose your path</div>
-                <h2 className="section-title mb-3 max-w-sm">Start where you need clarity most.</h2>
-                <p className="section-copy max-w-md">
+                <h2 className="section-title mb-3 max-w-sm blur-reveal">Start where you need clarity most.</h2>
+                <p className="section-copy max-w-md blur-reveal blur-reveal-delay-1">
                   Learn the attacks, test yourself, scan current threats, or move straight into response mode.
                 </p>
               </div>
@@ -133,7 +133,7 @@ export default function Home() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="card-rail-link-warm group entrance-stagger"
+                    className="card-rail-link-warm shimmer-sweep group entrance-stagger"
                     style={{ "--stagger-delay": `${index * 90}ms` } as React.CSSProperties}
                   >
                     <div className="flex items-center justify-between gap-3">
