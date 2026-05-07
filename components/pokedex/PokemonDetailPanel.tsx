@@ -29,11 +29,14 @@ function Section({
   return (
     <section
       className="pokedex-section-card pokedex-section-cascade"
-      style={{ "--cascade-delay": delay } as CSSProperties}
+      style={{ "--cascade-delay": delay, borderLeft: `3px solid ${accentColor}80` } as CSSProperties}
     >
-      <h3 className="mono-label pokedex-section-title" style={{ color: accentColor }}>
-        {title}
-      </h3>
+      <div className="pokedex-section-title-row">
+        <span className="pokedex-section-title-accent" style={{ background: `${accentColor}22`, borderColor: `${accentColor}40` }} />
+        <h3 className="mono-label pokedex-section-title" style={{ color: accentColor }}>
+          {title}
+        </h3>
+      </div>
       <div className="pokedex-section-content">{children}</div>
     </section>
   );
