@@ -17,9 +17,9 @@ export default function Home() {
   return (
     <div className="w-full overflow-x-hidden">
       <section className="relative overflow-hidden bg-grid">
-        <div className="orb orb-drift absolute -left-32 top-0 h-[440px] w-[440px] opacity-[0.18]" style={{ backgroundColor: "#ff1744" }} />
-        <div className="orb orb-drift absolute right-0 top-8 h-[360px] w-[360px] opacity-[0.12]" style={{ backgroundColor: "#00d4ff", animationDelay: "4s" }} />
-        <div className="orb orb-drift absolute left-1/2 bottom-0 h-[300px] w-[300px] opacity-[0.07]" style={{ backgroundColor: "#a855f7", animationDelay: "8s" }} />
+        <div className="orb orb-drift orb-enter absolute -left-32 top-0 h-[440px] w-[440px] opacity-[0.18]" style={{ backgroundColor: "#ff1744" }} />
+        <div className="orb orb-drift orb-enter absolute right-0 top-8 h-[360px] w-[360px] opacity-[0.12]" style={{ backgroundColor: "#00d4ff", animationDelay: "4s", ["--orb-delay" as string]: "0.3s" }} />
+        <div className="orb orb-drift orb-enter absolute left-1/2 bottom-0 h-[300px] w-[300px] opacity-[0.07]" style={{ backgroundColor: "#a855f7", animationDelay: "8s" }} />
 
         <div className="page-frame">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
@@ -95,7 +95,7 @@ export default function Home() {
                     accent: "#ff6d00",
                   },
                 ].map((item) => (
-                  <Link key={item.href} href={item.href} className="card-rail-link group">
+                  <Link key={item.href} href={item.href} className="card-rail-link shimmer-sweep group">
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <div className="mono-label mb-2 text-[11px] uppercase tracking-[0.22em]" style={{ color: item.accent }}>
@@ -107,7 +107,7 @@ export default function Home() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
-                    <p className="text-sm leading-relaxed text-white/52">{item.body}</p>
+                    <p className="text-sm leading-relaxed text-white/64">{item.body}</p>
                   </Link>
                 ))}
               </div>
@@ -146,7 +146,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="mb-2 text-lg font-black text-white">{item.label}</h3>
-                      <p className="text-sm leading-relaxed text-white/48">{item.sub}</p>
+                      <p className="text-sm leading-relaxed text-white/60">{item.sub}</p>
                     </div>
                   </Link>
                 ))}
@@ -205,7 +205,7 @@ export default function Home() {
                 <h2 className="text-2xl font-black text-white">Think you just got hit?</h2>
               </div>
             </div>
-            <p className="max-w-2xl flex-1 text-sm leading-relaxed text-white/58 lg:text-base">
+            <p className="max-w-2xl flex-1 text-sm leading-relaxed text-white/68 lg:text-base">
               Don&apos;t freeze. Move straight into the response path to secure accounts, preserve evidence, and avoid the second mistake scammers count on.
             </p>
             <span className="inline-flex items-center gap-2 text-sm font-bold text-white transition-all duration-200 group-hover:gap-3">

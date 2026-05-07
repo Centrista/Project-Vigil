@@ -53,7 +53,7 @@ export default function Navbar() {
                     </span>
                     <span className="h-1.5 w-1.5 rounded-full bg-[#ff1744]" />
                   </div>
-                  <p className="mono-label text-[10px] uppercase tracking-[0.22em] text-white/35">
+                  <p className="mono-label text-[10px] uppercase tracking-[0.22em] text-white/52">
                     AI Scam Defense
                   </p>
                 </div>
@@ -136,7 +136,7 @@ export default function Navbar() {
         >
           <div className="mx-auto max-w-7xl">
             <div className="mb-4 px-1">
-              <p className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/28">
+              <p className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/48">
                 Primary Routes
               </p>
             </div>
@@ -154,7 +154,7 @@ export default function Navbar() {
                     }`}
                   >
                     <div className="text-sm font-semibold text-white">{link.label}</div>
-                    <div className="mt-1 text-xs leading-relaxed text-white/42">
+                    <div className="mt-1 text-xs leading-relaxed text-white/58">
                       {link.description}
                     </div>
                   </Link>
@@ -163,7 +163,7 @@ export default function Navbar() {
             </div>
 
             <div className="mb-4 mt-5 px-1">
-              <p className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/28">
+              <p className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/48">
                 More Tools
               </p>
             </div>
