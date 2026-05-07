@@ -14,7 +14,6 @@ export const NAV_LINKS = [
   { label: "Trending", href: "/trending-scams", description: "Track active scam patterns.", tone: COLORS.red },
   { label: "Guide", href: "/guide", description: "Learn every attack type.", tone: COLORS.cyan },
   { label: "Stories", href: "/stories", description: "Read real teen experiences.", tone: "#f59e0b" },
-  { label: "Alerts", href: "/alerts", description: "See the latest verified threats.", tone: COLORS.red },
   { label: "Emergency", href: "/emergency", description: "What to do right now.", tone: COLORS.orange },
   { label: "Simulator", href: "/simulator", description: "Practice spotting fakes.", tone: COLORS.cyan },
   { label: "Feedback", href: "/feedback", description: "Send product feedback.", tone: "rgba(255,255,255,0.75)" },
@@ -26,7 +25,6 @@ export const PRIMARY_NAV_LINKS = [
   "/guide",
   "/simulator",
   "/stories",
-  "/alerts",
   "/emergency",
   "/pokedex",
 ] as const;
@@ -47,7 +45,7 @@ export const FOOTER_GROUPS = [
       { label: "Pre Quiz", href: "/risk-quiz" },
       { label: "Post Quiz", href: "/risk-quiz/post-quiz" },
       { label: "Real Stories", href: "/stories" },
-      { label: "Scam Alerts", href: "/alerts" },
+      { label: "Scam Alerts", href: "/trending-scams" },
     ],
   },
   {
@@ -93,7 +91,7 @@ export const HOME_DESTINATIONS = [
     n: "05",
     label: "Scam Alerts",
     sub: "Stay current on the newest attack patterns showing up right now.",
-    href: "/alerts",
+    href: "/trending-scams",
     accent: "#fb7185",
   },
   {

@@ -20,6 +20,7 @@ export default function CursorGlow() {
     let rx = -999, ry = -999;
     let raf: number;
     let visible = false;
+    let dirty = false;
 
     const show = () => {
       if (!visible) {
@@ -63,10 +64,11 @@ export default function CursorGlow() {
       my = e.clientY;
       show();
 
+      dirty = true;
       if (dotRef.current)
-        dotRef.current.style.transform = `translate(${mx}px,${my}px)`;
+        dotRef.current.style.transform = `translate3d(${mx}px,${my}px,0)`;
       if (glowRef.current)
-        glowRef.current.style.transform = `translate(${mx}px,${my}px)`;
+        glowRef.current.style.transform = `translate3d(${mx}px,${my}px,0)`;
 
       const navLink = (e.target as Element).closest(".nav-link");
       if (navLink) {
@@ -94,18 +96,22 @@ export default function CursorGlow() {
 
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
+    const EPS = 0.08;
     const tick = () => {
-      if (!conformedTo.current) {
-        rx = lerp(rx, mx, 0.13);
-        ry = lerp(ry, my, 0.13);
+      if (dirty || Math.abs(rx - mx) > EPS || Math.abs(ry - my) > EPS) {
+        dirty = false;
+        if (!conformedTo.current) {
+          rx = lerp(rx, mx, 0.2);
+          ry = lerp(ry, my, 0.2);
+        }
+        if (ringRef.current)
+          ringRef.current.style.transform = `translate3d(${rx}px,${ry}px,0)`;
       }
-      if (ringRef.current)
-        ringRef.current.style.transform = `translate(${rx}px,${ry}px)`;
       raf = requestAnimationFrame(tick);
     };
 
-    window.addEventListener("mousemove", onMove);
-    document.documentElement.addEventListener("mouseleave", onLeave);
+    window.addEventListener("mousemove", onMove, { passive: true });
+    document.documentElement.addEventListener("mouseleave", onLeave, { passive: true });
     raf = requestAnimationFrame(tick);
 
     return () => {
@@ -134,13 +140,13 @@ export default function CursorGlow() {
         aria-hidden
         style={{
           ...base,
-          width: 640,
-          height: 640,
-          marginLeft: -320,
-          marginTop: -320,
+          width: 320,
+          height: 320,
+          marginLeft: -160,
+          marginTop: -160,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(0,212,255,0.03) 0%, transparent 40%)",
+            "radial-gradient(circle, rgba(0,212,255,0.045) 0%, transparent 70%)",
           zIndex: 9997,
         }}
       />
