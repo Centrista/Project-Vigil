@@ -299,7 +299,7 @@ h4 {
   overflow: hidden;
   border-radius: var(--radius-card);
   border: 1px solid var(--line-soft);
-  background: linear-gradient(180deg, rgba(27, 38, 64, 0.92) 0%, rgba(19, 28, 48, 0.96) 100%);
+  background: linear-gradient(180deg, rgba(16, 24, 44, 0.96) 0%, rgba(11, 17, 32, 0.98) 100%);
   box-shadow: var(--shadow-card);
 }
 
@@ -312,17 +312,17 @@ h4 {
 
 .premium-panel-danger {
   border-color: rgba(255, 23, 68, 0.18);
-  background: linear-gradient(180deg, rgba(255, 23, 68, 0.08) 0%, rgba(18, 25, 43, 0.96) 100%);
+  background: linear-gradient(180deg, rgba(255, 23, 68, 0.08) 0%, rgba(11, 17, 32, 0.98) 100%);
 }
 
 .premium-panel-info {
   border-color: rgba(0, 212, 255, 0.18);
-  background: linear-gradient(180deg, rgba(0, 212, 255, 0.07) 0%, rgba(18, 25, 43, 0.96) 100%);
+  background: linear-gradient(180deg, rgba(0, 212, 255, 0.07) 0%, rgba(11, 17, 32, 0.98) 100%);
 }
 
 .premium-panel-warm {
   border-color: rgba(255, 109, 0, 0.18);
-  background: linear-gradient(180deg, rgba(255, 109, 0, 0.08) 0%, rgba(18, 25, 43, 0.96) 100%);
+  background: linear-gradient(180deg, rgba(255, 109, 0, 0.08) 0%, rgba(11, 17, 32, 0.98) 100%);
 }
 
 .premium-chip {
@@ -2090,25 +2090,34 @@ h4 {
 
 /* ── WARM LIGHT ACCENTS ── */
 .warm-panel {
-  background: linear-gradient(160deg, rgba(22,34,60,0.98) 0%, rgba(14,22,42,0.99) 100%);
-  border-color: rgba(255,210,100,0.18) !important;
+  background: linear-gradient(160deg, rgba(13,20,36,0.99) 0%, rgba(10,15,26,1) 100%);
+  border-color: rgba(255,210,100,0.14) !important;
   color: rgba(255,255,255,0.9);
 }
 
 .card-rail-link-warm {
-  background: linear-gradient(160deg, rgba(255,210,100,0.07) 0%, rgba(255,210,100,0.03) 100%);
-  border-color: rgba(255,210,100,0.22) !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  height: 100%;
+  padding: 1.25rem 1.4rem;
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255,210,100,0.18);
+  background: linear-gradient(160deg, rgba(255,210,100,0.065) 0%, rgba(255,210,100,0.022) 100%);
   color: #ffffff;
+  box-shadow: var(--shadow-card);
+  transition: transform 220ms ease, border-color 200ms ease, background 200ms ease;
 }
 
 .card-rail-link-warm:hover {
-  background: linear-gradient(160deg, rgba(255,210,100,0.12) 0%, rgba(255,210,100,0.06) 100%);
-  border-color: rgba(255,210,100,0.38) !important;
+  transform: translateY(-3px);
+  background: linear-gradient(160deg, rgba(255,210,100,0.11) 0%, rgba(255,210,100,0.05) 100%);
+  border-color: rgba(255,210,100,0.32);
 }
 
 .premium-panel-amber {
   border-color: rgba(255,109,0,0.22) !important;
-  background: linear-gradient(180deg, rgba(255,109,0,0.09) 0%, rgba(18,25,43,0.96) 100%);
+  background: linear-gradient(180deg, rgba(255,109,0,0.09) 0%, rgba(11,17,32,0.98) 100%);
 }
 
 .premium-panel-purple {
