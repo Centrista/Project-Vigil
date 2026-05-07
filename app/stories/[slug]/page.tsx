@@ -77,7 +77,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
             &ldquo;{story.pullQuote}&rdquo;
           </blockquote>
           <p className="mono-label text-xs text-[rgba(89,72,24,0.55)] pl-5">
-            — Age {story.age}, {story.location}
+            — {story.location}, {story.submittedAt}
           </p>
         </div>
 
@@ -96,10 +96,10 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
                 Quick Facts
               </p>
               {[
-                { label: "Age", value: String(story.age) },
                 { label: "Location", value: story.location },
                 { label: "Platform", value: story.platform },
                 { label: "Lost", value: story.lossAmount },
+                { label: "Date", value: story.submittedAt },
               ].map((row) => (
                 <div key={row.label} className="flex justify-between items-baseline mb-2.5 last:mb-0">
                   <span className="mono-label text-[10px] text-[rgba(89,72,24,0.55)] uppercase tracking-widest">{row.label}</span>
