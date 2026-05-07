@@ -52,7 +52,7 @@ export default function StoryFilter({ stories }: StoryFilterProps) {
 
       {filtered.length === 0 ? (
         <div className="warm-panel p-12 text-center">
-          <p className="text-sm text-[rgba(20,33,56,0.45)]">No stories in this category yet.</p>
+          <p className="text-sm text-white/45">No stories in this category yet.</p>
         </div>
       ) : (
         <div className="warm-panel overflow-hidden px-4">
@@ -67,7 +67,7 @@ export default function StoryFilter({ stories }: StoryFilterProps) {
         </div>
       )}
 
-      <p className="mono-label text-[11px] text-[rgba(89,72,24,0.5)] mt-4 text-right">
+      <p className="mono-label text-[11px] text-white/40 mt-4 text-right">
         {filtered.length} {filtered.length === 1 ? "story" : "stories"} · All accounts anonymous
       </p>
     </div>

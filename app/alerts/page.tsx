@@ -28,13 +28,13 @@ function AlertCard({ alert }: { alert: Alert }) {
       {/* Badges */}
       <div className="flex items-center gap-2 mb-3 flex-wrap">
         <span
-          className="mono-label text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded"
+          className="mono-label text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-lg"
           style={{ color: sev.color, background: sev.bg, border: `1px solid ${sev.border}` }}
         >
           {sev.label}
         </span>
         <span
-          className="mono-label text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded"
+          className="mono-label text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-lg"
           style={{
             color: alert.categoryColor,
             background: `${alert.categoryColor}12`,

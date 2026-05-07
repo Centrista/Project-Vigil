@@ -118,7 +118,7 @@ export default function TrendingScamCard({
 
       <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-[20px] border border-[rgba(255,224,112,0.15)] bg-[rgba(255,248,222,0.07)] p-4">
+          <div className="rounded-[24px] border border-[rgba(255,224,112,0.15)] bg-[rgba(255,248,222,0.07)] p-4">
             <div className="mono-label mb-2 text-[10px] uppercase tracking-[0.22em] text-white/34">Reports this week</div>
             <div className="flex items-center gap-2">
               <span className="text-2xl font-black text-white">{item.reportsThisWeek}</span>
@@ -127,7 +127,7 @@ export default function TrendingScamCard({
               </span>
             </div>
           </div>
-          <div className="rounded-[20px] border border-[rgba(255,224,112,0.15)] bg-[rgba(255,248,222,0.07)] p-4">
+          <div className="rounded-[24px] border border-[rgba(255,224,112,0.15)] bg-[rgba(255,248,222,0.07)] p-4">
             <div className="mono-label mb-2 text-[10px] uppercase tracking-[0.22em] text-white/34">Last reported</div>
             <div className="text-base font-semibold text-white">{item.reportedAt}</div>
             <div className="mt-1 text-xs text-white/34">Placeholder verification timestamp</div>

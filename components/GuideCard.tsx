@@ -163,7 +163,7 @@ export default function GuideCard({ entry }: { entry: GuideEntry }) {
           {/* By The Numbers */}
           <Section label="By The Numbers" accentColor={entry.categoryColor}>
             <div
-              className="rounded-xl p-4"
+              className="rounded-2xl p-4"
               style={{
                 background: `${entry.categoryColor}08`,
                 border: `1px solid ${entry.categoryColor}22`,

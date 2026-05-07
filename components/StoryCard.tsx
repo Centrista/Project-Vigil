@@ -33,13 +33,13 @@ export default function StoryCard({ story, isLast = false, animIndex = 0 }: Stor
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex items-center gap-2 flex-wrap">
             <span
-              className="mono-label text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded"
+              className="mono-label text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-lg"
               style={{ color: outcome.color, background: outcome.bg, border: `1px solid ${outcome.border}` }}
             >
               {outcome.label}
             </span>
             <span
-              className="mono-label text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded"
+              className="mono-label text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-lg"
               style={{ color: story.tagColor, background: `${story.tagColor}18`, border: `1px solid ${story.tagColor}28` }}
             >
               {story.tag}
@@ -56,18 +56,18 @@ export default function StoryCard({ story, isLast = false, animIndex = 0 }: Stor
         </div>
 
         {/* Title */}
-        <h2 className="mb-2 text-xl font-black leading-tight text-[#131b30] transition-colors group-hover:text-[#131b30]/90">
+        <h2 className="mb-2 text-xl font-black leading-tight text-white transition-colors group-hover:text-white/90">
           {story.title}
         </h2>
 
         {/* Pull quote */}
-        <p className="text-sm text-[rgba(20,33,56,0.62)] italic leading-relaxed mb-3">
+        <p className="text-sm text-white/60 italic leading-relaxed mb-3">
           &ldquo;{story.pullQuote}&rdquo;
         </p>
 
         {/* Metadata + arrow */}
         <div className="flex items-center justify-between gap-3">
-          <span className="mono-label text-[11px] text-[rgba(89,72,24,0.55)]">
+          <span className="mono-label text-[11px] text-white/45">
             {story.location} · {story.platform} · {story.submittedAt}
           </span>
           <svg

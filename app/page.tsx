@@ -120,9 +120,9 @@ export default function Home() {
         <div className="page-frame">
           <ScrollReveal>
           <div className="warm-panel overflow-hidden">
-            <div className="grid gap-6 border-b border-[rgba(255,222,128,0.3)] px-6 py-6 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+            <div className="grid gap-6 border-b border-[rgba(255,210,100,0.14)] px-6 py-6 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
               <div>
-                <div className="hero-kicker mb-4" style={{ color: "#9d7d2d" }}>Choose your path</div>
+                <div className="hero-kicker mb-4" style={{ color: "#e8c96a" }}>Choose your path</div>
                 <h2 className="section-title mb-3 max-w-sm">Start where you need clarity most.</h2>
                 <p className="section-copy max-w-md">
                   Learn the attacks, test yourself, scan current threats, or move straight into response mode.

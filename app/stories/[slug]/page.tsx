@@ -38,7 +38,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
 
         <Link
           href="/stories"
-          className="link-inline mono-label mb-10 text-xs text-[rgba(20,33,56,0.45)]"
+          className="link-inline mono-label mb-10 text-xs text-white/45"
         >
           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -49,13 +49,13 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
         <div className="mb-10">
           <div className="flex items-center gap-2.5 mb-5 flex-wrap">
             <span
-              className="mono-label text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded"
+              className="mono-label text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-lg"
               style={{ color: outcome.color, background: outcome.bg, border: `1px solid ${outcome.border}` }}
             >
               {outcome.label}
             </span>
             <span
-              className="mono-label text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded"
+              className="mono-label text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-lg"
               style={{ color: story.tagColor, background: `${story.tagColor}10`, border: `1px solid ${story.tagColor}28` }}
             >
               {story.tag}
@@ -70,13 +70,13 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
           <blockquote
             className="mb-4 pl-5 text-xl italic leading-relaxed sm:text-2xl"
             style={{
-              color: "rgba(20,33,56,0.72)",
+              color: "rgba(255,255,255,0.78)",
               borderLeft: `3px solid ${story.tagColor}`,
             }}
           >
             &ldquo;{story.pullQuote}&rdquo;
           </blockquote>
-          <p className="mono-label text-xs text-[rgba(89,72,24,0.55)] pl-5">
+          <p className="mono-label text-xs text-white/45 pl-5">
             — {story.location}, {story.submittedAt}
           </p>
         </div>
@@ -92,7 +92,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
                 borderLeft: `3px solid ${story.tagColor}`,
               }}
             >
-              <p className="mono-label text-[10px] font-black uppercase tracking-widest text-[rgba(89,72,24,0.55)] mb-4">
+              <p className="mono-label text-[10px] font-black uppercase tracking-widest text-white/45 mb-4">
                 Quick Facts
               </p>
               {[
@@ -102,8 +102,8 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
                 { label: "Date", value: story.submittedAt },
               ].map((row) => (
                 <div key={row.label} className="flex justify-between items-baseline mb-2.5 last:mb-0">
-                  <span className="mono-label text-[10px] text-[rgba(89,72,24,0.55)] uppercase tracking-widest">{row.label}</span>
-                  <span className="text-sm font-bold text-[#131b30] text-right ml-3">{row.value}</span>
+                  <span className="mono-label text-[10px] text-white/45 uppercase tracking-widest">{row.label}</span>
+                  <span className="text-sm font-bold text-white/85 text-right ml-3">{row.value}</span>
                 </div>
               ))}
             </div>
@@ -113,7 +113,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
             <div className="warm-panel p-6 sm:p-8">
               <div className="space-y-5">
               {story.story.map((paragraph, i) => (
-                <p key={i} className="text-[15px] text-[rgba(20,33,56,0.78)] leading-relaxed">
+                <p key={i} className="text-[15px] text-white/72 leading-relaxed">
                   {paragraph}
                 </p>
               ))}
@@ -191,13 +191,13 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
           {prevStory ? (
             <Link
               href={`/stories/${prevStory.slug}`}
-              className="group flex items-center gap-2 text-sm text-[rgba(20,33,56,0.45)] hover:text-[rgba(20,33,56,0.85)] transition-colors"
+              className="group flex items-center gap-2 text-sm text-white/45 hover:text-white/85 transition-colors"
             >
               <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
               <span className="leading-tight">
-                <span className="block mono-label text-[10px] uppercase tracking-widest text-[rgba(89,72,24,0.4)] mb-0.5">Previous</span>
+                <span className="block mono-label text-[10px] uppercase tracking-widest text-white/35 mb-0.5">Previous</span>
                 {prevStory.title}
               </span>
             </Link>
@@ -208,10 +208,10 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
           {nextStory ? (
             <Link
               href={`/stories/${nextStory.slug}`}
-              className="group flex items-center gap-2 text-sm text-[rgba(20,33,56,0.45)] hover:text-[rgba(20,33,56,0.85)] transition-colors text-right"
+              className="group flex items-center gap-2 text-sm text-white/45 hover:text-white/85 transition-colors text-right"
             >
               <span className="leading-tight">
-                <span className="block mono-label text-[10px] uppercase tracking-widest text-[rgba(89,72,24,0.4)] mb-0.5">Next</span>
+                <span className="block mono-label text-[10px] uppercase tracking-widest text-white/35 mb-0.5">Next</span>
                 {nextStory.title}
               </span>
               <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -1544,7 +1544,7 @@ h4 {
   width: 2.2rem;
   height: 2.2rem;
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 999px;
+  border-radius: 20px;
   background: rgba(8, 12, 24, 0.72);
   color: rgba(255,255,255,0.84);
   font-size: 1.3rem;
@@ -2090,15 +2090,20 @@ h4 {
 
 /* ── WARM LIGHT ACCENTS ── */
 .warm-panel {
-  background: linear-gradient(180deg, rgba(255,250,232,0.98) 0%, rgba(244,231,183,0.94) 100%);
-  border-color: rgba(255,222,128,0.5) !important;
-  color: #1d2a43;
+  background: linear-gradient(160deg, rgba(22,34,60,0.98) 0%, rgba(14,22,42,0.99) 100%);
+  border-color: rgba(255,210,100,0.18) !important;
+  color: rgba(255,255,255,0.9);
 }
 
 .card-rail-link-warm {
-  background: rgba(255,248,222,0.96);
-  border-color: rgba(255,222,128,0.4) !important;
-  color: #131b30;
+  background: linear-gradient(160deg, rgba(255,210,100,0.07) 0%, rgba(255,210,100,0.03) 100%);
+  border-color: rgba(255,210,100,0.22) !important;
+  color: #ffffff;
+}
+
+.card-rail-link-warm:hover {
+  background: linear-gradient(160deg, rgba(255,210,100,0.12) 0%, rgba(255,210,100,0.06) 100%);
+  border-color: rgba(255,210,100,0.38) !important;
 }
 
 .premium-panel-amber {
