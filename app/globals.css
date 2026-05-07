@@ -1649,7 +1649,7 @@ h4 {
 .pokedex-detail-identity {
   position: relative;
   z-index: 1;
-  margin-top: 0.4rem;
+  margin-top: 0.2rem;
   text-align: center;
 }
 
@@ -1682,11 +1682,11 @@ h4 {
 }
 
 .pokedex-threat-card {
-  margin-top: 0.55rem;
+  margin-top: 0.3rem;
   border-radius: 16px;
   border: 1px solid rgba(255,224,138,0.36);
   background: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.07) 100%);
-  padding: 0.7rem 0.9rem;
+  padding: 0.5rem 0.9rem;
 }
 
 .pokedex-detail-panel:has(.pokedex-threat-fill-high) .pokedex-threat-card {
@@ -1729,7 +1729,7 @@ h4 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.65rem;
-  margin-top: 0.55rem;
+  margin-top: 0.3rem;
 }
 
 .pokedex-rail-pill {
