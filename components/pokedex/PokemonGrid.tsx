@@ -104,7 +104,7 @@ export default function PokemonGrid({
   const learnedCount = Array.from(learnedSlugs).filter((slug) =>
     entries.some((entry) => entry.slug === slug),
   ).length;
-  const progressPercent = Math.round((learnedCount / entries.length) * 100);
+  const progressPercent = Math.round((viewedCount / entries.length) * 100);
 
   function openEntry(slug: string) {
     setShareFeedback(null);

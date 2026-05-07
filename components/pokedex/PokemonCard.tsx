@@ -22,7 +22,7 @@ export default function PokemonCard({
   return (
     <button
       type="button"
-      className="pokedex-card pokedex-card-enter card-hover"
+      className="pokedex-card pokedex-card-enter"
       style={
         {
           "--pokedex-accent": typeMeta.color,
