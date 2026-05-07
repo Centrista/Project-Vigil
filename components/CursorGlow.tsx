@@ -140,7 +140,7 @@ export default function CursorGlow() {
           marginTop: -320,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(0,212,255,0.13) 0%, rgba(0,212,255,0.055) 35%, rgba(255,23,68,0.03) 60%, transparent 72%)",
+            "radial-gradient(circle, rgba(0,212,255,0.055) 0%, rgba(0,212,255,0.018) 30%, transparent 55%)",
           zIndex: 9997,
         }}
       />
