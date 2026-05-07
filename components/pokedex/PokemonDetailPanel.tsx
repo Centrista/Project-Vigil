@@ -178,9 +178,6 @@ export default function PokemonDetailPanel({
             className="pokedex-rail-pill"
             style={{ "--rail-accent": item.color } as CSSProperties}
           >
-            <span className="pokedex-rail-icon" aria-hidden="true">
-              {item.icon}
-            </span>
             <span className="mono-label pokedex-rail-text">{item.label}</span>
           </div>
         ))}
