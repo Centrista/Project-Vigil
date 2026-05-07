@@ -128,35 +128,37 @@ export default function CursorGlow() {
 
   return (
     <>
-      {/* ambient glow */}
+      {/* ambient spotlight */}
       <div
         ref={glowRef}
         aria-hidden
         style={{
           ...base,
-          width: 550,
-          height: 550,
-          marginLeft: -275,
-          marginTop: -275,
+          width: 640,
+          height: 640,
+          marginLeft: -320,
+          marginTop: -320,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(0,212,255,0.07) 0%, rgba(0,212,255,0.025) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(0,212,255,0.13) 0%, rgba(0,212,255,0.055) 35%, rgba(255,23,68,0.03) 60%, transparent 72%)",
           zIndex: 9997,
         }}
       />
 
-      {/* morphing ring */}
+      {/* lagging morphing ring */}
       <div
         ref={ringRef}
         aria-hidden
         style={{
           ...base,
-          width: 36,
-          height: 36,
-          marginLeft: -18,
-          marginTop: -18,
+          width: 44,
+          height: 44,
+          marginLeft: -22,
+          marginTop: -22,
           borderRadius: "50%",
-          border: "1px solid rgba(255,255,255,0.28)",
+          border: "1.5px solid rgba(255,255,255,0.52)",
+          boxShadow:
+            "0 0 10px rgba(255,255,255,0.14), 0 0 22px rgba(0,212,255,0.12), inset 0 0 8px rgba(255,255,255,0.04)",
           zIndex: 9998,
         }}
       />
@@ -172,7 +174,9 @@ export default function CursorGlow() {
           marginLeft: -3.5,
           marginTop: -3.5,
           borderRadius: "50%",
-          background: "rgba(255,255,255,0.88)",
+          background: "rgba(255,255,255,0.95)",
+          boxShadow:
+            "0 0 8px rgba(255,255,255,0.7), 0 0 18px rgba(255,255,255,0.35)",
           zIndex: 9999,
         }}
       />
