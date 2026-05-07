@@ -13,11 +13,10 @@ export default function StoryFilter({ stories }: StoryFilterProps) {
 
   const CATEGORY_ORDER = [
     "All",
-    "Gaming Scams",
-    "Job Scams",
-    "Deepfake Video",
-    "Sextortion",
-    "AI Phishing",
+    "Deepfake Scam",
+    "Impersonation Scam",
+    "Investment Fraud",
+    "Retail Fraud",
   ];
 
   const tags = CATEGORY_ORDER;
