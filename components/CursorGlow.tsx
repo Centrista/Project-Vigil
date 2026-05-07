@@ -5,6 +5,7 @@ export default function CursorGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
   const dotRef  = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const conformedTo = useRef<Element | null>(null);
 
   useEffect(() => {
     const supportsGlow =
@@ -29,14 +30,59 @@ export default function CursorGlow() {
       }
     };
 
+    const conformRing = (el: Element) => {
+      const ring = ringRef.current;
+      if (!ring) return;
+      const r = el.getBoundingClientRect();
+      ring.style.transition =
+        "width 180ms ease, height 180ms ease, margin 180ms ease, border-radius 180ms ease, opacity 0.25s ease";
+      ring.style.width        = `${r.width}px`;
+      ring.style.height       = `${r.height}px`;
+      ring.style.marginLeft   = `${-r.width  / 2}px`;
+      ring.style.marginTop    = `${-r.height / 2}px`;
+      ring.style.borderRadius = "14px";
+      // lock lerp target to element centre
+      rx = r.left + r.width  / 2;
+      ry = r.top  + r.height / 2;
+    };
+
+    const resetRing = () => {
+      const ring = ringRef.current;
+      if (!ring) return;
+      ring.style.transition =
+        "width 180ms ease, height 180ms ease, margin 180ms ease, border-radius 180ms ease, opacity 0.25s ease";
+      ring.style.width        = "36px";
+      ring.style.height       = "36px";
+      ring.style.marginLeft   = "-18px";
+      ring.style.marginTop    = "-18px";
+      ring.style.borderRadius = "50%";
+    };
+
     const onMove = (e: MouseEvent) => {
       mx = e.clientX;
       my = e.clientY;
       show();
+
       if (dotRef.current)
         dotRef.current.style.transform = `translate(${mx}px,${my}px)`;
       if (glowRef.current)
         glowRef.current.style.transform = `translate(${mx}px,${my}px)`;
+
+      const navLink = (e.target as Element).closest(".nav-link");
+      if (navLink) {
+        if (conformedTo.current !== navLink) {
+          conformedTo.current = navLink;
+          conformRing(navLink);
+        } else {
+          // keep ring centred as element may scroll/resize
+          const r = navLink.getBoundingClientRect();
+          rx = r.left + r.width  / 2;
+          ry = r.top  + r.height / 2;
+        }
+      } else if (conformedTo.current) {
+        conformedTo.current = null;
+        resetRing();
+      }
     };
 
     const onLeave = () => {
@@ -49,8 +95,10 @@ export default function CursorGlow() {
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
     const tick = () => {
-      rx = lerp(rx, mx, 0.13);
-      ry = lerp(ry, my, 0.13);
+      if (!conformedTo.current) {
+        rx = lerp(rx, mx, 0.13);
+        ry = lerp(ry, my, 0.13);
+      }
       if (ringRef.current)
         ringRef.current.style.transform = `translate(${rx}px,${ry}px)`;
       raf = requestAnimationFrame(tick);
@@ -97,7 +145,7 @@ export default function CursorGlow() {
         }}
       />
 
-      {/* lagging outer ring */}
+      {/* morphing ring */}
       <div
         ref={ringRef}
         aria-hidden
