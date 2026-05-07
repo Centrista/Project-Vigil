@@ -42,7 +42,7 @@ export default function StoryFilter({ stories }: StoryFilterProps) {
               className={`flex-shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-150 ${isActive ? "story-filter-pill-active" : "story-filter-pill"}`}
             >
               <span>{tag}</span>
-              <span className={`ml-2 rounded-full px-2 py-0.5 mono-label text-[10px] ${isActive ? "bg-[rgba(150,110,20,0.15)] text-[#131b30]" : "bg-[rgba(180,140,60,0.12)] text-[rgba(20,33,56,0.45)]"}`}>
+              <span className={`ml-2 rounded-full px-2 py-0.5 mono-label text-[10px] ${isActive ? "bg-[rgba(232,201,106,0.2)] text-[#e8c96a]" : "bg-[rgba(200,185,140,0.15)] text-[rgba(200,185,140,0.75)]"}`}>
                 {counts[tag]}
               </span>
             </button>

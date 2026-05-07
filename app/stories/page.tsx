@@ -23,7 +23,6 @@ export default function StoriesPage() {
           description="First-hand accounts from teens who encountered AI scams. Their experience is your warning."
           stats={[
             { label: `${STORIES.length} stories archived`, tone: "warm" },
-            { label: "Anonymous submissions only", tone: "default" },
           ]}
         />
         <StoryFilter stories={STORIES} />
