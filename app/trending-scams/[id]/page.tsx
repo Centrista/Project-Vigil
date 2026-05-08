@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { SCAMS } from "@/lib/scams";
 
@@ -100,6 +101,46 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
           <div className="grid gap-5 lg:grid-cols-[1fr_280px]">
             {/* Left column */}
             <div className="flex flex-col gap-5">
+
+              {/* Image frame */}
+              <div
+                className="relative overflow-hidden"
+                style={{
+                  borderRadius: "18px",
+                  border: "1.5px solid rgba(255,224,110,0.55)",
+                  background: "linear-gradient(180deg, rgba(255,242,180,0.80) 0%, rgba(185,215,255,0.88) 52%, rgba(96,155,228,0.92) 100%)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.22)",
+                }}
+              >
+                <div
+                  className="flex items-center justify-between px-3 py-2"
+                  style={{
+                    background: "linear-gradient(180deg, rgba(255,248,210,0.97) 0%, rgba(240,216,128,0.95) 100%)",
+                    borderBottom: "1px solid rgba(63,74,106,0.18)",
+                  }}
+                >
+                  <span className="mono-label text-[10px] font-black" style={{ color: "rgba(20,33,56,0.66)" }}>
+                    FIELD REPORT
+                  </span>
+                  <span className="mono-label text-[10px] font-black" style={{ color: risk.color }}>
+                    {risk.label.toUpperCase()}
+                  </span>
+                </div>
+                <div className="relative h-[240px] w-full">
+                  <div
+                    className="absolute rounded-full"
+                    style={{ inset: "10% 18%", background: risk.color, filter: "blur(42px)", opacity: 0.20 }}
+                  />
+                  <Image
+                    src={scam.image}
+                    alt={scam.name}
+                    fill
+                    className="relative object-cover"
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    priority
+                  />
+                </div>
+              </div>
 
               {/* How it works */}
               <div
