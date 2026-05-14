@@ -1,28 +1,78 @@
-import UtilityPageTemplate from "@/components/UtilityPageTemplate";
+import Link from "next/link";
+import PageIntro from "@/components/PageIntro";
 
 export const metadata = {
   title: "Submit an AI Scam — Project Vigil",
   description: "Encountered an AI scam? Report it anonymously to help us map new attack patterns.",
 };
 
+// ─── TODO ────────────────────────────────────────────────────────────────────
+// Create a Google Form for anonymous scam reporting, then paste its public URL
+// here. The site embeds it inline (same pattern as /feedback and /risk-quiz).
+// Until set, the embed shows the placeholder fallback URL.
+// ────────────────────────────────────────────────────────────────────────────
+const SUBMIT_FORM_URL =
+  process.env.NEXT_PUBLIC_SUBMIT_FORM_URL ??
+  "https://docs.google.com/forms/d/e/REPLACE_WITH_FORM_ID/viewform";
+const SUBMIT_FORM_EMBED_URL = `${SUBMIT_FORM_URL}?embedded=true`;
+
 export default function SubmitScamPage() {
   return (
-    <UtilityPageTemplate
-      eyebrow="Report an AI Scam"
-      title={
-        <>
-          Report an <span className="gradient-text-cyan">AI Scam</span>
-        </>
-      }
-      description="Encountered a voice clone, deepfake, AI phishing, or romance bot? Submit it anonymously. Every report helps map new AI attack patterns."
-      previewTitle="Anonymous reporting is being built next."
-      previewBody="This submission flow is being designed to make reporting fast, private, and structured enough to spot new scam patterns without exposing the person reporting them."
-      bullets={[
-        "Anonymous intake for new scam variants and suspicious messages.",
-        "Fields tailored to voice clones, deepfakes, phishing, and romance bots.",
-        "A cleaner bridge between user reports and the alerts/trending pipeline.",
-      ]}
-      accentTone="info"
-    />
+    <div className="w-full overflow-x-hidden">
+      <section className="page-section">
+        <div className="page-frame page-frame-narrow">
+          <PageIntro
+            eyebrow="Report an AI Scam"
+            title={
+              <>
+                Report an <span className="gradient-text-cyan">AI Scam</span>
+              </>
+            }
+            description="Encountered a voice clone, deepfake, AI phishing, or romance bot? Submit it anonymously. Every report helps map new AI attack patterns."
+            align="center"
+            stats={[
+              { label: "Fully anonymous", tone: "info" },
+              { label: "Voice / video / text", tone: "warm" },
+              { label: "Feeds the alerts page", tone: "success" },
+            ]}
+            actions={
+              <Link
+                href={SUBMIT_FORM_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-red px-6 py-3 text-sm"
+              >
+                Open in Google Forms
+              </Link>
+            }
+          />
+
+          <div className="premium-panel premium-panel-info overflow-hidden p-4 sm:p-5">
+            <div className="eyebrow-row mb-4">
+              <span className="premium-dot" />
+              <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/42">
+                Anonymous Intake
+              </span>
+            </div>
+
+            <div className="overflow-hidden rounded-[22px] border border-white/10 bg-white">
+              <iframe
+                title="Project Vigil — Submit an AI Scam"
+                src={SUBMIT_FORM_EMBED_URL}
+                className="block w-full bg-white"
+                style={{ minHeight: "1200px", border: 0 }}
+                loading="lazy"
+              >
+                Loading…
+              </iframe>
+            </div>
+
+            <p className="mono-label mt-4 text-center text-[10px] uppercase tracking-[0.22em] text-white/35">
+              No login required. Nothing about you is collected.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

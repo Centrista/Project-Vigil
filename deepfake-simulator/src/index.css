@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent-red:    #ff1744;
+  --accent-cyan:   #00d4ff;
+  --accent-green:  #22c55e;
+  --accent-amber:  #f59e0b;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: rgba(255,255,255,0.94);
+  font-family: "Avenir Next", "Segoe UI Variable", "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+  background:
+    radial-gradient(ellipse at 0% 0%,   rgba(255, 23, 68, 0.13)  0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(0, 212, 255, 0.10)  0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(168, 85, 247, 0.07) 0%, transparent 55%),
+    linear-gradient(180deg, #0e1827 0%, #0c1624 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root { min-height: 100vh; }
+
+h1, h2, h3 {
+  font-family: "Avenir Next", "SF Pro Display", "Segoe UI Variable Display", sans-serif;
+  letter-spacing: -0.035em;
+}
+
+::selection { background: rgba(255,23,68,0.22); color: #fff; }
+
+button { cursor: pointer; }
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,212,255,0.35);
+}
+
+/* ── Animations ─────────────────── */
+@keyframes waveBar {
+  from { height: 15%; }
+  to   { height: 85%; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes revealIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+.animate-fade-up { animation: fadeUp   0.42s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-reveal  { animation: revealIn 0.36s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* ── Gradient text ───────────────── */
+.gradient-text-red {
+  background: linear-gradient(135deg, #ffffff 0%, #ffaab8 12%, #ff1744 60%, #ff6b86 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #ffffff 0%, #9df5ff 12%, #00d4ff 65%, #49e8ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Utilities ───────────────────── */
+.mono-label {
+  font-family: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  letter-spacing: 0.07em;
+}
+
+.bg-vigil-gradient {
+  background:
+    radial-gradient(ellipse at 0% 0%,   rgba(255, 23, 68, 0.13)  0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(0, 212, 255, 0.10)  0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(168, 85, 247, 0.07) 0%, transparent 55%),
+    linear-gradient(180deg, #0e1827 0%, #0c1624 100%);
+}
+
+/* ── Scrollbar ───────────────────── */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(255,255,255,0.12); border-radius: 2px; }
