@@ -63,6 +63,71 @@ button { cursor: pointer; }
 .animate-fade-up { animation: fadeUp   0.42s cubic-bezier(0.16,1,0.3,1) both; }
 .animate-reveal  { animation: revealIn 0.36s cubic-bezier(0.16,1,0.3,1) both; }
 
+/* iMessage-style bubble pop (subtle spring overshoot) */
+@keyframes bubblePop {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.92); }
+  60%  { opacity: 1; transform: translateY(0)   scale(1.015); }
+  100% { opacity: 1; transform: translateY(0)   scale(1); }
+}
+.bubble-pop { animation: bubblePop 260ms cubic-bezier(0.34,1.56,0.64,1) both; }
+
+/* Typing dots */
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0);    opacity: 0.45; }
+  30%           { transform: translateY(-3px); opacity: 1;    }
+}
+.typing-dot { animation: typingDot 1100ms ease-in-out infinite; }
+
+/* Direction-aware page slides */
+@keyframes slideInFromRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+@keyframes slideInFromLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+.animate-slide-in-forward  { animation: slideInFromRight 320ms cubic-bezier(0.16,1,0.3,1) both; }
+.animate-slide-in-backward { animation: slideInFromLeft  320ms cubic-bezier(0.16,1,0.3,1) both; }
+.animate-slide-in-initial  { animation: revealIn         360ms cubic-bezier(0.16,1,0.3,1) both; }
+
+/* Next-button slide-up entrance */
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.animate-slide-up-fade { animation: slideUpFade 280ms cubic-bezier(0.16,1,0.3,1) both; }
+
+/* Score pulse-glow (fires once after count-up completes) */
+@keyframes scorePulse {
+  0%, 100% { text-shadow: 0 0 0 currentColor;  transform: scale(1); }
+  50%      { text-shadow: 0 0 26px currentColor; transform: scale(1.04); }
+}
+.animate-score-pulse { animation: scorePulse 900ms ease-in-out 700ms 1 both; }
+
+/* Step-dot wipe — fills horizontally when a dot becomes done */
+@keyframes dotWipe {
+  from { background-size: 0% 100%; }
+  to   { background-size: 100% 100%; }
+}
+.animate-dot-wipe {
+  background-repeat: no-repeat;
+  animation: dotWipe 380ms cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* Reduced motion — disable everything that moves */
+@media (prefers-reduced-motion: reduce) {
+  .bubble-pop,
+  .typing-dot,
+  .animate-slide-in-forward,
+  .animate-slide-in-backward,
+  .animate-slide-up-fade,
+  .animate-fade-up,
+  .animate-reveal,
+  .animate-score-pulse,
+  .animate-dot-wipe { animation: none !important; }
+}
+
 /* ── Gradient text ───────────────── */
 .gradient-text-red {
   background: linear-gradient(135deg, #ffffff 0%, #ffaab8 12%, #ff1744 60%, #ff6b86 100%);

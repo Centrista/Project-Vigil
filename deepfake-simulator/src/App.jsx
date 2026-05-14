@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react'
 import { AudioProvider } from './context/AudioContext'
 import { PhoneFrame } from './components/PhoneFrame'
+import { ModeToggle } from './components/ModeToggle'
 import { Intro } from './screens/Intro'
 import { Training } from './screens/Training'
 import { Test } from './screens/Test'
 import { Results } from './screens/Results'
-import { testSamples } from './data/testSamples'
+import { voiceSamples, imageSamples } from './data/samples'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -18,17 +19,20 @@ function shuffle(arr) {
 
 const VIGIL_URL = 'https://projectvigil.vercel.app'
 
+const SAMPLES = { voice: voiceSamples, image: imageSamples }
+
 export default function App() {
-  const [phase, setPhase] = useState('intro')
+  const [mode,  setMode]  = useState('voice')         // 'voice' | 'image'
+  const [phase, setPhase] = useState('intro')         // 'intro' | 'training' | 'test' | 'results'
   const [score, setScore] = useState(0)
   const [shuffledTests, setShuffledTests] = useState([])
 
   const handleStart = useCallback(() => setPhase('training'), [])
 
   const handleStartTest = useCallback(() => {
-    setShuffledTests(shuffle(testSamples))
+    setShuffledTests(shuffle(SAMPLES[mode].test))
     setPhase('test')
-  }, [])
+  }, [mode])
 
   const handleComplete = useCallback((finalScore) => {
     setScore(finalScore)
@@ -44,16 +48,39 @@ export default function App() {
   const goToIntro    = useCallback(() => setPhase('intro'),    [])
   const goToTraining = useCallback(() => setPhase('training'), [])
 
+  const switchMode = useCallback((next) => {
+    if (next === mode) return
+    setMode(next)
+    setPhase('intro')
+    setScore(0)
+    setShuffledTests([])
+  }, [mode])
+
   const screen = (() => {
+    const samples = SAMPLES[mode]
     switch (phase) {
       case 'intro':
-        return <Intro onStart={handleStart} />
+        return <Intro mode={mode} onStart={handleStart} />
       case 'training':
-        return <Training onContinue={handleStartTest} onBack={goToIntro} />
+        return (
+          <Training
+            mode={mode}
+            samples={samples.training}
+            onContinue={handleStartTest}
+            onBack={goToIntro}
+          />
+        )
       case 'test':
-        return <Test samples={shuffledTests} onComplete={handleComplete} onBackToTraining={goToTraining} />
+        return (
+          <Test
+            mode={mode}
+            samples={shuffledTests}
+            onComplete={handleComplete}
+            onBackToTraining={goToTraining}
+          />
+        )
       case 'results':
-        return <Results score={score} onRetry={handleRetry} vigilUrl={VIGIL_URL} />
+        return <Results mode={mode} score={score} onRetry={handleRetry} vigilUrl={VIGIL_URL} />
       default:
         return null
     }
@@ -62,7 +89,8 @@ export default function App() {
   return (
     <AudioProvider>
       <PhoneFrame>
-        <div className="min-h-screen bg-vigil-gradient">
+        <div className="min-h-screen bg-vigil-gradient flex flex-col">
+          <ModeToggle mode={mode} onChange={switchMode} />
           {screen}
         </div>
       </PhoneFrame>

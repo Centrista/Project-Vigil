@@ -70,7 +70,7 @@ export function VoiceNote({ src, label, onPlayComplete }) {
   const progress = duration > 0 ? currentTime / duration : 0
 
   return (
-    <div className="w-full">
+    <div className="w-full bubble-pop">
       {label && (
         <p className="mono-label text-[9px] uppercase tracking-[0.26em] text-white/35 mb-3">
           {label}

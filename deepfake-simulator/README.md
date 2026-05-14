@@ -1,6 +1,7 @@
-# Deepfake Voice Simulator — Project Vigil
+# Deepfake Simulator — Project Vigil
 
-Interactive voice deepfake recognition test. 4 phases: intro → training → test → results.
+Interactive deepfake recognition test with two modes: **Voice** and **Image**.
+4 phases each: intro → training → test → results.
 Built with React + Vite + Tailwind CSS. Iframe-ready for Google Sites.
 
 ---
@@ -19,58 +20,70 @@ npm run preview      # preview production build locally
 
 ## Where to drop files
 
-### Audio files
+### Voice mode — audio files
 
 | Path | What goes here |
 |------|---------------|
-| `public/audio/train/train-1.mp3` | Training sample 1 (real voice) |
-| `public/audio/train/train-2.mp3` | Training sample 2 (real voice) |
-| `public/audio/train/train-3.mp3` | Training sample 3 (real voice) |
-| `public/audio/train/train-4.mp3` | Training sample 4 (real voice) |
-| `public/audio/train/train-5.mp3` | Training sample 5 (real voice) |
-| `public/audio/test/test-1.mp3`   | Test sample 1 |
-| `public/audio/test/test-2.mp3`   | Test sample 2 |
-| `public/audio/test/test-3.mp3`   | Test sample 3 |
-| `public/audio/test/test-4.mp3`   | Test sample 4 |
+| `public/audio/train/train-1.mp3` … `train-5.mp3` | 5 real voice samples of one person |
+| `public/audio/test/test-1.mp3` … `test-4.mp3`   | 4 test clips (2 real, 2 AI-cloned) |
 
-**Format:** MP3 recommended. Any browser-playable audio format works.  
-**Missing files** show a clean "Audio not loaded" placeholder — they won't break the app.
+**Format:** MP3 recommended. Any browser-playable audio format works.
+
+### Image mode — photo files
+
+| Path | What goes here |
+|------|---------------|
+| `public/images/train/train-1.jpg` … `train-5.jpg` | 5 real photos of the same person, varied angles |
+| `public/images/test/test-1.jpg` … `test-4.jpg`   | 4 test photos (2 real, 2 AI-generated portraits) |
+
+**Format:** JPG or PNG. Aspect ratio ~4:5 portrait works best with the bubble layout.
 
 ### Avatar photo
 
-Drop the person's photo at:
 ```
 public/avatars/person.jpg
 ```
 
-Recommended: square crop, ~200×200px min. Shows in the WhatsApp voice note bubble.
-Missing photo falls back to a grey circle placeholder.
+Square crop ~200×200px. Shows in the small chat bubble avatar. Missing photo falls back to a person icon.
+
+**Missing files of any kind** show a clean inline placeholder — the app won't break.
 
 ---
 
 ## Customising content
 
+All sample data lives in **one file**: `src/data/samples.js`.
+
 ### Change the person's name
-Edit `src/data/trainingSamples.js`:
 ```js
 export const SUBJECT_NAME = 'Alex'  // ← change this
 ```
 
-### Edit test sample tells (the explanations shown after each answer)
-Edit `src/data/testSamples.js`:
+### Edit voice test tells (the explanations shown after each answer)
 ```js
-export const testSamples = [
+voiceSamples.test = [
   {
-    id: 1,
-    file: 'test-1.mp3',
+    id: 1, file: 'test-1.mp3',
     isAI: true,               // ← true = AI clone, false = genuine recording
-    tell: "Slight robotic cadence on the word 'tomorrow'...",  // ← your real tell
+    tell: "Slight robotic cadence on the word...",  // ← your real tell
   },
-  // ...
+  ...
 ]
 ```
 
-The test samples are shuffled each session — you don't need to worry about order.
+### Edit image test tells
+```js
+imageSamples.test = [
+  {
+    id: 1, file: 'test-1.jpg',
+    isAI: true,
+    tell: "AI-generated. Look at the ears...",
+  },
+  ...
+]
+```
+
+The test samples are shuffled each session — order doesn't matter.
 
 ### Change the "Back to Project Vigil" link
 In `src/App.jsx`, update:
@@ -80,38 +93,46 @@ const VIGIL_URL = 'https://projectvigil.vercel.app'
 
 ---
 
+## Features
+
+- **Mode toggle** at top — switch between Voice / Image testing anytime (resets to intro of that mode)
+- **Paginated Training** — one sample per page with Next/Prev nav (less scrolling)
+- **Paginated Results** — score → stats → action steps (3 phone "pages")
+- **Keyboard shortcuts**:
+  - `R` / `A` → Real / AI Fake (during Test)
+  - `Enter` / `Space` → advance after reveal
+  - `←` / `→` → previous/next page (Training and Results)
+  - `Esc` → back
+- **Confetti** on a perfect 4/4 score
+- **Share result** button (Web Share API + clipboard fallback)
+- **Haptic feedback** on mobile (vibrate on answer)
+- **Score count-up** animation on Results page 1
+
+---
+
 ## Deploying to Vercel
 
-1. Push `deepfake-simulator/` to a GitHub repo (or deploy from this monorepo)
-2. In Vercel dashboard → New Project → Import repo
+1. Push `deepfake-simulator/` to a GitHub repo
+2. In Vercel dashboard → **Add New → Project** → Import repo
 3. **Set Root Directory to `deepfake-simulator`** (critical — the app lives in a subfolder)
 4. Framework preset: Vite (auto-detected)
-5. Deploy. Vercel will give you a URL like `vigil-deepfake-simulator.vercel.app`
+5. Deploy
 
-The included `vercel.json` already sets `frame-ancestors *` so Google Sites and the main Project Vigil site can embed it.
+The included `vercel.json` sets `frame-ancestors *` so Google Sites and the main Project Vigil site can embed it.
 
 ### Wiring it into the main Project Vigil site
 
-After deploying, the main Next.js site embeds this simulator at `/simulator`. Tell it where the simulator lives by setting an env var:
+The main Next.js site embeds this simulator at `/simulator`. After deploying, set the env var:
 
-**On Vercel (main site project):**
+**On Vercel (main-site project):**
 1. Settings → Environment Variables
-2. Add `NEXT_PUBLIC_SIMULATOR_URL` = your simulator's deployment URL (e.g. `https://vigil-deepfake-simulator.vercel.app`)
+2. Add `NEXT_PUBLIC_SIMULATOR_URL` = your simulator's deployment URL
 3. Redeploy the main site
 
 **For local dev**, create `.env.local` in the main project root:
 ```
 NEXT_PUBLIC_SIMULATOR_URL=https://your-simulator-url.vercel.app
 ```
-
-If the env var is unset, the page falls back to a placeholder URL — the iframe shows a blank Vercel "not found" until you wire it in.
-
-### Embedding in Google Sites (optional)
-
-In Google Sites:
-1. Insert → Embed → URL
-2. Paste the simulator's Vercel URL directly
-3. Resize the iframe to ~900px tall (the app scrolls within the iframe on shorter devices)
 
 ---
 
@@ -120,23 +141,24 @@ In Google Sites:
 ```
 deepfake-simulator/
   src/
-    App.jsx                    # Phase state machine
+    App.jsx                    # Mode + phase state machine
     context/AudioContext.jsx   # Single-audio-at-a-time manager
     components/
       VoiceNote.jsx            # WhatsApp-style audio bubble
-      Button.jsx               # Primary / secondary / danger variants
-      StatCard.jsx             # Stat highlight cards
-      PhoneFrame.jsx           # Optional phone chrome on desktop
+      ImageNote.jsx            # WhatsApp-style photo bubble
+      ModeToggle.jsx           # Voice / Image pill toggle
+      Button.jsx, StatCard.jsx, PhoneFrame.jsx
     screens/
-      Intro.jsx                # Phase 1 — hook + CTA
-      Training.jsx             # Phase 2 — listen to real samples
+      Intro.jsx                # Phase 1 — hook + CTA (mode-aware copy)
+      Training.jsx             # Phase 2 — paginated, one sample per page
       Test.jsx                 # Phase 3 — one-at-a-time challenge
-      Results.jsx              # Phase 4 — score + debrief
+      Results.jsx              # Phase 4 — 3 paginated pages
     data/
-      testSamples.js           # ← EDIT THIS for real tells + isAI flags
-      trainingSamples.js       # ← EDIT THIS for subject name
+      samples.js               # ← EDIT THIS — all training + test data, both modes
   public/
     avatars/person.jpg         # ← DROP YOUR PHOTO HERE
-    audio/train/train-1..5.mp3 # ← DROP TRAINING AUDIO HERE
-    audio/test/test-1..4.mp3   # ← DROP TEST AUDIO HERE
+    audio/train/train-1..5.mp3
+    audio/test/test-1..4.mp3
+    images/train/train-1..5.jpg
+    images/test/test-1..4.jpg
 ```
