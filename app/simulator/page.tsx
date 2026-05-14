@@ -6,11 +6,11 @@ export const metadata = {
   description: "Can you tell when AI is faking a voice? Train your ear on real samples, then test yourself against AI clones.",
 };
 
-// Set NEXT_PUBLIC_SIMULATOR_URL in Vercel project env vars after deploying
-// the deepfake-simulator/ Vite app. Falls back to a placeholder for dev.
+// Resolve simulator URL:
+//   1. NEXT_PUBLIC_SIMULATOR_URL  → override (set in Vercel env vars if you redeploy)
+//   2. Otherwise                  → the production simulator deployment
 const SIMULATOR_URL =
-  process.env.NEXT_PUBLIC_SIMULATOR_URL ??
-  "https://vigil-deepfake-simulator.vercel.app";
+  process.env.NEXT_PUBLIC_SIMULATOR_URL ?? "https://vigil-simulator.vercel.app";
 
 export default function SimulatorPage() {
   return (
