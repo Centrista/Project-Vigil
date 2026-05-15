@@ -12,16 +12,18 @@ const COPY = {
     ),
     stat: <>AI clones a voice with <strong className="text-white font-bold">85% accuracy</strong> from just <strong className="text-white font-bold">3 seconds of audio.</strong></>,
     source: 'McAfee, 2023',
+    buttonLabel: 'Start Training',
   },
   image: {
     label: 'Image Simulator',
     title: 'Can you spot an AI',
     titleAccent: 'generated face?',
     body: (
-      <>First you'll study 5 real photos of one person. Then we show you 4 new photos — 2 real, 2 AI-generated. Spot the fakes.</>
+      <>We'll show you 10 photos — half real, half AI-generated. For each one, decide: real, or fake?</>
     ),
     stat: <>AI-generated faces fool humans <strong className="text-white font-bold">38.7% more often</strong> than real photos.</>,
     source: 'PNAS, 2022',
+    buttonLabel: 'Start Test',
   },
 }
 
@@ -67,7 +69,7 @@ export function Intro({ mode, onStart }) {
 
       <div className="animate-fade-up" style={{ animationDelay: '180ms' }}>
         <Button onClick={onStart} fullWidth>
-          Start Training
+          {c.buttonLabel}
         </Button>
       </div>
 

@@ -5,12 +5,18 @@ import { StatCard } from '../components/StatCard'
 import { Button } from '../components/Button'
 import { usePagedTransition } from '../hooks/usePagedTransition'
 
-const SCORE_MAP = {
-  4: { line: 'Sharp eyes and ears.',   sub: 'But scammers only need to fool you once.',                color: 'text-[#22c55e]' },
-  3: { line: 'Better than most.',      sub: 'One slip is all it takes. AI improves every month.',       color: 'text-[#00d4ff]' },
-  2: { line: 'Coin-flip territory.',   sub: 'Scammers are counting on exactly this.',                   color: 'text-[#f59e0b]' },
-  1: { line: "You're not alone.",      sub: "Most people can't tell. Now you know what to look for.",   color: 'text-[#ff1744]' },
-  0: { line: "You're not alone.",      sub: "Most people can't tell. The good news: now you do.",       color: 'text-[#ff1744]' },
+// Score bands by ratio so the same map works for the 4-question voice test
+// and the 10-question image test.
+const BANDS = [
+  { min: 1.00, line: 'Sharp eyes and ears.', sub: 'But scammers only need to fool you once.',              color: 'text-[#22c55e]' },
+  { min: 0.75, line: 'Better than most.',    sub: 'One slip is all it takes. AI improves every month.',     color: 'text-[#00d4ff]' },
+  { min: 0.45, line: 'Coin-flip territory.', sub: 'Scammers are counting on exactly this.',                 color: 'text-[#f59e0b]' },
+  { min: 0.00, line: "You're not alone.",    sub: "Most people can't tell. Now you know what to look for.", color: 'text-[#ff1744]' },
+]
+
+function scoreCopy(score, total) {
+  const ratio = total > 0 ? score / total : 0
+  return BANDS.find(b => ratio >= b.min) ?? BANDS[BANDS.length - 1]
 }
 
 const STATS = {
@@ -84,8 +90,8 @@ function useCountUp(target, durationMs = 700) {
   return value
 }
 
-export function Results({ mode, score, total = 4, onRetry, vigilUrl = 'https://projectvigil.vercel.app' }) {
-  const copy   = SCORE_MAP[score] ?? SCORE_MAP[0]
+export function Results({ mode, score, total, onRetry, vigilUrl = 'https://projectvigil.vercel.app' }) {
+  const copy   = scoreCopy(score, total)
   const stats  = STATS[mode]   ?? STATS.voice
   const steps  = STEPS[mode]   ?? STEPS.voice
   const callout = CALLOUT[mode] ?? CALLOUT.voice

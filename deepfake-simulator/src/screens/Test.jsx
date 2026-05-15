@@ -117,7 +117,7 @@ export function Test({ mode, samples, onComplete, onBackToTraining }) {
         className="flex items-center gap-1 mono-label text-[9px] uppercase tracking-[0.24em] text-white/35 hover:text-white/70 -ml-1 mb-5 self-start animate-fade-up"
       >
         <ChevronLeft size={13} strokeWidth={2.5} />
-        {index === 0 ? 'Training' : 'Previous'}
+        {index === 0 ? (mode === 'image' ? 'Intro' : 'Training') : 'Previous'}
       </button>
 
       {/* Header + step dots */}

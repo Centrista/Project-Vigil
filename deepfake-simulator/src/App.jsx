@@ -17,6 +17,15 @@ function shuffle(arr) {
   return a
 }
 
+// Image mode: pick 5 AI + 5 real from the 84-photo pool, then shuffle order.
+// Voice mode: keep current behaviour (shuffle the whole 4-clip pool).
+function pickSession(samples, mode) {
+  if (mode !== 'image') return shuffle(samples)
+  const ai   = shuffle(samples.filter(s =>  s.isAI)).slice(0, 5)
+  const real = shuffle(samples.filter(s => !s.isAI)).slice(0, 5)
+  return shuffle([...ai, ...real])
+}
+
 const VIGIL_URL = 'https://projectvigil.vercel.app'
 
 const SAMPLES = { voice: voiceSamples, image: imageSamples }
@@ -27,12 +36,19 @@ export default function App() {
   const [score, setScore] = useState(0)
   const [shuffledTests, setShuffledTests] = useState([])
 
-  const handleStart = useCallback(() => setPhase('training'), [])
-
   const handleStartTest = useCallback(() => {
-    setShuffledTests(shuffle(SAMPLES[mode].test))
+    setShuffledTests(pickSession(SAMPLES[mode].test, mode))
     setPhase('test')
   }, [mode])
+
+  // Image mode skips training — straight to the test.
+  const handleStart = useCallback(() => {
+    if (mode === 'image') {
+      handleStartTest()
+    } else {
+      setPhase('training')
+    }
+  }, [mode, handleStartTest])
 
   const handleComplete = useCallback((finalScore) => {
     setScore(finalScore)
@@ -76,11 +92,19 @@ export default function App() {
             mode={mode}
             samples={shuffledTests}
             onComplete={handleComplete}
-            onBackToTraining={goToTraining}
+            onBackToTraining={mode === 'image' ? goToIntro : goToTraining}
           />
         )
       case 'results':
-        return <Results mode={mode} score={score} onRetry={handleRetry} vigilUrl={VIGIL_URL} />
+        return (
+          <Results
+            mode={mode}
+            score={score}
+            total={shuffledTests.length || (mode === 'image' ? 10 : 4)}
+            onRetry={handleRetry}
+            vigilUrl={VIGIL_URL}
+          />
+        )
       default:
         return null
     }

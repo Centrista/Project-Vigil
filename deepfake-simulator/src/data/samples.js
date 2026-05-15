@@ -37,36 +37,54 @@ export const voiceSamples = {
 }
 
 // ─── IMAGE MODE ──────────────────────────────────────────────────────────────
-// Drop JPGs into:
-//   public/images/train/train-1..5.jpg
-//   public/images/test/test-1..4.jpg
+// No training phase — image mode goes straight from intro to test.
+// Test pool: 84 photos (42 AI + 42 real). Each session draws 5 + 5 at random.
 //
-// Training images = 5 real photos of the SAME person, varied angles/lighting.
-// Test images = 2 real + 2 AI-generated portraits. Set isAI accordingly.
+// File layout in public/images/test/
+//   test-1..42.jpg   → AI-generated (StyleGAN, thispersondoesnotexist.com)
+//   test-43..84.jpg  → Real portraits (Unsplash CDN)
+const AI_TELLS = [
+  "AI-generated. Look at the ears, jewellery, and background — AI image models often produce asymmetric or melting details on these.",
+  "AI-generated. Check the eyes — pupil shapes are slightly off, and reflections in both eyes don't match.",
+  "AI-generated. The skin is a touch too smooth — pores and fine lines are flattened in a way real cameras don't do.",
+  "AI-generated. Hair near the edges blends oddly with the background — strands fade or melt instead of having clean outlines.",
+  "AI-generated. Look for suspiciously perfect symmetry in the face — real faces are subtly asymmetric.",
+  "AI-generated. Teeth, glasses, or collars often have warped or impossible geometry on close inspection.",
+]
+
+const REAL_TELLS = [
+  "Real photo. Notice the natural skin texture with pores and unevenness — AI faces tend to look unnaturally smooth.",
+  "Real photo. Note the asymmetric expression and natural shadows — AI portraits often have suspiciously perfect symmetry.",
+  "Real photo. The background has consistent depth and lighting — AI often blurs or distorts it inconsistently.",
+  "Real photo. Hair strands have crisp, individual outlines against the background — a giveaway AI struggles with.",
+  "Real photo. Small imperfections — a stray hair, a freckle, an uneven eyebrow — that AI tends to smooth away.",
+  "Real photo. Catchlights in both eyes match the same light source — AI sometimes gets these subtly inconsistent.",
+]
+
+function buildImageTest() {
+  const out = []
+  // 42 AI faces → ids 1..42, files test-1.jpg..test-42.jpg
+  for (let i = 1; i <= 42; i++) {
+    out.push({
+      id: i,
+      file: `test-${i}.jpg`,
+      isAI: true,
+      tell: AI_TELLS[(i - 1) % AI_TELLS.length],
+    })
+  }
+  // 42 real portraits → ids 43..84, files test-43.jpg..test-84.jpg
+  for (let i = 43; i <= 84; i++) {
+    out.push({
+      id: i,
+      file: `test-${i}.jpg`,
+      isAI: false,
+      tell: REAL_TELLS[(i - 43) % REAL_TELLS.length],
+    })
+  }
+  return out
+}
+
 export const imageSamples = {
-  training: [
-    { id: 1, file: 'train-1.jpg' },
-    { id: 2, file: 'train-2.jpg' },
-    { id: 3, file: 'train-3.jpg' },
-    { id: 4, file: 'train-4.jpg' },
-    { id: 5, file: 'train-5.jpg' },
-  ],
-  test: [
-    {
-      id: 1, file: 'test-1.jpg', isAI: true,
-      tell: "AI-generated. Look at the ears, jewellery, and background — AI image models often produce asymmetric or melting details on these.",
-    },
-    {
-      id: 2, file: 'test-2.jpg', isAI: false,
-      tell: "Real photo. Notice the natural skin texture with pores and unevenness — AI faces tend to look unnaturally smooth.",
-    },
-    {
-      id: 3, file: 'test-3.jpg', isAI: true,
-      tell: "AI-generated. Check the eyes — pupil shapes are slightly off, and reflections in both eyes don't match.",
-    },
-    {
-      id: 4, file: 'test-4.jpg', isAI: false,
-      tell: "Real photo. Note the asymmetric expression and natural shadows — AI portraits often have suspiciously perfect symmetry.",
-    },
-  ],
+  training: [],
+  test: buildImageTest(),
 }
