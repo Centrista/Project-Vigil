@@ -38,33 +38,37 @@ export const voiceSamples = {
 
 // ─── IMAGE MODE ──────────────────────────────────────────────────────────────
 // No training phase — image mode goes straight from intro to test.
-// Test pool: 84 photos (42 AI + 42 real). Each session draws 5 + 5 at random.
+// Test pool: 204 photos (102 AI + 102 real). Each session draws 5 + 5 at random.
 //
 // File layout in public/images/test/
-//   test-1..42.jpg   → AI-generated (StyleGAN, thispersondoesnotexist.com)
-//   test-43..84.jpg  → Real portraits (Unsplash CDN)
+//   test-1..102.jpg    → AI-generated (StyleGAN, thispersondoesnotexist.com)
+//   test-103..204.jpg  → Real portraits (Unsplash + Pexels CDN)
 const AI_TELLS = [
-  "AI-generated. Look at the ears, jewellery, and background — AI image models often produce asymmetric or melting details on these.",
-  "AI-generated. Check the eyes — pupil shapes are slightly off, and reflections in both eyes don't match.",
-  "AI-generated. The skin is a touch too smooth — pores and fine lines are flattened in a way real cameras don't do.",
-  "AI-generated. Hair near the edges blends oddly with the background — strands fade or melt instead of having clean outlines.",
-  "AI-generated. Look for suspiciously perfect symmetry in the face — real faces are subtly asymmetric.",
-  "AI-generated. Teeth, glasses, or collars often have warped or impossible geometry on close inspection.",
+  "AI-generated. Look closely at the eyes — the pupils are often slightly different shapes between the left and right side, and the catchlights (the bright reflection of the light source) don't always match. Real cameras capture light from one source, so reflections in both eyes should be identical in shape and position. When they differ, it's almost always a synthetic image.",
+  "AI-generated. Pay attention to ears and jewellery. AI models struggle with small repeating shapes, so earrings often don't match each other (different size, style, or one missing entirely), and ears can have warped folds or impossible geometry. Real photos always have a matched pair, even if one is partly hidden by hair.",
+  "AI-generated. The skin looks a touch too smooth — almost airbrushed. AI tends to flatten the natural pores, fine lines, and tiny colour variations that every real face has. If a 30-year-old's cheeks look as smooth as polished plastic, that's the AI giveaway. Zoom in mentally and ask: would a real camera see this much detail vanish?",
+  "AI-generated. Look at where the hair meets the background. On a real photo, individual strands have crisp, distinct outlines. On AI, hair tends to fade, melt, or blur into the background as if the model couldn't decide where the head ends. Stray flyaway hairs are also rare in AI portraits — real life is much messier.",
+  "AI-generated. The face is suspiciously symmetric. Real human faces are subtly asymmetric — one eye sits slightly higher, one nostril is bigger, one side of the mouth pulls more when smiling. AI loves perfect symmetry because it's a statistical average of training data. If the two halves look like mirror images, be suspicious.",
+  "AI-generated. Check teeth, collars, glasses, and any clothing pattern. AI often produces teeth of irregular sizes, collar lines that don't meet, or glasses with mismatched arms. Patterns on shirts can drift or contradict themselves across the image. These are exactly the small structured details current image models still struggle to render coherently.",
+  "AI-generated. The background often looks generic, blurry, or slightly nonsensical when you focus on it. Real photos have a real place behind the person — recognisable shapes, consistent perspective, depth that makes sense. AI backgrounds tend to be a soft mush of colour or contain warped objects that wouldn't exist in reality.",
+  "AI-generated. Look at the lighting on the face vs the background. Are the shadows consistent? Real cameras follow the laws of physics — if light hits the right cheek, shadows fall to the left. AI sometimes gets the direction subtly wrong, or the face looks lit from a different source than the background scene.",
 ]
 
 const REAL_TELLS = [
-  "Real photo. Notice the natural skin texture with pores and unevenness — AI faces tend to look unnaturally smooth.",
-  "Real photo. Note the asymmetric expression and natural shadows — AI portraits often have suspiciously perfect symmetry.",
-  "Real photo. The background has consistent depth and lighting — AI often blurs or distorts it inconsistently.",
-  "Real photo. Hair strands have crisp, individual outlines against the background — a giveaway AI struggles with.",
-  "Real photo. Small imperfections — a stray hair, a freckle, an uneven eyebrow — that AI tends to smooth away.",
-  "Real photo. Catchlights in both eyes match the same light source — AI sometimes gets these subtly inconsistent.",
+  "Real photo. Notice the natural skin texture — pores, fine lines, slight redness around the nose, tiny blemishes. Real human skin has microscopic variations that no current AI bothers to recreate; AI faces look unnaturally smooth at the same zoom level. If you can see the texture of real skin, you're almost certainly looking at a real person.",
+  "Real photo. Look at the asymmetry — one eyebrow slightly higher, one side of the mouth pulled differently when smiling, a nostril that's a touch bigger. Real faces are never perfectly symmetric, and small lopsided details are a strong sign of a real person. AI portraits, by contrast, tend toward an almost mathematical symmetry.",
+  "Real photo. The background has real depth and consistent lighting. You can usually tell what the place is — an office, a park, a wall — and the depth-of-field blur falls off naturally. AI backgrounds often look like a soft generic blur with no recognisable objects, or contain warped shapes that wouldn't exist anywhere in real life.",
+  "Real photo. Hair strands have crisp, individual edges against the background, with stray flyaway hairs catching the light. AI tends to blur or melt hair edges into the background and rarely renders the unruly little strands real hair always has. If you can count individual hairs near the silhouette, it's real.",
+  "Real photo. Spot the small imperfections — a stray hair across the forehead, a freckle, a small spot, slightly chapped lips, a bit of asymmetric eyeliner. These are the marks of a real life lived in a real body. AI smooths all of this away in pursuit of an idealised average face.",
+  "Real photo. The catchlights in both eyes come from the same light source and have matching shapes. Look for the small bright spot in each pupil — on a real photo, both eyes catch the light identically (square light = square reflection). On an AI face, these reflections are often subtly different shapes or positioned inconsistently.",
+  "Real photo. Pay attention to ears and accessories. The earrings match each other, the ears have realistic detail, and any jewellery has consistent metal sheen. Glasses, when present, sit naturally on the bridge of the nose with both arms behaving the same way. These are exactly the things AI gets wrong but cameras get right by default.",
+  "Real photo. Notice that teeth, when visible, are slightly uneven and individual. Real teeth vary in size, shade, and alignment — that's normal human anatomy. AI sometimes generates teeth that all look the same shape or melt into one continuous shape. A natural mouth with believable, slightly imperfect teeth is a strong sign of a real photo.",
 ]
 
 function buildImageTest() {
   const out = []
-  // 42 AI faces → ids 1..42, files test-1.jpg..test-42.jpg
-  for (let i = 1; i <= 42; i++) {
+  // 102 AI faces → ids 1..102, files test-1.jpg..test-102.jpg
+  for (let i = 1; i <= 102; i++) {
     out.push({
       id: i,
       file: `test-${i}.jpg`,
@@ -72,13 +76,13 @@ function buildImageTest() {
       tell: AI_TELLS[(i - 1) % AI_TELLS.length],
     })
   }
-  // 42 real portraits → ids 43..84, files test-43.jpg..test-84.jpg
-  for (let i = 43; i <= 84; i++) {
+  // 102 real portraits → ids 103..204, files test-103.jpg..test-204.jpg
+  for (let i = 103; i <= 204; i++) {
     out.push({
       id: i,
       file: `test-${i}.jpg`,
       isAI: false,
-      tell: REAL_TELLS[(i - 43) % REAL_TELLS.length],
+      tell: REAL_TELLS[(i - 103) % REAL_TELLS.length],
     })
   }
   return out
