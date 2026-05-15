@@ -12,8 +12,8 @@ export default {
         'accent-purple': '#a855f7',
       },
       fontFamily: {
-        sans: ['"Avenir Next"', '"Segoe UI Variable"', '"SF Pro Display"', '"Segoe UI"', 'system-ui', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', '"SF Mono"', 'Menlo', 'monospace'],
+        sans: ['"Inter"', '"Avenir Next"', '"Segoe UI Variable"', '"SF Pro Display"', '"Segoe UI"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', '"IBM Plex Mono"', '"SF Mono"', 'Menlo', 'monospace'],
       },
       borderRadius: {
         card: '28px',

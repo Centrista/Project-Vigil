@@ -20,7 +20,10 @@ body {
   margin: 0;
   min-height: 100vh;
   color: rgba(255,255,255,0.94);
-  font-family: "Avenir Next", "Segoe UI Variable", "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+  font-family: "Inter", "Avenir Next", "Segoe UI Variable", "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+  /* Inter stylistic: cv11 = single-story 'a', ss03 = curved 'l'/'i' tails — feels less geometric & more friendly */
+  font-feature-settings: "cv11", "ss03", "calt";
+  font-optical-sizing: auto;
   background:
     radial-gradient(ellipse at 0% 0%,   rgba(255, 23, 68, 0.13)  0%, transparent 50%),
     radial-gradient(ellipse at 100% 0%, rgba(0, 212, 255, 0.10)  0%, transparent 50%),
@@ -28,13 +31,15 @@ body {
     linear-gradient(180deg, #0e1827 0%, #0c1624 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 #root { min-height: 100vh; }
 
 h1, h2, h3 {
-  font-family: "Avenir Next", "SF Pro Display", "Segoe UI Variable Display", sans-serif;
+  font-family: "Inter", "Avenir Next", "SF Pro Display", "Segoe UI Variable Display", sans-serif;
   letter-spacing: -0.035em;
+  font-feature-settings: "cv11", "ss03", "ss01";
 }
 
 ::selection { background: rgba(255,23,68,0.22); color: #fff; }
@@ -144,8 +149,10 @@ button { cursor: pointer; }
 
 /* ── Utilities ───────────────────── */
 .mono-label {
-  font-family: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  font-family: "JetBrains Mono", "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  font-weight: 500;
   letter-spacing: 0.07em;
+  font-feature-settings: "zero", "ss20"; /* slashed zero + tighter alts */
 }
 
 .bg-vigil-gradient {
