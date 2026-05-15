@@ -38,11 +38,13 @@ export const voiceSamples = {
 
 // ─── IMAGE MODE ──────────────────────────────────────────────────────────────
 // No training phase — image mode goes straight from intro to test.
-// Test pool: 204 photos (102 AI + 102 real). Each session draws 5 + 5 at random.
+// Test pool: 284 photos (142 AI + 142 real). Each session draws 5 + 5 at random.
 //
 // File layout in public/images/test/
-//   test-1..102.jpg    → AI-generated (StyleGAN, thispersondoesnotexist.com)
-//   test-103..204.jpg  → Real portraits (Unsplash + Pexels CDN)
+//   test-1..102.jpg     → AI-generated faces (StyleGAN, thispersondoesnotexist.com)
+//   test-103..204.jpg   → Real portraits (Unsplash + Pexels CDN)
+//   test-205..244.jpg   → AI-generated events (Lexica / Stable Diffusion etc.)
+//   test-245..284.jpg   → Real news / event photos (Wikimedia Commons)
 const AI_TELLS = [
   "AI-generated. Look closely at the eyes — the pupils are often slightly different shapes between the left and right side, and the catchlights (the bright reflection of the light source) don't always match. Real cameras capture light from one source, so reflections in both eyes should be identical in shape and position. When they differ, it's almost always a synthetic image.",
   "AI-generated. Pay attention to ears and jewellery. AI models struggle with small repeating shapes, so earrings often don't match each other (different size, style, or one missing entirely), and ears can have warped folds or impossible geometry. Real photos always have a matched pair, even if one is partly hidden by hair.",
@@ -65,6 +67,28 @@ const REAL_TELLS = [
   "Real photo. Notice that teeth, when visible, are slightly uneven and individual. Real teeth vary in size, shade, and alignment — that's normal human anatomy. AI sometimes generates teeth that all look the same shape or melt into one continuous shape. A natural mouth with believable, slightly imperfect teeth is a strong sign of a real photo.",
 ]
 
+const AI_EVENT_TELLS = [
+  "AI-generated. Look at the smoke, fire, and debris — AI loves to render dramatic chaos, but the physics is usually wrong. Smoke plumes rise in impossible directions, fire glows with no clear fuel, and debris pieces look duplicated or are floating without gravity. Real disaster photos always obey gravity and have one consistent light source.",
+  "AI-generated. Check the architecture of buildings in the background. AI struggles with structural logic — windows are uneven, floors don't line up, roof angles contradict the walls below. Real buildings, even when damaged or collapsing, retain logical geometry. If the structure looks like it couldn't physically stand, it's synthetic.",
+  "AI-generated. Look at any text, signs, or numbers in the scene. AI almost always renders letters as garbled, nonsensical strings — fake-looking characters that don't form real words. Real news photos contain readable street signs, license plates, banners, or newspaper text. Unreadable 'text noise' is one of the strongest AI tells.",
+  "AI-generated. The crowd or group of people in the background looks suspicious — faces blur into each other, limbs merge, or some figures have too many fingers / wrong proportions. AI struggles with multiple humans in the same frame. Real news photos show distinct, anatomically correct people even far in the background.",
+  "AI-generated. The lighting is too cinematic. AI tends to produce a 'movie poster' look — dramatic god-rays, glowing embers, and a vignette that pulls your eye to the centre. Real disaster photos taken by journalists are usually flatter, with imperfect framing and harsh, ugly light. Beauty and drama are a synthetic giveaway.",
+  "AI-generated. Look at the textures of materials — concrete, metal, fabric, water. AI surfaces often look painted or slightly plastic, lacking the gritty detail real cameras capture. Rubble looks suspiciously uniform; water lacks the sharp, chaotic spray of real splashes. Texture flatness across the whole image is a strong tell.",
+  "AI-generated. The composition is too perfect. The 'subject' of the event sits beautifully in the frame, dust spirals artfully, every element arranged like a painting. Real photojournalists almost never get a perfect shot — there are awkward edges, things half-cropped, people partly blocking the action. Perfection is suspect.",
+  "AI-generated. Scale and perspective break down. Compare the size of people to vehicles, doors, or windows nearby — AI often makes humans too small or too large relative to their surroundings, and vanishing points don't line up. Real cameras follow one consistent perspective. Mismatched scale is a clear synthetic marker.",
+]
+
+const REAL_EVENT_TELLS = [
+  "Real photo. Notice the imperfect framing and ugly real-world lighting — telephone wires cutting across the shot, a stranger's shoulder in the foreground, harsh midday sun. Photojournalists work in real conditions where you can't recompose the scene. These mundane imperfections are exactly what AI smooths away in favour of cinematic beauty.",
+  "Real photo. The text in the scene — signs, banners, license plates, building names — is readable and forms real words in a real language. AI consistently fails at coherent text. If you can squint and actually read what a sign says, you're almost certainly looking at a genuine photograph.",
+  "Real photo. The architecture, vehicles, and infrastructure are internally consistent. Damaged buildings still look like they could have stood before the damage — beams, walls, and windows align in a way that matches real construction. AI tends to produce 'building-shaped' rubble where the original geometry doesn't add up.",
+  "Real photo. People in the background — even small or partly hidden ones — have correct anatomy: five fingers per hand, two ears, one head per body. AI struggles badly with secondary figures in crowds. If everyone in the scene looks like a real human at every distance, it's most likely a real photo.",
+  "Real photo. Smoke, fire, water, and debris obey physics. Smoke rises in a coherent direction with the wind; fire has a visible fuel source; debris falls under gravity in believable arcs. AI often gets these subtly wrong — smoke without a source, embers hanging mid-air, water frozen in impossible shapes.",
+  "Real photo. The lighting is consistent across the entire scene — one sun (or one fire) creating shadows that all fall the same way. AI sometimes lights the foreground from one direction and the background from another, because it's compositing learned fragments. Trace the shadows: if they all point the same way, that's reality.",
+  "Real photo. Textures are gritty and varied — rough concrete, smudged metal, chaotic dust patterns, wet pavement reflections that warp realistically. Real cameras pick up an enormous amount of micro-detail in disaster scenes. AI surfaces look smoother, more 'rendered', as if everything were painted by the same brush.",
+  "Real photo. The image has timestamp / agency hallmarks of journalism — slightly motion-blurred, imperfect focus, an awkward angle that suggests someone running while shooting. AI images tend to look posed and still even when depicting motion. The chaos of a real photographer in a real event is hard to fake.",
+]
+
 function buildImageTest() {
   const out = []
   // 102 AI faces → ids 1..102, files test-1.jpg..test-102.jpg
@@ -83,6 +107,24 @@ function buildImageTest() {
       file: `test-${i}.jpg`,
       isAI: false,
       tell: REAL_TELLS[(i - 103) % REAL_TELLS.length],
+    })
+  }
+  // 40 AI-generated events → ids 205..244, files test-205.jpg..test-244.jpg
+  for (let i = 205; i <= 244; i++) {
+    out.push({
+      id: i,
+      file: `test-${i}.jpg`,
+      isAI: true,
+      tell: AI_EVENT_TELLS[(i - 205) % AI_EVENT_TELLS.length],
+    })
+  }
+  // 40 real news/event photos → ids 245..284, files test-245.jpg..test-284.jpg
+  for (let i = 245; i <= 284; i++) {
+    out.push({
+      id: i,
+      file: `test-${i}.jpg`,
+      isAI: false,
+      tell: REAL_EVENT_TELLS[(i - 245) % REAL_EVENT_TELLS.length],
     })
   }
   return out
