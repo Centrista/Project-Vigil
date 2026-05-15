@@ -52,7 +52,7 @@ export function ImageNote({ src, label }) {
                 <img
                   src={src}
                   alt=""
-                  className={`w-full h-auto object-cover aspect-[4/5] ${loaded ? '' : 'hidden'}`}
+                  className={`block w-full h-auto max-h-[440px] object-contain ${loaded ? '' : 'hidden'}`}
                   onLoad={() => setLoaded(true)}
                   onError={() => setError(true)}
                 />

@@ -8,9 +8,9 @@ const MODES = [
 
 export function ModeToggle({ mode, onChange }) {
   return (
-    <div className="flex justify-center pt-5 pb-1 px-6">
+    <div className="flex justify-center pt-3 px-6">
       <div
-        className="inline-flex items-center gap-0.5 p-1 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-md shadow-[0_4px_18px_rgba(0,0,0,0.18)]"
+        className="inline-flex items-center border-b border-white/8"
         role="tablist"
         aria-label="Test type"
       >
@@ -22,13 +22,13 @@ export function ModeToggle({ mode, onChange }) {
               onClick={() => onChange(key)}
               role="tab"
               aria-selected={active}
-              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-bold tracking-tight transition-all duration-200 ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.14em] border-b-2 -mb-px transition-colors duration-150 ${
                 active
-                  ? 'bg-white text-[#0c1628] shadow-[0_2px_8px_rgba(0,0,0,0.18)]'
-                  : 'text-white/55 hover:text-white/85'
+                  ? 'text-white border-white'
+                  : 'text-white/45 border-transparent hover:text-white/75'
               }`}
             >
-              <Icon size={11} strokeWidth={2.5} />
+              <Icon size={10} strokeWidth={2.5} />
               {label}
             </button>
           )

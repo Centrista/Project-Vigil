@@ -37,7 +37,7 @@ export const SCAMS: ScamItem[] = [
       "Never wire money, send gift cards, or do a cryptocurrency transfer based on any phone call, no matter how convincing the voice sounds.",
       "3 seconds of public audio is all it takes to clone a voice. Any urgent, emotional call requesting money should be verified in person or by callback.",
     ],
-    image: "https://images.unsplash.com/photo-UwnH5jSrdr4?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&h=400&fit=crop&auto=format",
   },
   {
     id: "pig-butchering-romance-bot",
@@ -58,7 +58,7 @@ export const SCAMS: ScamItem[] = [
       "Never invest in any platform introduced by someone you met online, no matter how long you've been talking.",
       "The 'pig butchering' name comes from fattening the victim's trust before slaughter. Weeks of charm followed by a crypto pitch is the defining pattern.",
     ],
-    image: "https://images.unsplash.com/photo-cQagZjqw88k?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop&auto=format",
   },
   {
     id: "ai-sextortion-nudify",
@@ -79,7 +79,7 @@ export const SCAMS: ScamItem[] = [
       "Block the attacker on every platform and do not respond further. Engagement is what they want.",
       "Tell a trusted adult. This is not your fault — the fake images are AI-generated and courts recognize that.",
     ],
-    image: "https://images.unsplash.com/photo-2YjIz_cc1QU?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop&auto=format",
   },
   {
     id: "deepfake-video-call-fraud",
@@ -100,7 +100,7 @@ export const SCAMS: ScamItem[] = [
       "Ask them to wave quickly or touch their face — real-time deepfakes still struggle with fast, unexpected movements.",
       "No legitimate authority will pressure you to wire funds or share credentials during a single video call. That urgency is the attack.",
     ],
-    image: "https://images.unsplash.com/photo-72LU8QlGs5E?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600&h=400&fit=crop&auto=format",
   },
   {
     id: "ai-hyper-personalized-phishing",
@@ -121,7 +121,7 @@ export const SCAMS: ScamItem[] = [
       "Bad grammar and generic greetings are no longer reliable red flags. Treat any urgent request — even a perfect one — with suspicion.",
       "Enable two-factor authentication everywhere so that even if credentials are stolen, the attacker can't get in.",
     ],
-    image: "https://images.unsplash.com/photo-8VdHghrvC0k?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop&auto=format",
   },
   {
     id: "fake-ai-recruiter-job-scam",
@@ -142,7 +142,7 @@ export const SCAMS: ScamItem[] = [
       "Any job that requires you to pay upfront for training, equipment, or a background check is a scam.",
       "Check the recruiter's LinkedIn — AI-generated profiles often have suspiciously perfect photos and very short employment histories.",
     ],
-    image: "https://images.unsplash.com/photo-l4Zu0xVCFfI?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop&auto=format",
   },
   {
     id: "celebrity-deepfake-crypto-ad",
@@ -163,7 +163,7 @@ export const SCAMS: ScamItem[] = [
       "Legitimate crypto investments don't require you to send money first to 'unlock' your returns.",
       "You correctly identify high-quality deepfake video only 24.5% of the time — your eyes alone are not enough.",
     ],
-    image: "https://images.unsplash.com/photo-ZAIbez5LTrg?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&auto=format",
   },
   {
     id: "ai-gov-impersonation-robocall",
@@ -184,7 +184,7 @@ export const SCAMS: ScamItem[] = [
       "Gift cards, wire transfers, and cryptocurrency are never valid forms of government payment. Ever.",
       "Save the number at irs.gov (1-800-829-1040) so you can call back to verify any claim.",
     ],
-    image: "https://images.unsplash.com/photo-n8kmAFCMwhg?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?w=600&h=400&fit=crop&auto=format",
   },
   {
     id: "ai-tech-support-popup",
@@ -205,7 +205,7 @@ export const SCAMS: ScamItem[] = [
       "Microsoft and Apple do not proactively call you about viruses on your device.",
       "If your browser is locked up, force-quit the app (Cmd+Q on Mac, Alt+F4 on Windows) — you are not infected.",
     ],
-    image: "https://images.unsplash.com/photo-4OkY858eLVI?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop&auto=format",
   },
   {
     id: "zelle-bank-impersonation-fraud",
@@ -226,6 +226,6 @@ export const SCAMS: ScamItem[] = [
       "Authorized push-payment fraud is the #1 reason banks deny refunds — once you send via Zelle, recovery is extremely rare.",
       "If you feel pressured to act within minutes, that urgency is the attack. Go to a physical branch to verify before touching anything.",
     ],
-    image: "https://images.unsplash.com/photo-HI04JoIfjjc?w=600&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=600&h=400&fit=crop&auto=format",
   },
 ];
