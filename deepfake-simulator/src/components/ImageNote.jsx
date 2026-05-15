@@ -4,7 +4,6 @@ import { User, ImageOff } from 'lucide-react'
 export function ImageNote({ src, label }) {
   const [error,     setError]     = useState(false)
   const [loaded,    setLoaded]    = useState(false)
-  const [noAvatar,  setNoAvatar]  = useState(false)
 
   return (
     <div className="w-full bubble-pop">
@@ -18,14 +17,6 @@ export function ImageNote({ src, label }) {
         {/* Avatar */}
         <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0 bg-white/8 border border-white/10 flex items-center justify-center">
           <User size={14} className="text-white/30" />
-          {!noAvatar && (
-            <img
-              src="/avatars/person.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-              onError={() => setNoAvatar(true)}
-            />
-          )}
         </div>
 
         {/* Bubble */}

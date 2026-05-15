@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { User, CheckCircle, XCircle } from 'lucide-react'
 
 const KIND_TEXT = {
@@ -11,7 +11,6 @@ const KIND_TEXT = {
  * Shows ✓ Correct / ✗ Wrong + the sample kind.
  */
 export function VerdictBubble({ correct, isAI, mode = 'voice' }) {
-  const [noAvatar, setNoAvatar] = useState(false)
   const kind = (KIND_TEXT[mode] ?? KIND_TEXT.voice)
   const subline = isAI ? kind.ai : kind.real
 
@@ -20,14 +19,6 @@ export function VerdictBubble({ correct, isAI, mode = 'voice' }) {
       <div className="flex items-start gap-3">
         <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0 bg-white/8 border border-white/10 flex items-center justify-center">
           <User size={14} className="text-white/30" />
-          {!noAvatar && (
-            <img
-              src="/avatars/person.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-              onError={() => setNoAvatar(true)}
-            />
-          )}
         </div>
 
         <div className="relative flex-1 min-w-0 max-w-[300px]">

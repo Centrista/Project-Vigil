@@ -185,7 +185,8 @@ export default function TrendingFilters({
               onBlur={onBlurSearch}
               onKeyDown={onSearchKeyDown}
               autoComplete="off"
-              placeholder="Search placeholder scam names"
+              placeholder="Search scam names"
+              aria-label="Search trending scams"
               className="w-full rounded-[22px] border border-white/10 bg-white/[0.04] px-12 py-4 text-sm text-white outline-none transition-all duration-200 placeholder:text-white/22 focus:border-[#ff1744]/40 focus:bg-white/[0.05]"
               aria-describedby="trending-search-status"
             />

@@ -142,7 +142,7 @@ export default function TrendingHeader({
               {reportedThisWeek} new scams reported this week
             </h2>
             <p className="max-w-xl text-sm leading-relaxed text-white/52 sm:text-base">
-              This board surfaces the attacks rising fastest across the current placeholder dataset, so the interaction model is ready for live reporting.
+              This board surfaces the attacks rising fastest right now, ranked by how aggressively they&rsquo;re being reported each week.
             </p>
           </div>
 
@@ -196,7 +196,7 @@ export default function TrendingHeader({
                 <div className={`mb-3 inline-flex ${CHIP_CLASS[item.tone]}`}>{item.label}</div>
                 <div className="text-2xl font-black text-white">{item.value}</div>
                 <p className="mt-2 text-sm text-white/48">
-                  Premium placeholder telemetry ready to swap onto live report data later.
+                  Tracked across the past seven days of reports.
                 </p>
               </div>
             ))}

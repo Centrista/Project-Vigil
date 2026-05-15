@@ -38,12 +38,12 @@ export const voiceSamples = {
 
 // ─── IMAGE MODE ──────────────────────────────────────────────────────────────
 // No training phase — image mode goes straight from intro to test.
-// Test pool: 284 photos (142 AI + 142 real). Each session draws 5 + 5 at random.
+// Test pool: 248 photos (106 AI + 142 real). Each session draws 5 + 5 at random.
 //
 // File layout in public/images/test/
 //   test-1..102.jpg     → AI-generated faces (StyleGAN, thispersondoesnotexist.com)
 //   test-103..204.jpg   → Real portraits (Unsplash + Pexels CDN)
-//   test-205..244.jpg   → AI-generated events (Lexica / Stable Diffusion etc.)
+//   test-205..208.jpg   → AI-generated events (Pollinations.ai / curated Reddit)
 //   test-245..284.jpg   → Real news / event photos (Wikimedia Commons)
 const AI_TELLS = [
   "AI-generated. Look closely at the eyes — the pupils are often slightly different shapes between the left and right side, and the catchlights (the bright reflection of the light source) don't always match. Real cameras capture light from one source, so reflections in both eyes should be identical in shape and position. When they differ, it's almost always a synthetic image.",
@@ -109,8 +109,8 @@ function buildImageTest() {
       tell: REAL_TELLS[(i - 103) % REAL_TELLS.length],
     })
   }
-  // 40 AI-generated events → ids 205..244, files test-205.jpg..test-244.jpg
-  for (let i = 205; i <= 244; i++) {
+  // 4 AI-generated events → ids 205..208, files test-205.jpg..test-208.jpg
+  for (let i = 205; i <= 208; i++) {
     out.push({
       id: i,
       file: `test-${i}.jpg`,

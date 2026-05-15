@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { User } from 'lucide-react'
 
 /**
@@ -6,21 +6,11 @@ import { User } from 'lucide-react'
  * Slightly muted styling to differentiate from the verdict bubble above it.
  */
 export function TellBubble({ tellHeader, tellIcon: TellIcon, tell }) {
-  const [noAvatar, setNoAvatar] = useState(false)
-
   return (
     <div className="bubble-pop w-full">
       <div className="flex items-start gap-3">
         <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0 bg-white/8 border border-white/10 flex items-center justify-center">
           <User size={14} className="text-white/30" />
-          {!noAvatar && (
-            <img
-              src="/avatars/person.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-              onError={() => setNoAvatar(true)}
-            />
-          )}
         </div>
 
         <div className="relative flex-1 min-w-0 max-w-[300px]">

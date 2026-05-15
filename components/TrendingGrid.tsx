@@ -99,6 +99,7 @@ export default function TrendingGrid() {
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search threats…"
+            aria-label="Search threats"
             className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white outline-none transition-all placeholder:text-white/30 focus:border-white/22 focus:bg-white/[0.05]"
           />
           {query && (

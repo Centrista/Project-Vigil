@@ -6,15 +6,8 @@ export const metadata = {
   description: "Encountered an AI scam? Report it anonymously to help us map new attack patterns.",
 };
 
-// ─── TODO ────────────────────────────────────────────────────────────────────
-// Create a Google Form for anonymous scam reporting, then paste its public URL
-// here. The site embeds it inline (same pattern as /feedback and /risk-quiz).
-// Until set, the embed shows the placeholder fallback URL.
-// ────────────────────────────────────────────────────────────────────────────
-const SUBMIT_FORM_URL =
-  process.env.NEXT_PUBLIC_SUBMIT_FORM_URL ??
-  "https://docs.google.com/forms/d/e/REPLACE_WITH_FORM_ID/viewform";
-const SUBMIT_FORM_EMBED_URL = `${SUBMIT_FORM_URL}?embedded=true`;
+const SUBMIT_FORM_URL = process.env.NEXT_PUBLIC_SUBMIT_FORM_URL ?? "";
+const SUBMIT_FORM_EMBED_URL = SUBMIT_FORM_URL ? `${SUBMIT_FORM_URL}?embedded=true` : "";
 
 export default function SubmitScamPage() {
   return (

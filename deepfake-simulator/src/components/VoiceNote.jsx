@@ -23,7 +23,6 @@ export function VoiceNote({ src, label, onPlayComplete }) {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration,    setDuration]    = useState(0)
   const [error,       setError]       = useState(false)
-  const [noAvatar,    setNoAvatar]    = useState(false)
 
   const { currentlyPlayingId, play, stopAll } = useAudioContext()
 
@@ -81,14 +80,6 @@ export function VoiceNote({ src, label, onPlayComplete }) {
         {/* Avatar */}
         <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0 bg-white/8 border border-white/10 flex items-center justify-center">
           <User size={14} className="text-white/30" />
-          {!noAvatar && (
-            <img
-              src="/avatars/person.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-              onError={() => setNoAvatar(true)}
-            />
-          )}
         </div>
 
         {/* Bubble */}

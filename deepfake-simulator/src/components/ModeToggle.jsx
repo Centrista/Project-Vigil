@@ -22,13 +22,13 @@ export function ModeToggle({ mode, onChange }) {
               onClick={() => onChange(key)}
               role="tab"
               aria-selected={active}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.14em] border-b-2 -mb-px transition-colors duration-150 ${
+              className={`inline-flex items-center gap-2 px-5 py-3 text-[15px] font-bold uppercase tracking-[0.18em] border-b-2 -mb-px transition-colors duration-150 ${
                 active
                   ? 'text-white border-white'
                   : 'text-white/45 border-transparent hover:text-white/75'
               }`}
             >
-              <Icon size={10} strokeWidth={2.5} />
+              <Icon size={16} strokeWidth={2.5} />
               {label}
             </button>
           )

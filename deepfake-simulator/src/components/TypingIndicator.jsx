@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { User } from 'lucide-react'
 
 /**
@@ -7,7 +7,6 @@ import { User } from 'lucide-react'
  * side="right" → sent message     (blue iMessage bubble,  no avatar, tail-right)
  */
 export function TypingIndicator({ side = 'left' }) {
-  const [noAvatar, setNoAvatar] = useState(false)
   const isLeft = side === 'left'
 
   const DotRow = ({ color }) => (
@@ -28,14 +27,6 @@ export function TypingIndicator({ side = 'left' }) {
         <div className="flex items-start gap-3">
           <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0 bg-white/8 border border-white/10 flex items-center justify-center">
             <User size={14} className="text-white/30" />
-            {!noAvatar && (
-              <img
-                src="/avatars/person.jpg"
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover"
-                onError={() => setNoAvatar(true)}
-              />
-            )}
           </div>
 
           <div className="relative">
