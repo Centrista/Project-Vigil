@@ -114,7 +114,7 @@ export function Test({ mode, samples, onComplete, onBackToTraining }) {
       {/* Back */}
       <button
         onClick={back}
-        className="flex items-center gap-1 mono-label text-[9px] uppercase tracking-[0.24em] text-white/35 hover:text-white/70 -ml-1 mb-5 self-start animate-fade-up"
+        className="flex items-center gap-1 mono-label text-[9px] uppercase tracking-[0.24em] text-white/55 hover:text-white/90 -ml-1 mb-5 self-start animate-fade-up"
       >
         <ChevronLeft size={13} strokeWidth={2.5} />
         {index === 0 ? (mode === 'image' ? 'Intro' : 'Training') : 'Previous'}
@@ -123,10 +123,10 @@ export function Test({ mode, samples, onComplete, onBackToTraining }) {
       {/* Header + step dots */}
       <div className="mb-6 animate-fade-up" style={{ animationDelay: '30ms' }}>
         <div className="flex items-center justify-between mb-3">
-          <p className="mono-label text-[9px] uppercase tracking-[0.3em] text-white/35">
+          <p className="mono-label text-[9px] uppercase tracking-[0.3em] text-white/55">
             {c.phaseLabel}
           </p>
-          <span className="mono-label text-[9px] text-white/28 tabular-nums">
+          <span className="mono-label text-[9px] text-white/55 tabular-nums">
             {index + 1} / {samples.length}
           </span>
         </div>
@@ -225,7 +225,7 @@ export function Test({ mode, samples, onComplete, onBackToTraining }) {
             className="flex flex-col items-center justify-center gap-2 rounded-card border border-[#22c55e]/25 bg-[#22c55e]/6 backdrop-blur-sm py-7 px-3 active:scale-[0.97] hover:border-[#22c55e]/45 hover:bg-[#22c55e]/12 transition-all duration-200"
           >
             <span className="text-[17px] font-black text-white tracking-tight">REAL</span>
-            <span className="mono-label text-[9px] uppercase tracking-[0.22em] text-white/40">
+            <span className="mono-label text-[9px] uppercase tracking-[0.22em] text-white/65">
               {mode === 'voice' ? 'Human voice' : 'Real photo'}
             </span>
           </button>
@@ -234,7 +234,7 @@ export function Test({ mode, samples, onComplete, onBackToTraining }) {
             className="flex flex-col items-center justify-center gap-2 rounded-card border border-[#ff1744]/25 bg-[#ff1744]/6 backdrop-blur-sm py-7 px-3 active:scale-[0.97] hover:border-[#ff1744]/45 hover:bg-[#ff1744]/12 transition-all duration-200"
           >
             <span className="text-[17px] font-black text-white tracking-tight">AI FAKE</span>
-            <span className="mono-label text-[9px] uppercase tracking-[0.22em] text-white/40">
+            <span className="mono-label text-[9px] uppercase tracking-[0.22em] text-white/65">
               {mode === 'voice' ? 'AI-cloned' : 'AI-generated'}
             </span>
           </button>
@@ -247,7 +247,7 @@ export function Test({ mode, samples, onComplete, onBackToTraining }) {
         </div>
       ) : (
         // Mid-sequence: subtle hint that tapping advances
-        <div className="text-center mono-label text-[9px] uppercase tracking-[0.24em] text-white/22 py-3">
+        <div className="text-center mono-label text-[9px] uppercase tracking-[0.24em] text-white/50 py-3">
           Tap space to skip
         </div>
       )}

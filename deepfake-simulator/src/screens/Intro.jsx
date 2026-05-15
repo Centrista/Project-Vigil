@@ -33,7 +33,7 @@ export function Intro({ mode, onStart }) {
   return (
     <div className="flex-1 flex flex-col px-6 pt-6 pb-12 max-w-[420px] mx-auto w-full">
 
-      <p className="mono-label text-[9px] uppercase tracking-[0.3em] text-white/40 mb-8 animate-fade-up">
+      <p className="mono-label text-[9px] uppercase tracking-[0.3em] text-white/60 mb-8 animate-fade-up">
         Project Vigil — {c.label}
       </p>
 
@@ -60,7 +60,7 @@ export function Intro({ mode, onStart }) {
           <AlertTriangle size={14} className="text-[#ff1744] flex-shrink-0 mt-[3px]" />
           <div>
             <p className="text-[14px] text-white/85 leading-relaxed">{c.stat}</p>
-            <p className="mono-label text-[9px] uppercase tracking-[0.22em] text-white/28 mt-2.5">
+            <p className="mono-label text-[9px] uppercase tracking-[0.22em] text-white/55 mt-2.5">
               {c.source}
             </p>
           </div>
@@ -74,7 +74,7 @@ export function Intro({ mode, onStart }) {
       </div>
 
       <p
-        className="text-center mono-label text-[9px] uppercase tracking-[0.22em] text-white/22 mt-6 animate-fade-up"
+        className="text-center mono-label text-[9px] uppercase tracking-[0.22em] text-white/50 mt-6 animate-fade-up"
         style={{ animationDelay: '220ms' }}
       >
         Runs in your browser. Nothing is recorded.

@@ -158,12 +158,12 @@ export function Results({ mode, score, total, onRetry, vigilUrl = 'https://proje
       {/* PAGE 1 — Score */}
       {page === 0 && (
         <div key={animKey} className={`flex-1 flex flex-col animate-slide-in-${direction}`}>
-          <p className="mono-label text-[9px] uppercase tracking-[0.3em] text-white/35 mb-5">
+          <p className="mono-label text-[9px] uppercase tracking-[0.3em] text-white/55 mb-5">
             Your result
           </p>
           <div className={`text-[88px] font-black leading-none tracking-tight mb-3 tabular-nums animate-score-pulse ${copy.color}`}>
             {displayedScore}
-            <span className="text-[36px] text-white/20 ml-1">/ {total}</span>
+            <span className="text-[36px] text-white/40 ml-1">/ {total}</span>
           </div>
           <h2 className="text-[24px] font-black text-white tracking-tight mb-3">
             {copy.line}
@@ -177,7 +177,7 @@ export function Results({ mode, score, total, onRetry, vigilUrl = 'https://proje
       {/* PAGE 2 — Stats + callout */}
       {page === 1 && (
         <div key={animKey} className={`flex-1 flex flex-col animate-slide-in-${direction}`}>
-          <p className="mono-label text-[9px] uppercase tracking-[0.3em] text-white/35 mb-4">
+          <p className="mono-label text-[9px] uppercase tracking-[0.3em] text-white/55 mb-4">
             Why this matters
           </p>
 
@@ -192,7 +192,7 @@ export function Results({ mode, score, total, onRetry, vigilUrl = 'https://proje
               {callout.eyebrow}
             </p>
             <p className="text-[13.5px] text-white/82 leading-relaxed">{callout.body}</p>
-            <p className="mono-label text-[9px] text-white/25 mt-2.5">{callout.source}</p>
+            <p className="mono-label text-[9px] text-white/55 mt-2.5">{callout.source}</p>
           </div>
         </div>
       )}
@@ -202,7 +202,7 @@ export function Results({ mode, score, total, onRetry, vigilUrl = 'https://proje
         <div key={animKey} className={`flex-1 flex flex-col animate-slide-in-${direction}`}>
           <div className="flex items-center gap-2 mb-3">
             <ShieldAlert size={13} className="text-[#22c55e]" />
-            <p className="mono-label text-[9px] uppercase tracking-[0.26em] text-white/35">
+            <p className="mono-label text-[9px] uppercase tracking-[0.26em] text-white/55">
               What to do
             </p>
           </div>
@@ -265,7 +265,7 @@ export function Results({ mode, score, total, onRetry, vigilUrl = 'https://proje
         </div>
       )}
 
-      <p className="text-center mono-label text-[9px] uppercase tracking-[0.22em] text-white/18 mt-8">
+      <p className="text-center mono-label text-[9px] uppercase tracking-[0.22em] text-white/45 mt-8">
         Project Vigil — Hwa Chong Institution
       </p>
     </div>

@@ -88,10 +88,10 @@ export function Training({ mode, samples, onContinue, onBack }) {
         className={`rounded-card border border-white/8 bg-white/[0.03] backdrop-blur-sm px-4 pt-4 pb-4 mb-6 flex-1 animate-slide-in-${direction}`}
       >
         <div className="flex items-center justify-between mb-3.5">
-          <span className="mono-label text-[9px] uppercase tracking-[0.24em] text-white/35">
+          <span className="mono-label text-[9px] uppercase tracking-[0.24em] text-white/55">
             {c.sampleLabel(page, samples.length)}
           </span>
-          <span className="mono-label text-[9px] uppercase tracking-[0.18em] text-white/30 tabular-nums">
+          <span className="mono-label text-[9px] uppercase tracking-[0.18em] text-white/55 tabular-nums">
             {page + 1} / {samples.length}
           </span>
         </div>

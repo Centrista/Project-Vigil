@@ -72,7 +72,7 @@ export function VoiceNote({ src, label, onPlayComplete }) {
   return (
     <div className="w-full bubble-pop">
       {label && (
-        <p className="mono-label text-[9px] uppercase tracking-[0.26em] text-white/35 mb-3">
+        <p className="mono-label text-[9px] uppercase tracking-[0.26em] text-white/55 mb-3">
           {label}
         </p>
       )}

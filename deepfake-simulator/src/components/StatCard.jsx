@@ -16,7 +16,7 @@ export function StatCard({ value, label, source, accent = 'amber', delay = 0 }) 
       <div className={`text-[28px] font-black tracking-tight leading-none mb-1.5 ${a.num}`}>{value}</div>
       <p className="text-[13px] text-white/75 leading-snug">{label}</p>
       {source && (
-        <p className="mono-label text-[9px] uppercase tracking-[0.2em] text-white/30 mt-2">{source}</p>
+        <p className="mono-label text-[9px] uppercase tracking-[0.2em] text-white/55 mt-2">{source}</p>
       )}
     </div>
   )
