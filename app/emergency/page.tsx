@@ -51,7 +51,11 @@ export default function EmergencyPage() {
 
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {RESPONSE_LANES.map((lane, index) => (
-                <div key={lane.title} className="rounded-[22px] border border-white/10 bg-black/10 p-5">
+                <div
+                  key={lane.title}
+                  className="entrance-stagger rounded-[22px] border border-white/10 bg-black/10 p-5"
+                  style={{ ["--stagger-delay" as string]: `${index * 90}ms`, animationDelay: `${index * 90}ms` }}
+                >
                   <div className="mono-label mb-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#ff9ab1]">
                     {String(index + 1).padStart(2, "0")}
                   </div>

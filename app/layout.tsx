@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import CursorGlow from "@/components/CursorGlow";
+import PageTransitionShell from "@/components/PageTransitionShell";
 
 export const metadata: Metadata = {
   title: "Project Vigil — AI Scam Defense for Teens",
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased flex min-h-screen flex-col">
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 flex flex-col">
+          <PageTransitionShell>{children}</PageTransitionShell>
+        </main>
         <Footer />
         <CursorGlow />
         <Analytics />

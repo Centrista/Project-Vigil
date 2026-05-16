@@ -79,12 +79,12 @@ export default function ScamDemo() {
   };
 
   return (
-    <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+    <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-14 items-center">
 
       {/* ── PHONE ── */}
       <div className="flex justify-center">
         <div
-          className="w-[288px] relative"
+          className="w-full max-w-[288px] relative"
           style={{
             borderRadius: "44px",
             background: "#080808",

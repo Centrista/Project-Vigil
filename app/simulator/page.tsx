@@ -57,7 +57,7 @@ export default function SimulatorPage() {
                 title="Project Vigil — Deepfake Voice Simulator"
                 src={SIMULATOR_URL}
                 className="block w-full"
-                style={{ minHeight: "920px", border: 0, background: "#0c1628" }}
+                style={{ minHeight: "920px", border: 0, borderRadius: "22px", background: "#0c1628" }}
                 allow="autoplay; clipboard-write"
                 loading="lazy"
               >

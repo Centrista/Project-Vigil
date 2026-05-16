@@ -50,7 +50,7 @@ export default function FeedbackPage() {
                 title="Project Vigil Feedback Form"
                 src={FEEDBACK_FORM_EMBED_URL}
                 className="block w-full bg-white"
-                style={{ minHeight: "1280px", border: 0 }}
+                style={{ minHeight: "1280px", border: 0, borderRadius: "22px" }}
                 loading="lazy"
               >
                 Loading…

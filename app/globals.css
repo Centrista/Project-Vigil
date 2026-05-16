@@ -164,6 +164,12 @@ h4 {
   letter-spacing: 0.08em;
 }
 
+@media (max-width: 640px) {
+  .mono-label {
+    letter-spacing: 0.14em;
+  }
+}
+
 /* ── PAGE LAYOUT ── */
 .page-section {
   position: relative;

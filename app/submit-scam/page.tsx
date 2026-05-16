@@ -53,7 +53,7 @@ export default function SubmitScamPage() {
                 title="Project Vigil — Submit an AI Scam"
                 src={SUBMIT_FORM_EMBED_URL}
                 className="block w-full bg-white"
-                style={{ minHeight: "1200px", border: 0 }}
+                style={{ minHeight: "1200px", border: 0, borderRadius: "22px" }}
                 loading="lazy"
               >
                 Loading…
