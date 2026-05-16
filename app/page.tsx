@@ -166,7 +166,7 @@ export default function Home() {
                 <div className="hero-kicker mb-4">Live Simulation</div>
                 <h2 className="section-title mb-3">Watch an AI scam unfold in real time.</h2>
                 <p className="section-copy">
-                  This is what a voice-clone phishing attempt looks like as a text. The AI threat scanner runs the same detection logic we teach in the quiz.
+                  A cloned voice of a parent, played back in a single message. The AI threat scanner runs the same detection logic we teach in the quiz.
                 </p>
               </div>
               <div className="hero-actions lg:justify-end">

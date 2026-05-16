@@ -2,24 +2,21 @@
 
 import { useState, useEffect, useRef } from "react";
 
-const MESSAGES = [
-  { id: 1, text: "Hey its mom. I need you to do something for me real quick" },
-  { id: 2, text: "Im at the hospital and my phone died. Borrowed someone's phone. Can you send $200 on Venmo right now? Its an emergency" },
-  { id: 3, text: "Dont call this number back just send it. Please hurry" },
-];
+const TRANSCRIPT =
+  "Boys, can you send me $200? I'm in an accident and needed it for the treatment.";
 
 const FLAGS = [
   {
+    label: "Cloned Voice",
+    detail: "AI-synthesized voice mimicking a known contact",
+  },
+  {
+    label: "Emotional Manipulation",
+    detail: "Accident / injury claim triggers panic response",
+  },
+  {
     label: "Urgency Injection",
-    detail: "Creates panic to bypass critical thinking",
-  },
-  {
-    label: "Unverifiable Identity",
-    detail: "Unknown number spoofed as a known contact",
-  },
-  {
-    label: "Verification Block",
-    detail: "'Don't call back' eliminates all identity checks",
+    detail: "Pressure to bypass verification and act fast",
   },
   {
     label: "Immediate Money Demand",
@@ -27,13 +24,20 @@ const FLAGS = [
   },
 ];
 
+const NUM_BARS = 28;
+const BAR_HEIGHTS = Array.from({ length: NUM_BARS }, (_, i) =>
+  Math.round(22 + Math.abs(Math.sin(i * 0.72 + 0.3)) * 72),
+);
+
 export default function ScamDemo() {
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [replayKey, setReplayKey] = useState(0);
 
-  const [visibleMsgs, setVisibleMsgs] = useState(0);
-  const [showTyping, setShowTyping] = useState(false);
+  const [voiceNoteVisible, setVoiceNoteVisible] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [showTranscript, setShowTranscript] = useState(false);
   const [scanning, setScanning] = useState(false);
   const [visibleFlags, setVisibleFlags] = useState(0);
   const [threatLevel, setThreatLevel] = useState(0);
@@ -42,8 +46,10 @@ export default function ScamDemo() {
   // Start when section scrolls into view
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true); },
-      { threshold: 0.25 }
+      ([entry]) => {
+        if (entry.isIntersecting && !started) setStarted(true);
+      },
+      { threshold: 0.25 },
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -53,24 +59,45 @@ export default function ScamDemo() {
   useEffect(() => {
     if (!started) return;
     const t: ReturnType<typeof setTimeout>[] = [];
-    t.push(setTimeout(() => setVisibleMsgs(1), 700));
-    t.push(setTimeout(() => setShowTyping(true), 1600));
-    t.push(setTimeout(() => { setShowTyping(false); setVisibleMsgs(2); }, 3100));
-    t.push(setTimeout(() => setShowTyping(true), 3900));
-    t.push(setTimeout(() => { setShowTyping(false); setVisibleMsgs(3); }, 5200));
-    t.push(setTimeout(() => setScanning(true), 6000));
-    t.push(setTimeout(() => { setScanning(false); setVisibleFlags(1); }, 6900));
-    t.push(setTimeout(() => setVisibleFlags(2), 7350));
-    t.push(setTimeout(() => setVisibleFlags(3), 7800));
-    t.push(setTimeout(() => setVisibleFlags(4), 8250));
-    t.push(setTimeout(() => setThreatLevel(94), 8900));
-    t.push(setTimeout(() => setDone(true), 10200));
+    t.push(setTimeout(() => setVoiceNoteVisible(true), 500));
+    t.push(setTimeout(() => setPlaying(true), 1200));
+    t.push(setTimeout(() => setShowTranscript(true), 1700));
+    t.push(setTimeout(() => setScanning(true), 5400));
+    t.push(setTimeout(() => {
+      setPlaying(false);
+      setProgress(1);
+    }, 5500));
+    t.push(setTimeout(() => {
+      setScanning(false);
+      setVisibleFlags(1);
+    }, 6100));
+    t.push(setTimeout(() => setVisibleFlags(2), 6500));
+    t.push(setTimeout(() => setVisibleFlags(3), 6900));
+    t.push(setTimeout(() => setVisibleFlags(4), 7300));
+    t.push(setTimeout(() => setThreatLevel(96), 7800));
+    t.push(setTimeout(() => setDone(true), 8800));
     return () => t.forEach(clearTimeout);
   }, [started, replayKey]);
 
+  // Smooth waveform progress while "playing"
+  useEffect(() => {
+    if (!playing) return;
+    const start = Date.now();
+    const duration = 4100;
+    const id = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const p = Math.min(elapsed / duration, 1);
+      setProgress(p);
+      if (p >= 1) clearInterval(id);
+    }, 40);
+    return () => clearInterval(id);
+  }, [playing]);
+
   const replay = () => {
-    setVisibleMsgs(0);
-    setShowTyping(false);
+    setVoiceNoteVisible(false);
+    setPlaying(false);
+    setProgress(0);
+    setShowTranscript(false);
     setScanning(false);
     setVisibleFlags(0);
     setThreatLevel(0);
@@ -105,14 +132,12 @@ export default function ScamDemo() {
           <div className="flex items-center justify-between px-7 pt-5 pb-1">
             <span className="text-[12px] font-semibold text-white mono-label">9:41</span>
             <div className="flex gap-1.5 items-center text-white">
-              {/* signal */}
               <svg className="w-4 h-3" fill="currentColor" viewBox="0 0 20 14">
                 <rect x="0" y="5" width="3" height="9" rx="1" opacity="0.9" />
                 <rect x="4.5" y="3" width="3" height="11" rx="1" opacity="0.9" />
                 <rect x="9" y="1" width="3" height="13" rx="1" opacity="0.9" />
                 <rect x="13.5" y="0" width="3" height="14" rx="1" opacity="0.9" />
               </svg>
-              {/* battery */}
               <div className="flex items-center gap-px">
                 <div className="w-6 h-3 rounded-sm border border-white/40 p-px">
                   <div className="h-full rounded-sm bg-white/80" style={{ width: "80%" }} />
@@ -134,73 +159,102 @@ export default function ScamDemo() {
                 boxShadow: "0 2px 8px rgba(139,92,246,0.5)",
               }}
             >
-              M
+              D
             </div>
             <div>
-              <div className="text-[15px] font-semibold text-white leading-tight">Mom</div>
+              <div className="text-[15px] font-semibold text-white leading-tight">Dad</div>
               <div className="text-[11px] text-white/38 mt-0.5 mono-label">+1 (555) 847–2931</div>
             </div>
           </div>
 
-          {/* Messages */}
+          {/* Voice note */}
           <div className="px-4 pt-5 pb-3" style={{ minHeight: "270px" }}>
             <div className="text-center mb-4">
-              <span
-                className="text-[11px] text-white/25 mono-label"
-              >
-                Today 9:41 AM
-              </span>
+              <span className="text-[11px] text-white/25 mono-label">Today 9:41 AM</span>
             </div>
-            <div className="space-y-2.5">
-              {visibleMsgs >= 1 && (
-                <div className="flex justify-start msg-appear">
+
+            {voiceNoteVisible && (
+              <div className="msg-appear">
+                {/* Voice-note bubble */}
+                <div className="flex justify-start">
                   <div
-                    className="max-w-[82%] px-3.5 py-2.5 rounded-2xl rounded-tl-[5px] text-[14px] leading-relaxed text-white"
+                    className="max-w-[88%] w-full px-3 py-2.5 rounded-2xl rounded-tl-[5px]"
                     style={{ background: "#2c2c2e" }}
                   >
-                    {MESSAGES[0].text}
-                  </div>
-                </div>
-              )}
+                    <div className="flex items-center gap-2.5">
+                      {/* Play / pause button */}
+                      <div
+                        className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+                        style={{
+                          background: playing
+                            ? "linear-gradient(135deg, #ff1744, #ff4d6d)"
+                            : "rgba(255,255,255,0.12)",
+                          boxShadow: playing ? "0 0 18px rgba(255,23,68,0.55)" : "none",
+                          transition: "all 0.25s ease",
+                        }}
+                      >
+                        {playing ? (
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 12 12">
+                            <rect x="2" y="2" width="3" height="8" rx="0.6" />
+                            <rect x="7" y="2" width="3" height="8" rx="0.6" />
+                          </svg>
+                        ) : (
+                          <svg className="w-3 h-3 text-white ml-0.5" fill="currentColor" viewBox="0 0 12 12">
+                            <path d="M3 2.2v7.6c0 .5.55.8.97.53l5.5-3.8a.65.65 0 000-1.06l-5.5-3.8A.65.65 0 003 2.2z" />
+                          </svg>
+                        )}
+                      </div>
 
-              {showTyping && (
-                <div className="flex justify-start">
-                  <div className="px-4 py-3 rounded-2xl rounded-tl-[5px]" style={{ background: "#2c2c2e" }}>
-                    <div className="flex gap-1.5 items-center h-4">
-                      {[0, 160, 320].map((d) => (
-                        <div
-                          key={d}
-                          className="w-2 h-2 rounded-full bg-white/45 animate-bounce"
-                          style={{ animationDelay: `${d}ms`, animationDuration: "1s" }}
-                        />
-                      ))}
+                      {/* Waveform */}
+                      <div className="flex-1 h-7 flex items-center gap-[2px]">
+                        {BAR_HEIGHTS.map((h, i) => {
+                          const filled = (i + 1) / NUM_BARS <= progress;
+                          return (
+                            <div
+                              key={i}
+                              className="flex-1 rounded-full"
+                              style={{
+                                height: `${h}%`,
+                                background: filled ? "#ff4d6d" : "rgba(255,255,255,0.28)",
+                                transition: "background 0.18s ease",
+                                animation: playing
+                                  ? `waveBar ${0.42 + (i % 6) * 0.06}s ease-in-out ${(i % 5) * 0.06}s infinite alternate`
+                                  : "none",
+                              }}
+                            />
+                          );
+                        })}
+                      </div>
+
+                      {/* Speed badge */}
+                      <span
+                        className="mono-label text-[10px] font-bold tabular-nums shrink-0 px-1.5 py-0.5 rounded"
+                        style={{
+                          background: "rgba(255,255,255,0.06)",
+                          color: "rgba(255,255,255,0.55)",
+                        }}
+                      >
+                        1.5×
+                      </span>
+                    </div>
+
+                    {/* Transcript caption */}
+                    {showTranscript && (
+                      <p
+                        className="mt-2.5 text-[13px] leading-snug text-white/90 px-1"
+                        style={{ animation: "fade-up 0.4s ease both" }}
+                      >
+                        {TRANSCRIPT}
+                      </p>
+                    )}
+
+                    <div className="flex items-center justify-end gap-1 mt-1.5">
+                      <span className="text-[9px] text-white/35 tabular-nums mono-label">9:41 AM</span>
                     </div>
                   </div>
                 </div>
-              )}
-
-              {visibleMsgs >= 2 && (
-                <div className="flex justify-start msg-appear">
-                  <div
-                    className="max-w-[82%] px-3.5 py-2.5 rounded-2xl rounded-tl-[5px] text-[14px] leading-relaxed text-white"
-                    style={{ background: "#2c2c2e" }}
-                  >
-                    {MESSAGES[1].text}
-                  </div>
-                </div>
-              )}
-
-              {visibleMsgs >= 3 && (
-                <div className="flex justify-start msg-appear">
-                  <div
-                    className="max-w-[82%] px-3.5 py-2.5 rounded-2xl rounded-tl-[5px] text-[14px] leading-relaxed text-white"
-                    style={{ background: "#2c2c2e" }}
-                  >
-                    {MESSAGES[2].text}
-                  </div>
-                </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           {/* Input bar */}
@@ -231,7 +285,7 @@ export default function ScamDemo() {
           </span>
           {scanning && (
             <span className="mono-label text-xs text-white/35 animate-pulse">
-              analyzing...
+              analyzing voice...
             </span>
           )}
         </div>
@@ -243,7 +297,8 @@ export default function ScamDemo() {
               style={{
                 opacity: visibleFlags > i ? 1 : 0,
                 transform: visibleFlags > i ? "translateX(0)" : "translateX(14px)",
-                transition: "opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1)",
+                transition:
+                  "opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1)",
               }}
             >
               <div
@@ -305,7 +360,7 @@ export default function ScamDemo() {
             </div>
             {done && (
               <p className="mono-label text-[11px] mt-3.5 text-white/30">
-                This message was AI-generated in approximately 0.3 seconds
+                This voice was AI-cloned from a few seconds of public audio
               </p>
             )}
           </div>
