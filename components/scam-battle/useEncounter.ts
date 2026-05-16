@@ -1,0 +1,102 @@
+"use client";
+
+import { useCallback, useMemo, useState } from "react";
+import {
+  startEncounter,
+  submitChoice,
+  assembleReport,
+  hydrate,
+  type ChoiceId,
+  type EncounterChoice,
+  type EncounterReport,
+  type EncounterState,
+  type EncounterTree,
+} from "@/lib/scam-battle-engine";
+
+export type EncounterPhase = "intro" | "battle" | "result";
+
+export interface EncounterApi {
+  phase: EncounterPhase;
+  state: EncounterState;
+  report: EncounterReport | null;
+  tree: EncounterTree;
+  // computed for the current turn
+  scammerMessage: string;
+  coachingFeedback: string | undefined;
+  choices: EncounterChoice[];
+  // hp values for visuals
+  playerHp: number;     // 100 down to 0
+  pokemonHp: number;    // 100 down to 0
+  // actions
+  beginBattle: () => void;
+  pickChoice: (id: ChoiceId) => void;
+  restart: () => void;
+}
+
+const MAX_HP = 100;
+const HP_PER_TURN = 25;
+
+export function useEncounter(tree: EncounterTree): EncounterApi {
+  const [phase, setPhase] = useState<EncounterPhase>("intro");
+  const [state, setState] = useState<EncounterState>(() => startEncounter(tree));
+  const [report, setReport] = useState<EncounterReport | null>(null);
+
+  const beginBattle = useCallback(() => setPhase("battle"), []);
+
+  const pickChoice = useCallback(
+    (id: ChoiceId) => {
+      setState((prev) => {
+        const next = submitChoice(prev, id);
+        if (next.isFinished) {
+          setReport(assembleReport(next, tree));
+          setTimeout(() => setPhase("result"), 900);
+        }
+        return next;
+      });
+    },
+    [tree],
+  );
+
+  const restart = useCallback(() => {
+    setState(startEncounter(tree));
+    setReport(null);
+    setPhase("intro");
+  }, [tree]);
+
+  // Latest turn in history
+  const latest = state.history[state.history.length - 1];
+  const scammerMessage = useMemo(
+    () => (latest ? hydrate(latest.scammerRaw, state.tokens) : ""),
+    [latest, state.tokens],
+  );
+  const choices = useMemo(
+    () => state.currentChoices ?? [],
+    [state.currentChoices],
+  );
+
+  // HP visuals — derived from cumulative danger
+  const totalSafeCredit = useMemo(() => {
+    return state.history.reduce((acc, h) => {
+      if (h.playerChoiceDanger === undefined) return acc;
+      return acc + (5 - h.playerChoiceDanger) * 5;
+    }, 0);
+  }, [state.history]);
+
+  const playerHp = Math.max(0, MAX_HP - state.totalDanger * HP_PER_TURN);
+  const pokemonHp = Math.max(0, MAX_HP - totalSafeCredit);
+
+  return {
+    phase,
+    state,
+    report,
+    tree,
+    scammerMessage,
+    coachingFeedback: latest?.coachingFeedback,
+    choices,
+    playerHp,
+    pokemonHp,
+    beginBattle,
+    pickChoice,
+    restart,
+  };
+}

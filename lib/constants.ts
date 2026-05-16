@@ -11,22 +11,24 @@ export const COLORS = {
 export const NAV_LINKS = [
   { label: "Pre & Post Quiz", href: "/risk-quiz", description: "Complete the quiz flow.", tone: COLORS.red },
   { label: "Scam Pokédex", href: "/pokedex", description: "Browse the threat catalogue.", tone: "#8b5cf6" },
+  { label: "Scam Simulator", href: "/scam-battle", description: "Spot the scam, battle the Pokémon.", tone: "#ff1744" },
   { label: "Trending", href: "/trending-scams", description: "Track active scam patterns.", tone: COLORS.red },
   { label: "Guide", href: "/guide", description: "Learn every attack type.", tone: COLORS.cyan },
   { label: "Stories", href: "/stories", description: "Read real teen experiences.", tone: "#f59e0b" },
   { label: "Emergency", href: "/emergency", description: "What to do right now.", tone: COLORS.orange },
-  { label: "Simulator", href: "/simulator", description: "Practice spotting fakes.", tone: COLORS.cyan },
+  { label: "Deepfake Tester", href: "/simulator", description: "Practice spotting AI fakes.", tone: COLORS.cyan },
   { label: "Feedback", href: "/feedback", description: "Send product feedback.", tone: "rgba(255,255,255,0.75)" },
 ] as const;
 
 export const PRIMARY_NAV_LINKS = [
   "/risk-quiz",
+  "/pokedex",
+  "/scam-battle",
   "/trending-scams",
   "/guide",
-  "/simulator",
   "/stories",
   "/emergency",
-  "/pokedex",
+  "/simulator",
 ] as const;
 
 export const FOOTER_GROUPS = [
@@ -35,17 +37,17 @@ export const FOOTER_GROUPS = [
     links: [
       { label: "Trending Scams", href: "/trending-scams" },
       { label: "AI Scam Guide", href: "/guide" },
-      { label: "Spot the Fake", href: "/simulator" },
+      { label: "Deepfake Tester", href: "/simulator" },
       { label: "Scam Pokédex", href: "/pokedex" },
     ],
   },
   {
     title: "Practice",
     links: [
+      { label: "Scam Simulator", href: "/scam-battle" },
       { label: "Pre Quiz", href: "/risk-quiz" },
       { label: "Post Quiz", href: "/risk-quiz/post-quiz" },
       { label: "Real Stories", href: "/stories" },
-      { label: "Scam Alerts", href: "/trending-scams" },
     ],
   },
   {
