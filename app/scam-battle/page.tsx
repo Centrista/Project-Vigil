@@ -30,20 +30,17 @@ export default function ScamBattleLanding() {
                 <span className="gradient-text-red">battle the Pokémon.</span>
               </>
             }
-            description="Real-feeling messages land in your inbox — some scams, some legit. Spot which is which. Get a scam right and the matching Scam Pokémon spawns for a multi-turn battle. Session-only, zero data saved."
-            stats={[
-              { label: "8 messages per run", tone: "default" },
-              { label: "9 Scam Pokémon", tone: "danger" },
-              { label: "Session-only", tone: "info" },
-            ]}
-            actions={
-              <Link href="/scam-battle/run" className="btn-red px-6 py-3 text-sm">
-                Begin Run →
-              </Link>
-            }
+            description="Real-feeling messages land in your inbox — some scams, some legit. Spot which is which. Get a scam right and the matching Scam Pokémon spawns for a multi-turn battle."
             align="center"
             className="fade-up"
           />
+
+          <div className="mt-2 flex justify-center">
+            <Link href="/scam-battle/run" className="sb-cta-mega">
+              <span className="sb-cta-mega-label">Begin Run</span>
+              <span className="sb-cta-mega-arrow">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 

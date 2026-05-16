@@ -52,6 +52,13 @@ export default function PokemonCard({
         </span>
       </div>
 
+      <p
+        className="mono-label pokedex-card-scam-label"
+        style={{ color: typeMeta.color }}
+      >
+        {entry.scamLabel}
+      </p>
+
       <div className="pokedex-card-titlebar">
         <h2 className="pokedex-card-name">{entry.name}</h2>
         <div className="pokedex-card-threat">
@@ -86,7 +93,6 @@ export default function PokemonCard({
       </div>
 
       <div className="pokedex-card-body">
-        <p className="pokedex-card-tagline">{entry.scamLabel}</p>
         <p className="pokedex-card-caption">Click to unleash full intel</p>
       </div>
     </button>

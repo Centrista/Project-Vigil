@@ -35,6 +35,15 @@ export interface InboxMessage {
   attachmentLabel?: string;   // describes a "photo" or "listing" attachment
 }
 
+export interface ListingPreview {
+  productTitle: string;
+  productEmoji?: string;       // emoji stand-in for product image
+  priceNow: string;
+  priceMarket?: string;        // strikethrough "market" price for comparison
+  sellerBadge?: string;        // e.g. "Joined 3 days ago · 0 reviews"
+  fakeReviews?: { author: string; body: string; stars: number }[];
+}
+
 export interface InboxScenario {
   id: string;
   platform: Platform;
@@ -42,6 +51,7 @@ export interface InboxScenario {
   messages: InboxMessage[];
   timestamp: string;          // displayed (e.g. "11:47 pm", "Mon 3:24 pm")
   subjectLine?: string;       // for gmail
+  listingPreview?: ListingPreview; // for carousell/tiktok-shop e-commerce scams
   verdict: Verdict;
 
   // when verdict = scam

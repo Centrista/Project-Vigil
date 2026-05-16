@@ -217,7 +217,7 @@ export const INBOX_POOL: InboxScenario[] = [
       "No real job asks YOU to deposit money to 'unlock higher-paying tasks'. The first small payment is the lure that builds trust before the real ask.",
   },
 
-  // 7. GLAUKULT — Carousell ecommerce scam
+  // 7. GLAUKULT — Carousell ecommerce scam (rendered as a LISTING, not a chat)
   {
     id: "glaukult-carousell-1",
     platform: "carousell",
@@ -227,28 +227,46 @@ export const INBOX_POOL: InboxScenario[] = [
       avatarSeed: "B",
       avatarColor: "#06b6d4",
       isKnownContact: false,
-      subtitleHint: "Joined 3 days ago · 0 reviews",
+      subtitleHint: "Joined 3 days ago · 0 reviews · No verified ID",
+    },
+    listingPreview: {
+      productTitle: "AirPods Pro 2 — Brand New Sealed",
+      productEmoji: "🎧",
+      priceNow: "$80",
+      priceMarket: "$349",
+      sellerBadge: "Joined 3 days ago · 0 reviews",
+      fakeReviews: [
+        {
+          author: "@happy_buyer_99",
+          body: "Item arrived fast, seller very nice 👍 highly recommend!!",
+          stars: 5,
+        },
+        {
+          author: "@sgshopper_x",
+          body: "Same as picture, real deal. Will buy again 🙏",
+          stars: 5,
+        },
+      ],
     },
     messages: [
       {
-        body: "Hi! Selling AirPods Pro 2 — $80 brand new in box, last 2 left.",
-        attachmentLabel: "Stock-photo image of AirPods Pro 2 box",
+        body: "Hi! Last 2 sets — PayNow me directly for an extra 20% off, no need go through Carousell payment (very slow leh).",
       },
       {
-        body: "PayNow me directly for extra 20% off! Carousell takes too long to release payment. WhatsApp me at +65 8554 9982 to confirm.",
+        body: "WhatsApp me at +65 8554 9982 to confirm, I send you the PayNow QR.",
       },
     ],
     timestamp: "Yesterday 7:55 pm",
     verdict: "scam",
     pokemonSlug: "glaukult",
     redFlagsToTeach: [
-      "AirPods Pro 2 retail $349 — $80 is impossible",
-      "Account joined 3 days ago, zero reviews",
+      "AirPods Pro 2 retail $349 — $80 is impossible for legit new stock",
+      "Account joined 3 days ago, zero real reviews",
+      "Reviews are AI-template style — same emoji pattern, no specifics",
       "Pushes payment OUTSIDE Carousell's protection",
-      "Generic stock photo, not a real listing photo",
     ],
     whyItsScamLesson:
-      "Insist on Carousell Protection / Shopee Guarantee — that's exactly what platform protection exists for. Anyone refusing it is hiding something.",
+      "Insist on Carousell Protection / Shopee Guarantee — platform payment is exactly the safety net you're paying for. Anyone refusing it is hiding something.",
   },
 
   // 8. PONSI — Investment scam

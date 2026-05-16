@@ -1,7 +1,12 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import type { InboxMessage, InboxScenario, Platform } from "@/lib/scam-battle-engine";
+import type {
+  InboxMessage,
+  InboxScenario,
+  ListingPreview as ListingPreviewData,
+  Platform,
+} from "@/lib/scam-battle-engine";
 
 // ---------------- Avatar ----------------
 
@@ -273,6 +278,66 @@ function MessageList({
   );
 }
 
+// ---------------- Listing preview (e-commerce scams) ----------------
+
+function ListingPreviewBlock({ listing }: { listing: ListingPreviewData }) {
+  return (
+    <div className="sb-listing">
+      <div className="sb-listing-image">
+        <span className="sb-listing-emoji" aria-hidden="true">
+          {listing.productEmoji ?? "📦"}
+        </span>
+        <span className="sb-listing-image-badge">PHOTO</span>
+      </div>
+      <div className="sb-listing-body">
+        <h3 className="sb-listing-title">{listing.productTitle}</h3>
+        <div className="sb-listing-price-row">
+          <span className="sb-listing-price-now">{listing.priceNow}</span>
+          {listing.priceMarket ? (
+            <span className="sb-listing-price-market">{listing.priceMarket}</span>
+          ) : null}
+          {listing.priceMarket ? (
+            <span className="sb-listing-discount">
+              −{discountPct(listing.priceNow, listing.priceMarket)}%
+            </span>
+          ) : null}
+        </div>
+        {listing.sellerBadge ? (
+          <p className="sb-listing-seller-badge">
+            <span className="mono-label">⚠ Seller</span> {listing.sellerBadge}
+          </p>
+        ) : null}
+        {listing.fakeReviews && listing.fakeReviews.length > 0 ? (
+          <div className="sb-listing-reviews">
+            <span className="mono-label sb-listing-reviews-label">REVIEWS</span>
+            <ul>
+              {listing.fakeReviews.map((r, i) => (
+                <li key={i}>
+                  <div className="sb-listing-review-head">
+                    <span className="sb-listing-review-author">{r.author}</span>
+                    <span className="sb-listing-review-stars">
+                      {"★".repeat(r.stars)}
+                      {"☆".repeat(5 - r.stars)}
+                    </span>
+                  </div>
+                  <p>{r.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function discountPct(now: string, market: string): number {
+  const a = parseFloat(now.replace(/[^0-9.]/g, ""));
+  const b = parseFloat(market.replace(/[^0-9.]/g, ""));
+  if (!a || !b || b <= a) return 0;
+  return Math.round(((b - a) / b) * 100);
+}
+
 // ---------------- ScenarioCard ----------------
 
 export default function ScenarioCard({ scenario }: { scenario: InboxScenario }) {
@@ -288,6 +353,9 @@ export default function ScenarioCard({ scenario }: { scenario: InboxScenario }) 
       }
     >
       <ShellHeader platform={scenario.platform} scenario={scenario} />
+      {scenario.listingPreview ? (
+        <ListingPreviewBlock listing={scenario.listingPreview} />
+      ) : null}
       <MessageList scenario={scenario} accent={theme.bubbleAccent} />
     </div>
   );

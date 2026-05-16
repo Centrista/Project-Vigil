@@ -1303,12 +1303,28 @@ h4 {
   color: rgba(255,255,255,0.94);
 }
 
+.pokedex-card-scam-label {
+  margin-top: 0.65rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  width: fit-content;
+  align-self: flex-start;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
 .pokedex-card-titlebar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
-  margin-top: 0.7rem;
+  margin-top: 0.5rem;
   padding: 0.65rem 0.8rem;
   border-radius: 18px;
   border: 1px solid rgba(255, 223, 128, 0.55);
@@ -3178,4 +3194,210 @@ h4 {
   text-align: center;
   color: rgba(255, 255, 255, 0.4);
   letter-spacing: 0.04em;
+}
+
+/* ------- Scam Battle mega CTA ------- */
+.sb-cta-mega {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 44px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #ff1744 0%, #d50032 100%);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 14px 32px rgba(255, 23, 68, 0.45),
+    0 4px 12px rgba(255, 23, 68, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms;
+  overflow: hidden;
+}
+.sb-cta-mega::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at top,
+    rgba(255, 255, 255, 0.22) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+.sb-cta-mega:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 22px 50px rgba(255, 23, 68, 0.55),
+    0 6px 18px rgba(255, 23, 68, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+.sb-cta-mega:active {
+  transform: translateY(0) scale(1);
+}
+.sb-cta-mega-label {
+  position: relative;
+  z-index: 1;
+}
+.sb-cta-mega-arrow {
+  position: relative;
+  z-index: 1;
+  font-size: 26px;
+  font-weight: 900;
+  display: inline-block;
+  transition: transform 220ms ease;
+}
+.sb-cta-mega:hover .sb-cta-mega-arrow {
+  transform: translateX(6px);
+}
+@media (max-width: 480px) {
+  .sb-cta-mega {
+    padding: 18px 32px;
+    font-size: 18px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ------- Scam Battle: listing preview (e-commerce) ------- */
+.sb-listing {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 12px;
+  padding: 14px;
+  margin: 12px 14px 0;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.sb-listing-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.sb-listing-emoji {
+  font-size: 42px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+.sb-listing-image-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.7);
+}
+.sb-listing-body { min-width: 0; }
+.sb-listing-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.sb-listing-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.sb-listing-price-now {
+  font-size: 20px;
+  font-weight: 900;
+  color: #ff5b32;
+  letter-spacing: -0.01em;
+}
+.sb-listing-price-market {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: line-through;
+}
+.sb-listing-discount {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(255, 91, 50, 0.18);
+  color: #ff8862;
+  border: 1px solid rgba(255, 91, 50, 0.3);
+}
+.sb-listing-seller-badge {
+  font-size: 10px;
+  color: rgba(255, 200, 100, 0.85);
+  background: rgba(255, 200, 100, 0.08);
+  border: 1px solid rgba(255, 200, 100, 0.2);
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.sb-listing-seller-badge .mono-label {
+  font-weight: 700;
+  margin-right: 4px;
+  color: rgba(255, 200, 100, 0.95);
+}
+.sb-listing-reviews {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 8px;
+}
+.sb-listing-reviews-label {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  display: block;
+  margin-bottom: 6px;
+}
+.sb-listing-reviews ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sb-listing-reviews li {
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.sb-listing-review-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.sb-listing-review-author {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+.sb-listing-review-stars {
+  font-size: 10px;
+  color: #ffd700;
+  letter-spacing: 0.04em;
+}
+.sb-listing-reviews li p {
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.7);
+}
+@media (max-width: 480px) {
+  .sb-listing { grid-template-columns: 84px 1fr; padding: 12px; gap: 10px; }
+  .sb-listing-emoji { font-size: 36px; }
 }
