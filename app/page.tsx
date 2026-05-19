@@ -2,12 +2,12 @@ import Link from "next/link";
 import ScamDemo from "@/components/ScamDemo";
 import ScrollReveal from "@/components/ScrollReveal";
 import { ALERTS } from "@/lib/alerts";
-import { GUIDE_ENTRIES } from "@/lib/guide-data";
+import { POKEDEX_ENTRY_COUNT } from "@/lib/pokedex";
 import { HOME_DESTINATIONS, SCAM_TYPES } from "@/lib/constants";
 import { STORIES } from "@/lib/stories";
 
 const SIGNALS = [
-  { label: "Scams mapped", value: `${GUIDE_ENTRIES.length}+`, tone: "premium-chip premium-chip-info" },
+  { label: "Scam creatures", value: String(POKEDEX_ENTRY_COUNT), tone: "premium-chip premium-chip-info" },
   { label: "Stories logged", value: String(STORIES.length), tone: "premium-chip premium-chip-purple" },
   { label: "Active alerts", value: String(ALERTS.length || 0), tone: "premium-chip premium-chip-danger" },
   { label: "Attack types", value: String(SCAM_TYPES.length), tone: "premium-chip premium-chip-amber" },
@@ -83,9 +83,9 @@ export default function Home() {
                     accent: "#ff1744",
                   },
                   {
-                    title: "Learn the mechanics",
-                    body: "Break every attack into how it works, why it works, and what to do when it appears.",
-                    href: "/guide",
+                    title: "Battle the playbook",
+                    body: "Spot the scam, then fight the Pokémon behind it. Every choice teaches the real-world move.",
+                    href: "/scam-battle",
                     accent: "#00d4ff",
                   },
                   {
@@ -173,8 +173,8 @@ export default function Home() {
                 <Link href="/risk-quiz" className="btn-ghost px-6 py-3 text-sm">
                   Start Pre Quiz
                 </Link>
-                <Link href="/guide" className="btn-red px-6 py-3 text-sm">
-                  Study the Attacks
+                <Link href="/scam-battle" className="btn-red px-6 py-3 text-sm">
+                  Battle the Scams
                 </Link>
               </div>
             </div>

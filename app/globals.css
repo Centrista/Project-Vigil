@@ -3035,6 +3035,12 @@ h4 {
 }
 .sb-result-section-caught { border-color: rgba(34, 197, 94, 0.28); background: rgba(34, 197, 94, 0.06); }
 .sb-result-section-missed { border-color: rgba(255, 23, 68, 0.28); background: rgba(255, 23, 68, 0.06); }
+.sb-result-section-ending { border-color: rgba(255, 167, 0, 0.30); background: rgba(255, 167, 0, 0.07); }
+.sb-result-section-ending p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.86);
+}
 .sb-result-section-label {
   display: block;
   font-size: 10px;

@@ -19,7 +19,7 @@ export interface Alert {
 //   categoryColor: "#00c853",
 //   severity: "high",
 //   weekOf: "Week of May 5, 2026",
-//   learnMoreHref: "/guide",
+//   learnMoreHref: "/scam-battle",
 // },
 
 export const ALERTS: Alert[] = [
@@ -31,7 +31,7 @@ export const ALERTS: Alert[] = [
     categoryColor: "#ff1744",
     severity: "critical",
     weekOf: "Week of May 5, 2026",
-    learnMoreHref: "/guide",
+    learnMoreHref: "/scam-battle",
   },
   {
     id: "apr-2026-pig-butchering-romance-bots",
@@ -41,7 +41,7 @@ export const ALERTS: Alert[] = [
     categoryColor: "#a855f7",
     severity: "critical",
     weekOf: "Week of Apr 28, 2026",
-    learnMoreHref: "/guide",
+    learnMoreHref: "/scam-battle",
   },
   {
     id: "apr-2026-fake-job-graduation",
@@ -51,7 +51,7 @@ export const ALERTS: Alert[] = [
     categoryColor: "#ff6d00",
     severity: "high",
     weekOf: "Week of Apr 21, 2026",
-    learnMoreHref: "/guide",
+    learnMoreHref: "/scam-battle",
   },
   {
     id: "apr-2026-celebrity-deepfake-crypto",
@@ -61,7 +61,7 @@ export const ALERTS: Alert[] = [
     categoryColor: "#00d4ff",
     severity: "high",
     weekOf: "Week of Apr 14, 2026",
-    learnMoreHref: "/guide",
+    learnMoreHref: "/scam-battle",
   },
   {
     id: "apr-2026-voice-clone-emergency",
@@ -71,7 +71,7 @@ export const ALERTS: Alert[] = [
     categoryColor: "#ff1744",
     severity: "critical",
     weekOf: "Week of Apr 7, 2026",
-    learnMoreHref: "/guide",
+    learnMoreHref: "/scam-battle",
   },
   {
     id: "mar-2026-irs-ai-robocall",
@@ -81,7 +81,7 @@ export const ALERTS: Alert[] = [
     categoryColor: "#f59e0b",
     severity: "high",
     weekOf: "Week of Mar 31, 2026",
-    learnMoreHref: "/guide",
+    learnMoreHref: "/scam-battle",
   },
   {
     id: "mar-2026-fraudgpt-phishing-kits",
@@ -91,6 +91,6 @@ export const ALERTS: Alert[] = [
     categoryColor: "#ff1744",
     severity: "high",
     weekOf: "Week of Mar 24, 2026",
-    learnMoreHref: "/guide",
+    learnMoreHref: "/scam-battle",
   },
 ];

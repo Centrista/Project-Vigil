@@ -168,12 +168,6 @@ export default function Navbar() {
               </p>
             </div>
             <div className="grid gap-2 sm:grid-cols-3">
-              <Link
-                href="/submit-scam"
-                className="rounded-2xl border border-[#ff1744]/20 bg-[#ff1744]/10 px-4 py-3 text-sm font-semibold text-white transition-all hover:border-[#ff1744]/30 hover:bg-[#ff1744]/16"
-              >
-                Submit a Scam
-              </Link>
               {SECONDARY_LINKS.map((link) => (
                 <Link
                   key={link.href}

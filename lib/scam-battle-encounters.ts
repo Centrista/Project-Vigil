@@ -136,8 +136,17 @@ const PASSAL_TREE: EncounterTree = {
           text: "Okay ma transferring {sum} now",
           dangerScore: 5,
           redFlagsMissed: ["noticed-unfamiliar-number", "noticed-secrecy-push", "ignored-cave-in"],
-          nextTurn: null,
-          endingNote: "{sum} sent to a number that wasn't mum's. Within an hour, the chat goes silent and you can't reach the number. Loss locked in.",
+          nextTurn: {
+            scammerMessage:
+              "Boy actually clinic also need {sum} more for x-ray deposit, can transfer again? Promise tonight I pay you back. Don't tell daddy ah 🙏",
+            coachingFeedback:
+              "First payment went through — now they're doubling it. This is how the loss snowballs in this scam.",
+            choices: [
+              { id: "a", text: "Send another {sum}", dangerScore: 5, redFlagsMissed: ["ignored-cave-in", "ignored-secrecy-trap"], nextTurn: null, endingNote: "Double loss locked in. Within an hour the chat goes silent. Lesson: every 'one more transfer' is exactly the same scam, in a smaller envelope." },
+              { id: "b", text: "Stop. Calling dad before I send anything else", dangerScore: 0, redFlagsCaught: ["escalate-to-adult"], nextTurn: null, endingNote: "Dad confirms mum is home. First {sum} gone, second one stopped. Lesson: the moment you doubt, escalate — every additional transfer is the bigger loss." },
+              { id: "c", text: "Screenshotting and reporting to 1799 right now", dangerScore: 0, redFlagsCaught: ["report-via-scamshield", "escalate-to-adult"], nextTurn: null, endingNote: "ScamShield logs the number. First {sum} unrecoverable but no further loss. Number gets added to the SG blocklist within hours." },
+            ],
+          },
         },
         {
           id: "b",
@@ -148,7 +157,7 @@ const PASSAL_TREE: EncounterTree = {
             scammerMessage: "Phone almost no battery, can't call! Number is my colleague's, she helping me forward to ah ma. Send first quickly leh!",
             coachingFeedback: "Real mum's PayNow is set up to her normal number. The 'forwarding through colleague' story is the scammer scrambling.",
             choices: [
-              { id: "a", text: "Okay if your phone dying I'll send", dangerScore: 4, redFlagsMissed: ["ignored-cave-in"], nextTurn: null, endingNote: "You believed the battery excuse. {sum} gone." },
+              { id: "a", text: "Okay if your phone dying I'll send", dangerScore: 4, redFlagsMissed: ["ignored-cave-in"], nextTurn: null, endingNote: "You believed the battery excuse. {sum} gone. Lesson: 'dying battery' is the most overused stall in this entire playbook." },
               { id: "b", text: "Then I'll call dad to confirm", dangerScore: 0, redFlagsCaught: ["escalate-to-adult"], nextTurn: null, endingNote: "Dad checks with mum directly. Zero loss." },
               { id: "c", text: "I'll PayNow your saved number only, not a new one", dangerScore: 0, redFlagsCaught: ["stand-firm"], nextTurn: null, endingNote: "Scammer pushes once more then goes silent. Zero loss." },
             ],
@@ -160,7 +169,49 @@ const PASSAL_TREE: EncounterTree = {
           dangerScore: 1,
           redFlagsCaught: ["personal-trivia-test"],
           nextTurn: null,
-          endingNote: "Scammer dodges, gets aggressive, then disappears when you keep asking. Zero loss.",
+          endingNote: "Scammer dodges, gets aggressive, then disappears when you keep asking. Zero loss. Lesson: even a tiny shared-memory question breaks AI clones — they can't fake a real history.",
+        },
+      ],
+    },
+    // ----- 3rd starter: Combined Passal + Akmon Zoom call (voice + video deepfake together) -----
+    {
+      tokens: {
+        sum: ["$400", "$520", "$680"],
+        deadline: ["midnight", "9pm tonight", "1 hour"],
+      },
+      openingMessage:
+        "📧 Email from \"Mrs Tan (Form Teacher) <ms.tan.hci.urgent@hci-edu.sg>\" — domain is hci-edu.sg (real is hci.edu.sg). Subject: URGENT — Join Zoom now. \"Please join the emergency Zoom — your parent is on the call. Camera & mic must be on. Do not tell other students.\"\n\n(If you join, you see a deepfake of Mrs Tan AND a deepfake of mum on a split screen. Both pressure you to PayNow {sum} before {deadline} to clear a 'school payment block'.)",
+      firstChoices: [
+        {
+          id: "a",
+          text: "Join the Zoom — it looks like Mrs Tan and mum",
+          dangerScore: 3,
+          redFlagsMissed: ["noticed-unfamiliar-number"],
+          nextTurn: {
+            scammerMessage: "📹 On Zoom, 'Mrs Tan' (voice + face match): \"Don't worry, this is confidential between us and your mother. The school has an outstanding charge of {sum}. PayNow now to my colleague's account: +65 8801 9920. Quickly please, before {deadline}.\"\n📹 'Mum' on the split screen: \"Boy just send first, mummy already lock out from POSB.\"",
+            coachingFeedback: "Two people on a call doesn't make it real. Both faces and both voices can be AI. This is Passal + Akmon teaming up.",
+            choices: [
+              { id: "a", text: "Both mum AND Mrs Tan are saying it — I'll send {sum}", dangerScore: 5, redFlagsMissed: ["ignored-cave-in", "noticed-secrecy-push"], nextTurn: null, endingNote: "{sum} gone. Real Mrs Tan emails you next morning asking what the police are calling about. Lesson: 'a second person on the call confirming it' isn't proof — it's just a second deepfake." },
+              { id: "b", text: "Hang up. Calling the school's main line right now.", dangerScore: 0, redFlagsCaught: ["verify-via-trusted-channel", "escalate-to-adult"], nextTurn: null, endingNote: "School general office confirms no such charge and no such meeting. You forward the email + Zoom link to ScamShield. Zero loss." },
+              { id: "c", text: "Ask 'Mrs Tan' to wave her hand across her face on camera", dangerScore: 0, redFlagsCaught: ["proof-of-life", "stand-firm"], nextTurn: null, endingNote: "Both deepfakes glitch HARD on the hand-wave. The scammer drops the call. Lesson: a single quick gesture beats hours of cloned voice and face." },
+            ],
+          },
+        },
+        {
+          id: "b",
+          text: "Email looks off — domain isn't hci.edu.sg. Forwarding to school + 1799.",
+          dangerScore: 0,
+          redFlagsCaught: ["verify-via-trusted-channel", "report-via-scamshield"],
+          nextTurn: null,
+          endingNote: "Clean defence. Lookalike domains (hci-edu.sg vs hci.edu.sg) are the highest-value tell — one hyphen difference is the entire scam. Zero loss.",
+        },
+        {
+          id: "c",
+          text: "Don't join. Calling mum + Mrs Tan separately on their saved numbers.",
+          dangerScore: 0,
+          redFlagsCaught: ["verify-via-trusted-channel", "escalate-to-adult"],
+          nextTurn: null,
+          endingNote: "Mum is at home. Mrs Tan is asleep. Two saved numbers, two truths — the Zoom never had a chance. Zero loss.",
         },
       ],
     },
@@ -201,10 +252,17 @@ const AKMON_TREE: EncounterTree = {
         {
           id: "a",
           text: "Okay bro sending {sum} now",
-          dangerScore: 5,
-          redFlagsMissed: ["noticed-lip-sync", "ignored-bad-quality", "ignored-cave-in"],
-          nextTurn: null,
-          endingNote: "Sent to a stranger's PayNow. Real cousin is on instagram posting JB food pics two hours later. {sum} gone.",
+          dangerScore: 4,
+          redFlagsMissed: ["noticed-lip-sync", "ignored-bad-quality"],
+          nextTurn: {
+            scammerMessage: "📹 \"Bro thank you ❤️ but hotel suddenly say need also $300 deposit before they release my passport. Can transfer once more? Promise pay back when I land tonight!\"",
+            coachingFeedback: "Once the first transfer goes through, the second one always follows. The scam isn't a single hit — it's a drip until you stop.",
+            choices: [
+              { id: "a", text: "Okay one more transfer", dangerScore: 5, redFlagsMissed: ["ignored-cave-in"], nextTurn: null, endingNote: "Double loss locked in. Real cousin is at home posting JB food pics two hours later. Lesson: a successful transfer ALWAYS triggers a second demand — that's the scam's full design." },
+              { id: "b", text: "No more. Calling his saved number to verify.", dangerScore: 0, redFlagsCaught: ["verify-via-trusted-channel"], nextTurn: null, endingNote: "Real cousin picks up from his room. First {sum} gone but the second one stopped. Lesson: late verification still saves the bigger half of the loss." },
+              { id: "c", text: "Hanging up. Calling dad + 1799 now.", dangerScore: 0, redFlagsCaught: ["escalate-to-adult", "verify-via-trusted-channel"], nextTurn: null, endingNote: "Dad calls cousin directly — he's fine. You file with ScamShield. First {sum} unrecoverable; rest of the night safe." },
+            ],
+          },
         },
         {
           id: "b",
@@ -443,6 +501,48 @@ const ACTEON_TREE: EncounterTree = {
         },
       ],
     },
+    // ----- 2nd starter: Telegram bluff-threat (no proof shown) -----
+    {
+      tokens: {
+        sum: ["$250", "$400", "$600"],
+        deadline: ["8 hours", "by midnight", "12 hours"],
+      },
+      openingMessage:
+        "📩 Telegram from @anon_user_8821 (no profile photo, joined this week): \"I have screenshots of you. You know what I mean. PayNow {sum} in {deadline} or your whole class sees them tomorrow. I have your school list. Don't test me.\"",
+      firstChoices: [
+        {
+          id: "a",
+          text: "Reply: \"what screenshots?? show me\"",
+          dangerScore: 5,
+          redFlagsMissed: ["engaged-with-scammer"],
+          nextTurn: {
+            scammerMessage: "\"I don't show first lah. Pay {sum} and I prove I have them by deleting. You have 1 hour now. Tick tock.\"",
+            coachingFeedback: "They have no real screenshots — but you just confirmed someone is reading. Next demand is locked in.",
+            choices: [
+              { id: "a", text: "Just PayNow {sum} to make it stop", dangerScore: 5, redFlagsMissed: ["paid-scammer"], nextTurn: null, endingNote: "{sum} sent. New demand for $800 arrives within 24 hours. The 'screenshots' never existed — only your fear did. Next time: never reply." },
+              { id: "b", text: "Block, screenshot the chat, tell a teacher", dangerScore: 0, redFlagsCaught: ["screenshot-and-block", "told-trusted-adult"], nextTurn: null, endingNote: "Teacher walks you through reporting via ScamShield. The threats were empty. You are safe. Lesson: replying is the leverage, not the photos." },
+              { id: "c", text: "Call 1799 right now", dangerScore: 0, redFlagsCaught: ["reported-via-scamshield"], nextTurn: null, endingNote: "ScamShield confirms this template — they hit hundreds of teens with the same script weekly. You are not alone, and you handled it right." },
+            ],
+          },
+        },
+        {
+          id: "b",
+          text: "Screenshot, then block. Zero reply.",
+          dangerScore: 0,
+          redFlagsCaught: ["did-not-reply", "screenshot-and-block"],
+          nextTurn: null,
+          endingNote: "Best move. No reply = no leverage. They had nothing real anyway. Tell a parent next so this doesn't sit on you alone.",
+        },
+        {
+          id: "c",
+          text: "Show mum or form teacher before doing anything",
+          dangerScore: 0,
+          redFlagsCaught: ["told-trusted-adult"],
+          nextTurn: null,
+          endingNote: "Adult immediately recognises the bluff-template. You block and report together. Zero loss, zero shame. This is the textbook move.",
+        },
+      ],
+    },
   ],
 };
 
@@ -481,9 +581,16 @@ const FANIR_TREE: EncounterTree = {
           id: "a",
           text: "Sweet, logging in to claim it",
           dangerScore: 5,
-          redFlagsMissed: ["free-generators-fake", "ignored-too-good-to-be-true", "shared-account"],
-          nextTurn: null,
-          endingNote: "You enter your username and password. Within 5 minutes your account is logged out and renamed. All your skins are listed for sale on a trading server. Account gone.",
+          redFlagsMissed: ["free-generators-fake", "ignored-too-good-to-be-true"],
+          nextTurn: {
+            scammerMessage: "(You enter username + password.) \"Almost done bro! The system sent a verification code to your email/phone — paste it here so I can credit the {currency} to your account 🙌\"",
+            coachingFeedback: "They have your login but need the 2FA code to actually take the account. The code is the LAST line of defence — sharing it is the real moment of loss.",
+            choices: [
+              { id: "a", text: "Paste the verification code", dangerScore: 5, redFlagsMissed: ["shared-account", "refused-otp"], nextTurn: null, endingNote: "Account gone within 60 seconds. Renamed, skins listed on a trading server. Friends start getting the same scam from 'you'. Lesson: never share a 2FA / verification code — that code IS the account." },
+              { id: "b", text: "Wait — why does a 'generator' need my login code??", dangerScore: 1, redFlagsCaught: ["refused-otp"], nextTurn: null, endingNote: "You stop just before the final theft. Password compromised — change it immediately on the OFFICIAL site, enable a fresh 2FA. Bullet dodged because you didn't share the code." },
+              { id: "c", text: "Logging out, changing my password now, blocking them", dangerScore: 0, redFlagsCaught: ["refused-otp", "went-to-official-site"], nextTurn: null, endingNote: "You catch it in time. Account safe. Lesson: the verification code is the moat — protect it harder than the password itself." },
+            ],
+          },
         },
         {
           id: "b",
@@ -610,6 +717,48 @@ const CIRCE_TREE: EncounterTree = {
         },
       ],
     },
+    // ----- 2nd starter: WhatsApp brand-deal scam (SG-flavoured, no contract) -----
+    {
+      tokens: {
+        rate: ["$50", "$80", "$120"],
+        bonus: ["$300", "$500", "$200"],
+      },
+      openingMessage:
+        "💬 WhatsApp from +65 8021 7748 (\"Recruiter SG\"): \"Hi! We're a SG marketing agency, saw your TikTok 👀 We pay {rate} per branded repost, {bonus} sign-up bonus for the first 24 hours. Reply YES and we send the brief.\"",
+      firstChoices: [
+        {
+          id: "a",
+          text: "YES, send me the brief",
+          dangerScore: 4,
+          redFlagsMissed: ["too-good-to-be-true", "no-contract"],
+          nextTurn: {
+            scammerMessage: "\"Great! To unlock the {bonus} sign-up bonus, send us your bank account number + a screenshot of your IC so finance can register you in the payroll system. We'll PayNow your bonus within 30 mins.\"",
+            coachingFeedback: "Bank details + IC photo before any work is done = identity theft setup. No real agency does this in WhatsApp.",
+            choices: [
+              { id: "a", text: "Okay sending my bank info + IC", dangerScore: 5, redFlagsMissed: ["shared-banking-info"], nextTurn: null, endingNote: "Your bank account and IC are now on a scam network's list. Expect loan applications in your name and follow-up phishing for the next 6 months. Lesson: real employers send a contract first, not a WhatsApp number." },
+              { id: "b", text: "Wait — can I see your company website + a contract first?", dangerScore: 0, redFlagsCaught: ["no-contract", "refused-banking-info"], nextTurn: null, endingNote: "Scammer dodges, gets evasive, then stops replying. Zero loss. Lesson: anything that won't pass a 2-minute Google search isn't a real job." },
+              { id: "c", text: "Asking mum or my form teacher first", dangerScore: 0, redFlagsCaught: ["told-parent"], nextTurn: null, endingNote: "Adult recognises the IC-screenshot ask as the dead giveaway. You block and report. Zero loss." },
+            ],
+          },
+        },
+        {
+          id: "b",
+          text: "What's the agency name & website?",
+          dangerScore: 0,
+          redFlagsCaught: ["no-contract"],
+          nextTurn: null,
+          endingNote: "They send a vague link to an Instagram page with 12 followers. You walk. Lesson: if you can't verify the company in 2 clicks, it isn't one.",
+        },
+        {
+          id: "c",
+          text: "Block. No real agency cold-WhatsApps for brand deals.",
+          dangerScore: 0,
+          redFlagsCaught: ["too-good-to-be-true", "noticed-telegram-channel"],
+          nextTurn: null,
+          endingNote: "Smart. Real brand deals come through a company email, not a personal number. Zero loss.",
+        },
+      ],
+    },
   ],
 };
 
@@ -648,10 +797,17 @@ const GLAUKULT_TREE: EncounterTree = {
         {
           id: "a",
           text: "PayNow him for the extra discount",
-          dangerScore: 5,
-          redFlagsMissed: ["paid-off-platform", "noticed-new-account", "noticed-price-too-low"],
-          nextTurn: null,
-          endingNote: "{price} gone. The item never ships. Seller deletes account. Carousell can't help because you paid outside the platform.",
+          dangerScore: 4,
+          redFlagsMissed: ["paid-off-platform", "noticed-new-account"],
+          nextTurn: {
+            scammerMessage: "(You PayNow {price}.) \"Thanks bro! Oh wait — courier needs $25 'remote area surcharge' for your postal code, also via PayNow. Last step then I ship!\"",
+            coachingFeedback: "The 'extra fee after payment' is a tell — every Glaukult variant has a second ask once you've shown you'll pay outside the platform.",
+            choices: [
+              { id: "a", text: "Okay PayNow the $25 surcharge", dangerScore: 5, redFlagsMissed: ["paid-off-platform"], nextTurn: null, endingNote: "Total gone. Item never ships. Account deletes within a day. Carousell can't help — you paid outside protection on both. Lesson: there's never just one fee; once you've paid off-platform, every 'one more step' is fresh extraction." },
+              { id: "b", text: "Refuse the $25, demand refund + tracking now", dangerScore: 2, redFlagsMissed: ["paid-off-platform"], nextTurn: null, endingNote: "They block you. {price} gone but you walked from the bigger ask. Lesson: the moment a 'surprise fee' appears, the scam has shown itself — every further dollar is voluntary." },
+              { id: "c", text: "Report the chat to Carousell + screenshot for police", dangerScore: 1, redFlagsCaught: ["noticed-fake-reviews"], nextTurn: null, endingNote: "Carousell suspends the account. {price} unrecoverable but you stopped the cascade. ScamShield logs the PayNow number for future victims." },
+            ],
+          },
         },
         {
           id: "b",
@@ -675,6 +831,49 @@ const GLAUKULT_TREE: EncounterTree = {
           redFlagsCaught: ["asked-for-proof"],
           nextTurn: null,
           endingNote: "Seller can't produce real proof. Conversation goes silent. Zero loss.",
+        },
+      ],
+    },
+    // ----- 2nd starter: TikTok Shop seller pushing off-platform -----
+    {
+      tokens: {
+        item: ["Stanley cup", "iPhone case bundle", "AirPods clone"],
+        price: ["$35", "$45", "$25"],
+        marketPrice: ["$89", "$120", "$70"],
+      },
+      openingMessage:
+        "🛍️ TikTok Shop seller @stanley_dropship_sg (5 followers, 0 reviews): \"Hey saw u like our {item} listing! Special bulk price — {price} (retail {marketPrice}). Pay direct PayNow lah, TikTok Shop charge me 18% commission. WhatsApp +65 8990 1287 for the QR. Only 5 sets left at this price 🏃‍♀️\"",
+      firstChoices: [
+        {
+          id: "a",
+          text: "WhatsApp them for the PayNow QR",
+          dangerScore: 5,
+          redFlagsMissed: ["paid-off-platform", "noticed-new-account", "noticed-price-too-low"],
+          nextTurn: {
+            scammerMessage: "📱 (You WhatsApp the number. They send a QR.) \"Pay {price} now, I ship same-day! 🙏 But shipping insurance is $15 extra, also via PayNow. Trust me bro it's standard for this price tier.\"",
+            coachingFeedback: "The 'shipping insurance' add-on is the second layer of the scam — fees on fees while you're locked in.",
+            choices: [
+              { id: "a", text: "Okay pay the {price} + $15 insurance", dangerScore: 5, redFlagsMissed: ["paid-off-platform"], nextTurn: null, endingNote: "Total gone. Nothing ships. Account deletes itself within a day. TikTok Shop can't help — you paid outside the platform. Lesson: every 'commission shortcut' is the trap, every time." },
+              { id: "b", text: "Refuse, demand refund, threaten to report", dangerScore: 2, redFlagsMissed: ["paid-off-platform"], nextTurn: null, endingNote: "They block you. Initial {price} gone. Lesson: once money leaves the platform, you can threaten all you want — nothing comes back." },
+              { id: "c", text: "Report the account to TikTok Shop right away", dangerScore: 2, redFlagsCaught: ["noticed-new-account"], nextTurn: null, endingNote: "TikTok suspends them within hours. Future buyers saved. {price} still gone — but the next person isn't a victim." },
+            ],
+          },
+        },
+        {
+          id: "b",
+          text: "No thanks — only buying in-app for protection",
+          dangerScore: 0,
+          redFlagsCaught: ["kept-payment-in-platform"],
+          nextTurn: null,
+          endingNote: "Smart. The 18% commission funds your buyer protection — that's exactly what they're trying to make you give up. Zero loss.",
+        },
+        {
+          id: "c",
+          text: "Check the seller's reviews and account age first",
+          dangerScore: 0,
+          redFlagsCaught: ["noticed-new-account", "did-not-verify-seller"],
+          nextTurn: null,
+          endingNote: "5 followers, 0 reviews, joined this week — every red flag stacked. You walk. Zero loss.",
         },
       ],
     },
@@ -745,6 +944,56 @@ const PONSI_TREE: EncounterTree = {
         },
       ],
     },
+    // ----- 2nd starter: Telegram VIP group via "friend's cousin" -----
+    {
+      tokens: {
+        multiplier: ["4x", "3x", "5x"],
+        deposit: ["$500", "$800", "$300"],
+        weeks: ["3 weeks", "2 weeks", "10 days"],
+      },
+      openingMessage:
+        "💬 Telegram from a stranger @weihan_invest_sg (claims to know your school): \"Eh bro my cousin runs this private crypto signal group. Members made {multiplier} in {weeks}. He's onboarding 5 new ppl tonight only, min {deposit}. I can vouch for u — don't tell others ah, group has cap. Link: t.me/sg_alpha_signals_vip\"",
+      firstChoices: [
+        {
+          id: "a",
+          text: "Join the group and deposit {deposit}",
+          dangerScore: 5,
+          redFlagsMissed: ["noticed-guaranteed-returns", "noticed-vip-pressure"],
+          nextTurn: {
+            scammerMessage: "(You deposit {deposit}. Dashboard shows $2,100 'profit' in 4 days. Group admin posts screenshots of other members 'cashing out'.)\n\nAdmin DM: \"Bro time to withdraw your profits! Just pay 8% gas fee — that's $168 to release the {deposit} + profits to your wallet. Standard ETH protocol fee, refunded with profits.\"",
+            coachingFeedback: "Fake profits + fake gas fee = the textbook Ponsi exit. The 'screenshots of others cashing out' are all the same scammer using different accounts.",
+            choices: [
+              { id: "a", text: "Pay the $168 gas fee to release my profits", dangerScore: 5, redFlagsMissed: ["paid-tax-fee"], nextTurn: null, endingNote: "$168 sent. Next message: 'verification fee $300'. Then 'admin fee $450'. The cycle has no end. Total loss: {deposit} + every fee you pay. Lesson: there is no 'one more fee' — there are infinite ones." },
+              { id: "b", text: "Refuse the fee. Demand my {deposit} back.", dangerScore: 1, redFlagsCaught: ["refused-tax-fee"], nextTurn: null, endingNote: "Group goes silent, then deletes. Initial {deposit} gone but no further loss. Lesson: the deposit is the scam — once it's in, it's gone." },
+              { id: "c", text: "Tell mum/dad now and screenshot everything", dangerScore: 0, redFlagsCaught: ["told-parent"], nextTurn: null, endingNote: "Parents file a police report with ScamShield. They may recover nothing, but they stop you depositing more. {deposit} gone, lesson banked." },
+            ],
+          },
+        },
+        {
+          id: "b",
+          text: "How do I verify your cousin is real & MAS-licensed?",
+          dangerScore: 0,
+          redFlagsCaught: ["checked-MAS-licence"],
+          nextTurn: {
+            scammerMessage: "\"Bro it's a private signal group la, MAS for what 😂 We're not investing your money for u, just sending you trade signals — you DIY trade on Binance. Totally legal!\"",
+            coachingFeedback: "Real MAS-regulated platforms exist for exactly this reason. 'It's just signals' is the dodge that lets unregulated platforms operate.",
+            choices: [
+              { id: "a", text: "Fair point, I'll try a small deposit", dangerScore: 4, redFlagsMissed: ["noticed-guaranteed-returns"], nextTurn: null, endingNote: "Even a 'small' deposit triggers the same dashboard-fee-cycle. {deposit} gone." },
+              { id: "b", text: "No thanks — if it's not MAS-regulated I'm out", dangerScore: 0, redFlagsCaught: ["checked-MAS-licence", "noticed-guaranteed-returns"], nextTurn: null, endingNote: "Clean walkaway. Zero loss." },
+              { id: "c", text: "Block, report to Telegram, and tell my school IT teacher", dangerScore: 0, redFlagsCaught: ["told-parent", "checked-MAS-licence"], nextTurn: null, endingNote: "Telegram bans the channel within a week. Other students saved. Zero loss." },
+            ],
+          },
+        },
+        {
+          id: "c",
+          text: "Block — random stranger pitching crypto = scam every time",
+          dangerScore: 0,
+          redFlagsCaught: ["noticed-vip-pressure"],
+          nextTurn: null,
+          endingNote: "Pattern recognition is the actual skill here. Zero loss.",
+        },
+      ],
+    },
   ],
 };
 
@@ -812,6 +1061,48 @@ const PEITHO_TREE: EncounterTree = {
           redFlagsCaught: ["told-friend-or-parent", "noticed-overly-friendly"],
           nextTurn: null,
           endingNote: "Friend/mum instantly spots the pig-butchering pattern. You block and report. Zero loss.",
+        },
+      ],
+    },
+    // ----- 2nd starter: Money mule recruitment variant (small 'favour' framing) -----
+    {
+      tokens: {
+        name: ["Jade", "Megan", "Eunice"],
+        sum: ["$400", "$650", "$800"],
+      },
+      openingMessage:
+        "📩 Snapchat add from @{name}.ng: \"heyy saw u in ur school's story 👀 we have similar friends ahaha\"\n\n(After 2 days of friendly chat about school, K-pop, exam stress):\n\n\"omg random question — can u help me with something? My PayNow not working & I got a refund coming in tmr. Can {sum} go to ur acc first, then u PayNow me back? Don't tell ur parents la, they wun get it 💜\"",
+      firstChoices: [
+        {
+          id: "a",
+          text: "Sure, send me the details — friend helping friend right",
+          dangerScore: 5,
+          redFlagsMissed: ["refused-to-send-money", "stayed-in-isolation"],
+          nextTurn: {
+            scammerMessage: "\"Omg thanks ily 💜 Money will hit tmr 9am. Once it arrives, just PayNow me — but to my friend's account la, mine still bugged. Number: +65 8902 1147.\"\n\n(Next day: {sum} arrives in your account. You PayNow it to '+65 8902 1147'. Two days later, your bank calls — that {sum} was from a scam victim, and your account is now flagged as a money mule.)",
+            coachingFeedback: "This is how teens get charged for money-mule offences in Singapore. You never touched the scam — but your account was the pass-through.",
+            choices: [
+              { id: "a", text: "PayNow the {sum} to her friend's number anyway", dangerScore: 5, redFlagsMissed: ["sent-money"], nextTurn: null, endingNote: "Account frozen. Police investigation opened against YOU. Even though you didn't scam anyone, you were the mule — and that's a crime under Singapore's Computer Misuse Act. Lesson: never let money pass through your account for someone you've only met online." },
+              { id: "b", text: "Refuse to PayNow it onward — return the money to the original sender", dangerScore: 2, redFlagsMissed: ["sent-money"], nextTurn: null, endingNote: "Bank helps reverse the transfer. You're cleared but flagged. Lesson: the moment money you didn't earn hits your account from a stranger's deal, talk to a parent and the bank before doing anything." },
+              { id: "c", text: "Stop. Tell mum + report the account before sending anything", dangerScore: 0, redFlagsCaught: ["told-friend-or-parent", "blocked-and-reported"], nextTurn: null, endingNote: "Mum and bank confirm this is mule recruitment. You're not charged. You report 'Jade' to ScamShield. Lesson: every 'pass-through favour' is identical to this script." },
+            ],
+          },
+        },
+        {
+          id: "b",
+          text: "That's a money-mule ask. Blocking + telling parents.",
+          dangerScore: 0,
+          redFlagsCaught: ["refused-to-send-money", "told-friend-or-parent", "blocked-and-reported"],
+          nextTurn: null,
+          endingNote: "You knew the pattern. Money mule recruitment is a crime in Singapore — you can be charged even if you didn't keep the money. Zero loss.",
+        },
+        {
+          id: "c",
+          text: "Ask for a quick video call to verify she's real first",
+          dangerScore: 0,
+          redFlagsCaught: ["asked-for-video-call", "noticed-overly-friendly"],
+          nextTurn: null,
+          endingNote: "She makes excuses for 3 days, then quietly unadds you. Lesson: 'won't get on a quick video call' is the second-best Peitho tell, after the money pivot itself.",
         },
       ],
     },

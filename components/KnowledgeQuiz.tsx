@@ -341,8 +341,8 @@ export default function KnowledgeQuiz() {
               <Link href="/risk-quiz" className="btn-red inline-flex items-center gap-2 px-7 py-3 text-sm rounded-xl">
                 Take the Full Quiz
               </Link>
-              <Link href="/guide" className="btn-ghost inline-flex items-center gap-2 px-7 py-3 text-sm rounded-xl">
-                Study the Attacks →
+              <Link href="/scam-battle" className="btn-ghost inline-flex items-center gap-2 px-7 py-3 text-sm rounded-xl">
+                Battle the Scams →
               </Link>
             </div>
           </div>

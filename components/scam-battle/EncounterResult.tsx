@@ -9,11 +9,13 @@ import type { PokemonScam } from "@/lib/pokedex";
 export default function EncounterResult({
   entry,
   report,
+  endingNote,
   onContinue,
   onRetry,
 }: {
   entry: PokemonScam;
   report: EncounterReport;
+  endingNote?: string;
   onContinue: () => void;
   onRetry: () => void;
 }) {
@@ -62,6 +64,13 @@ export default function EncounterResult({
         <h2 className="sb-result-title">{entry.name} — Encounter Report</h2>
         <p className="sb-result-summary">{report.summary}</p>
       </div>
+
+      {endingNote ? (
+        <div className="sb-result-section sb-result-section-ending">
+          <span className="mono-label sb-result-section-label">📍 What happened next</span>
+          <p>{endingNote}</p>
+        </div>
+      ) : null}
 
       {report.redFlagsCaught.length > 0 ? (
         <div className="sb-result-section sb-result-section-caught">

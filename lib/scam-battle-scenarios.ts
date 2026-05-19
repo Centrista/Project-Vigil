@@ -339,6 +339,355 @@ export const INBOX_POOL: InboxScenario[] = [
   },
 
   // ============================================================
+  // ALTERNATE SCAM SCENARIOS — second variant per Pokémon
+  // so runs get different opening shots, not the same one twice.
+  // ============================================================
+
+  // 1b. PASSAL — Voice clone "DAD" instead of mum
+  {
+    id: "passal-whatsapp-2",
+    platform: "whatsapp",
+    sender: {
+      name: "Daddy",
+      phone: "+65 9883 1207",
+      avatarSeed: "D",
+      avatarColor: "#3478F6",
+      isKnownContact: false,
+      subtitleHint: "Unknown number — using display name 'Daddy'",
+    },
+    messages: [
+      {
+        body: "🎙️ Voice note",
+        isVoiceNote: true,
+        voiceDurationSec: 28,
+        voiceTranscript:
+          "Boy ah, daddy in trouble! Got pulled over at the checkpoint, phone almost no battery. PayNow $480 to this number for the officer fine, settle today only. Don't tell mummy first, she will panic. Quick okay.",
+      },
+      { body: "Cannot call back, signal very weak here" },
+    ],
+    timestamp: "Fri 6:18 pm",
+    verdict: "scam",
+    pokemonSlug: "passal",
+    redFlagsToTeach: [
+      "Number isn't dad's saved one in your contacts",
+      "'Don't tell mum' — same secrecy trick as the mum variant",
+      "Officers never collect fines via PayNow",
+      "Voice + urgency + new number = textbook Passal",
+    ],
+    whyItsScamLesson:
+      "Same playbook, different parent. No real officer takes a fine through a personal PayNow. Hang up, call dad's saved number, loop in mum — that whole frame falls apart the moment you verify.",
+  },
+
+  // 1c. PASSAL + AKMON combined — Fake Zoom call from "form teacher" (voice + video deepfake together)
+  {
+    id: "passal-akmon-zoom",
+    platform: "gmail",
+    sender: {
+      name: "Mrs Tan (Form Teacher)",
+      email: "ms.tan.hci.urgent@hci-edu.sg",
+      avatarSeed: "T",
+      avatarColor: "#ef4444",
+      isKnownContact: false,
+      subtitleHint: "Lookalike domain — real one is hci.edu.sg",
+    },
+    subjectLine: "URGENT — Join Zoom now (parent meeting)",
+    messages: [
+      {
+        body: "Dear student, please join the emergency Zoom now — your parent is on the call to discuss a serious matter regarding your account. Camera and mic must be on. Do not tell other students.",
+      },
+      {
+        body: "Zoom: zoom-hci-urgent.com/j/8472019 (Meeting ID 8472019, passcode HCI2026)",
+        link: {
+          displayText: "zoom-hci-urgent.com/j/8472019",
+          actualUrl: "https://zoom-hci-urgent.com/j/8472019",
+        },
+      },
+      {
+        body: "(If you join: a deepfake of Mrs Tan's face appears with a cloned voice. A second window 'connects mum' — another deepfake — and both pressure you to PayNow $400 to clear a 'school payment block' before midnight.)",
+      },
+    ],
+    timestamp: "9:42 pm",
+    verdict: "scam",
+    pokemonSlug: "passal",
+    redFlagsToTeach: [
+      "Email domain is hci-edu.sg (fake) — real HCI is hci.edu.sg",
+      "Real teachers never run urgent Zoom calls at night with secrecy rules",
+      "Both the teacher AND the parent on the same call = both are deepfakes (Akmon + Passal together)",
+      "Any meeting that demands PayNow before 'unlocking' something is the entire scam",
+    ],
+    whyItsScamLesson:
+      "This is the next-generation scam — voice clone (Passal) + face deepfake (Akmon) running side-by-side in a fake Zoom to overwhelm your verification reflex. Two 'people' on the call doesn't mean it's real; both can be fake. Always hang up and call the school directly using the published main line.",
+  },
+
+  // 2b. AKMON — Deepfake "older brother stuck overseas"
+  {
+    id: "akmon-whatsapp-2",
+    platform: "whatsapp",
+    sender: {
+      name: "Kor 哥",
+      phone: "+65 8771 4093",
+      avatarSeed: "K",
+      avatarColor: "#0ea5e9",
+      isKnownContact: false,
+      subtitleHint: "Unknown number — calling now",
+    },
+    messages: [
+      {
+        body: "📹 Incoming video call... [tap to view]",
+        attachmentLabel: "Choppy video — kor's face buffering every few seconds",
+      },
+      {
+        body: "Bro ATM eaten my card at Bangkok, hotel asking for deposit. PayNow $580 to my friend here can? Number is +65 8771 4093. Camera quality damn bad lah, hotel wifi sian one.",
+      },
+      { body: "Quick eh kor leaving lobby soon" },
+    ],
+    timestamp: "Sun 11:42 pm",
+    verdict: "scam",
+    pokemonSlug: "akmon",
+    redFlagsToTeach: [
+      "Video stutters every time he 'talks fast' — deepfakes break on quick mouth movement",
+      "'Friend's PayNow' is a stranger's account",
+      "Hotel wifi excuse hides the deepfake glitches",
+      "Real kor would call from his saved WhatsApp, not a new number",
+    ],
+    whyItsScamLesson:
+      "Hang up. Call your brother's normal number — most of the time he's already home and has no idea you got this call. Never PayNow to a 'friend of family' number.",
+  },
+
+  // 3b. DOLON — DBS card "suspicious transaction" phish (SMS)
+  {
+    id: "dolon-sms-2",
+    platform: "sms",
+    sender: {
+      name: "DBS Alert",
+      phone: "+65 9224 0188",
+      avatarSeed: "D",
+      avatarColor: "#dc2626",
+      isKnownContact: false,
+      subtitleHint: "Unknown number posing as DBS",
+    },
+    messages: [
+      {
+        body: "DBS: Charge of S$2,148.00 at SHOPEE THAILAND on your card ending 8821. If not you, dispute within 24h or you'll be liable. Dispute now:",
+        link: {
+          displayText: "dbs-secure-portal.com/dispute",
+          actualUrl: "https://dbs-secure-portal.com/dispute",
+        },
+      },
+    ],
+    timestamp: "1:36 am",
+    verdict: "scam",
+    pokemonSlug: "dolon",
+    redFlagsToTeach: [
+      "Real DBS uses short code DBS, not a phone number",
+      "Domain dbs-secure-portal.com isn't real — DBS uses dbs.com.sg",
+      "Card ending '8821' is a guess — if it doesn't match your real card, it's fake",
+      "Sent at 1am — half-asleep panic is the goal",
+    ],
+    whyItsScamLesson:
+      "Open the real DBS app and check transactions there. No real charge will exist. The link only goes to a form designed to steal your card number, CVV, and OTP.",
+  },
+
+  // 4b. ACTEON — Telegram cold DM sextortion (no profile pic, fake screenshot threat)
+  {
+    id: "acteon-telegram-2",
+    platform: "telegram",
+    sender: {
+      name: "anon_user_8821",
+      handle: "@anon_user_8821",
+      avatarSeed: "?",
+      avatarColor: "#334155",
+      isKnownContact: false,
+      subtitleHint: "No bio · Joined this week",
+    },
+    messages: [
+      { body: "I have screenshots of you. You know what I mean." },
+      { body: "PayNow $300 in 12 hours or your whole class sees them tomorrow morning." },
+      { body: "I have your school list. Don't test me." },
+    ],
+    timestamp: "11:08 pm",
+    verdict: "scam",
+    pokemonSlug: "acteon",
+    redFlagsToTeach: [
+      "No proof of any actual screenshots — just vague threats",
+      "'I have your school list' is a bluff — scammers spam this to hundreds at once",
+      "Deadline + secrecy + payment demand = sextortion pattern",
+      "Empty profile + recent account = textbook throwaway",
+    ],
+    whyItsScamLesson:
+      "Even if this happened for real: do not reply, do not pay. Screenshot, block, tell a parent or teacher, call 1799. Replying once is the win they want — silence is what defeats them.",
+  },
+
+  // 5b. FANIR — TikTok comment → DM "free V-Bucks generator"
+  {
+    id: "fanir-tiktok-2",
+    platform: "instagram",
+    sender: {
+      name: "fortnite_vbucks_official",
+      handle: "@fortnite_vbucks_official",
+      avatarSeed: "F",
+      avatarColor: "#a855f7",
+      isKnownContact: false,
+      subtitleHint: "Instagram — fake 'official' in name, no verified tick",
+    },
+    messages: [
+      { body: "Hey bro saw your fortnite clip 🔥 wanna 5000 free V-Bucks?" },
+      { body: "Just enter your Epic login on this site, takes 30s:" },
+      {
+        body: "Link below ⬇️",
+        link: {
+          displayText: "vbucks-gen-sg.online",
+          actualUrl: "https://vbucks-gen-sg.online",
+        },
+      },
+    ],
+    timestamp: "Sat 11:24 pm",
+    verdict: "scam",
+    pokemonSlug: "fanir",
+    redFlagsToTeach: [
+      "Epic Games never runs V-Bucks giveaways through DMs",
+      "'Official' in the name with no verified tick is a tell",
+      "Any site asking for your game login that isn't the official store = account theft",
+      "Generators do not exist — full stop",
+    ],
+    whyItsScamLesson:
+      "If V-Bucks, Robux, Primogems, or any in-game currency comes from anywhere except the official in-game store, it's a scam. Period. The 'verification login' is just account theft with a coat of paint.",
+  },
+
+  // 6b. CIRCE — WhatsApp "SG HR" with brand-deal angle
+  {
+    id: "circe-whatsapp-2",
+    platform: "whatsapp",
+    sender: {
+      name: "Recruiter SG",
+      phone: "+65 8021 7748",
+      avatarSeed: "R",
+      avatarColor: "#f59e0b",
+      isKnownContact: false,
+      subtitleHint: "Unknown SG number — no verified business badge",
+    },
+    messages: [
+      {
+        body: "Hi! We're a SG marketing agency, saw your TikTok 👀 We pay $50 per branded TikTok repost, $300 sign-up bonus for first 24 hours.",
+      },
+      { body: "Reply YES and we send you the brief + bonus." },
+    ],
+    timestamp: "Wed 5:21 pm",
+    verdict: "scam",
+    pokemonSlug: "circe",
+    redFlagsToTeach: [
+      "No agency, no website link, no portfolio — just WhatsApp DMs",
+      "$50 per repost is 10–20x what real micro-creators earn",
+      "'Sign-up bonus in 24 hours' = urgency before you think",
+      "Real brand deals never start with a cold WhatsApp from a personal number",
+    ],
+    whyItsScamLesson:
+      "After 'YES' they ask for your bank info for the 'bonus,' then a 'security deposit' to unlock higher tiers. The bonus is bait. Real brand partnerships start with a company email and a contract — not a WhatsApp.",
+  },
+
+  // 7b. GLAUKULT — TikTok Shop seller pushing direct PayNow
+  {
+    id: "glaukult-tiktokshop-2",
+    platform: "instagram",
+    sender: {
+      name: "stanley_dropship_sg",
+      handle: "@stanley_dropship_sg",
+      avatarSeed: "S",
+      avatarColor: "#10b981",
+      isKnownContact: false,
+      subtitleHint: "TikTok Shop seller · 5 followers · No verified tick",
+    },
+    messages: [
+      { body: "Hey saw u like our Stanley listing! Got special bulk price for u — $35 for 30oz (retail $89)." },
+      {
+        body: "Pay direct PayNow lah, TikTok Shop charge me 18% commission. WhatsApp +65 8990 1287 for the QR.",
+      },
+      { body: "Only 5 sets left at this price 🏃‍♀️" },
+    ],
+    timestamp: "Yesterday 9:32 pm",
+    verdict: "scam",
+    pokemonSlug: "glaukult",
+    redFlagsToTeach: [
+      "Retail $89 — $35 is impossibly cheap for genuine stock",
+      "'Pay direct, skip platform commission' = avoiding buyer protection",
+      "5-follower seller account with no order history",
+      "Artificial scarcity ('5 sets left') stops you researching",
+    ],
+    whyItsScamLesson:
+      "TikTok Shop's commission is exactly what funds your buyer protection. Any seller pushing you OFF the platform is asking you to give up the only safety net you have.",
+  },
+
+  // 8b. PONSI — Telegram VIP crypto group invite from a "friend"
+  {
+    id: "ponsi-telegram-2",
+    platform: "telegram",
+    sender: {
+      name: "Wei Han 🚀",
+      handle: "@weihan_invest_sg",
+      avatarSeed: "W",
+      avatarColor: "#22c55e",
+      isKnownContact: false,
+      subtitleHint: "0 mutual contacts · Profile pic looks AI-generated",
+    },
+    messages: [
+      {
+        body: "Eh bro, my cousin's running this private crypto signal group. Members made 4x in 3 weeks 📈",
+      },
+      {
+        body: "He's onboarding 5 new ppl tonight only — min top-up $500. I can vouch for u, just dont tell others ah, group has a cap.",
+      },
+      { body: "Link: t.me/sg_alpha_signals_vip (real telegram link though group itself is fake)" },
+    ],
+    timestamp: "Mon 9:48 pm",
+    verdict: "scam",
+    pokemonSlug: "ponsi",
+    redFlagsToTeach: [
+      "Stranger pretending you've met — '0 mutual contacts' gives it away",
+      "'4x returns in 3 weeks' — no legit signal group claims that",
+      "Profile picture has the AI-generated 'too perfect' look",
+      "Secrecy push ('don't tell others') = isolation tactic",
+    ],
+    whyItsScamLesson:
+      "VIP crypto signal groups run the same script: 'first signal' makes money on paper, then a 'top-up' is required to claim it, then a 'tax fee', then nothing. Every step is engineered to extract more deposits.",
+  },
+
+  // 9b. PEITHO — Snapchat add → quick favour pivot (money mule recruitment variant)
+  {
+    id: "peitho-snapchat-2",
+    platform: "instagram",
+    sender: {
+      name: "jade.ng",
+      handle: "@jade.ng",
+      avatarSeed: "J",
+      avatarColor: "#ec4899",
+      isKnownContact: false,
+      subtitleHint: "Snap added you · 1 mutual story view from your school",
+    },
+    messages: [
+      {
+        body: "heyy saw u in @your.school's story 👀 you in sec 3 right? we have similar friends ahaha",
+      },
+      {
+        body: "(After 2 days of friendly chat about school, K-pop, exam stress):",
+      },
+      {
+        body: "omg random question — can u help me with something? My PayNow not working & I got a refund coming in tmr. Can the $400 go to ur acc first, then u PayNow me back? Don't tell ur parents la, they wun get it 💜",
+      },
+    ],
+    timestamp: "Now",
+    verdict: "scam",
+    pokemonSlug: "peitho",
+    redFlagsToTeach: [
+      "New 'friend' asking you to move money through your account = money mule recruitment",
+      "'Don't tell your parents' = isolation push, the Peitho signature",
+      "Real refunds go back to the original payer, never via a stranger's account",
+      "Fast friendship + small favour = the entry version of pig-butchering",
+    ],
+    whyItsScamLesson:
+      "This is how money mule recruitment starts — innocent-looking 'pass-through' favour that makes your bank account part of a scam network. You can be charged for it. Real friends never need your account as a middle stop.",
+  },
+
+  // ============================================================
   // LEGIT DECOYS — each one lives in the same territory as a Pokémon
   // so players must use the full pattern, not just brand matching.
   // ============================================================

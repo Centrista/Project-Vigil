@@ -24,6 +24,8 @@ export interface EncounterApi {
   scammerMessage: string;
   coachingFeedback: string | undefined;
   choices: EncounterChoice[];
+  // lesson surfaced on the terminal choice (hydrated with tokens)
+  endingNote: string | undefined;
   // hp values for visuals
   playerHp: number;     // 100 down to 0
   pokemonHp: number;    // 100 down to 0
@@ -85,6 +87,12 @@ export function useEncounter(tree: EncounterTree): EncounterApi {
   const playerHp = Math.max(0, MAX_HP - state.totalDanger * HP_PER_TURN);
   const pokemonHp = Math.max(0, MAX_HP - totalSafeCredit);
 
+  const endingNote = useMemo(() => {
+    if (!state.isFinished) return undefined;
+    const terminal = state.history.find((h) => h.endingNote);
+    return terminal?.endingNote ? hydrate(terminal.endingNote, state.tokens) : undefined;
+  }, [state.history, state.tokens, state.isFinished]);
+
   return {
     phase,
     state,
@@ -93,6 +101,7 @@ export function useEncounter(tree: EncounterTree): EncounterApi {
     scammerMessage,
     coachingFeedback: latest?.coachingFeedback,
     choices,
+    endingNote,
     playerHp,
     pokemonHp,
     beginBattle,

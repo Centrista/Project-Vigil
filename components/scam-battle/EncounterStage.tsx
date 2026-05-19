@@ -77,6 +77,7 @@ function EncounterStageInner({
       <EncounterResult
         entry={entry!}
         report={api.report}
+        endingNote={api.endingNote}
         onContinue={() => onComplete(entry!.slug, api.state.totalDanger)}
         onRetry={api.restart}
       />

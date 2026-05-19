@@ -13,7 +13,6 @@ export const NAV_LINKS = [
   { label: "Scam Pokédex", href: "/pokedex", description: "Browse the threat catalogue.", tone: "#8b5cf6" },
   { label: "Scam Simulator", href: "/scam-battle", description: "Spot the scam, battle the Pokémon.", tone: "#ff1744" },
   { label: "Trending", href: "/trending-scams", description: "Track active scam patterns.", tone: COLORS.red },
-  { label: "Guide", href: "/guide", description: "Learn every attack type.", tone: COLORS.cyan },
   { label: "Stories", href: "/stories", description: "Read real teen experiences.", tone: "#f59e0b" },
   { label: "Emergency", href: "/emergency", description: "What to do right now.", tone: COLORS.orange },
   { label: "Deepfake Tester", href: "/simulator", description: "Practice spotting AI fakes.", tone: COLORS.cyan },
@@ -25,7 +24,6 @@ export const PRIMARY_NAV_LINKS = [
   "/pokedex",
   "/scam-battle",
   "/trending-scams",
-  "/guide",
   "/stories",
   "/emergency",
   "/simulator",
@@ -36,7 +34,6 @@ export const FOOTER_GROUPS = [
     title: "Learn",
     links: [
       { label: "Trending Scams", href: "/trending-scams" },
-      { label: "AI Scam Guide", href: "/guide" },
       { label: "Deepfake Tester", href: "/simulator" },
       { label: "Scam Pokédex", href: "/pokedex" },
     ],
@@ -54,7 +51,6 @@ export const FOOTER_GROUPS = [
     title: "Act",
     links: [
       { label: "Emergency Guide", href: "/emergency" },
-      { label: "Submit a Scam", href: "/submit-scam" },
       { label: "Feedback", href: "/feedback" },
     ],
   },
@@ -70,9 +66,9 @@ export const HOME_DESTINATIONS = [
   },
   {
     n: "02",
-    label: "AI Scam Guide",
-    sub: "Every attack type, broken down into how it works and how to block it.",
-    href: "/guide",
+    label: "Scam Pokédex",
+    sub: "Catalogue of nine creatures, each one a scam pattern targeting teens right now.",
+    href: "/pokedex",
     accent: COLORS.cyan,
   },
   {
