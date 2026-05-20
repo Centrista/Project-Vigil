@@ -17,10 +17,10 @@ export default function ScamBattleRunPage() {
           {state.phase !== "summary" ? (
             <div className="flex items-center justify-between gap-3">
               <Link
-                href="/scam-battle"
+                href="/"
                 className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/45 hover:text-white/80"
               >
-                ← Exit Run
+                ← Exit
               </Link>
               <span className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/45">
                 Message {Math.min(state.index + 1, totalScenarios)} / {totalScenarios}
