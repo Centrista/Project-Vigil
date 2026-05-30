@@ -27,11 +27,6 @@ export default function SimulatorPage() {
             }
             description="Listen to 5 real voice samples from one person to learn their voice. Then we test you with 4 new clips — 2 real, 2 cloned by AI. Spot the fakes."
             align="center"
-            stats={[
-              { label: "Voice deepfake drill", tone: "danger" },
-              { label: "85% AI accuracy", tone: "warm" },
-              { label: "Mobile-friendly", tone: "info" },
-            ]}
             actions={
               <Link
                 href={SIMULATOR_URL}
@@ -45,13 +40,6 @@ export default function SimulatorPage() {
           />
 
           <div className="premium-panel premium-panel-danger overflow-hidden p-4 sm:p-5">
-            <div className="eyebrow-row mb-4">
-              <span className="premium-dot" />
-              <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/42">
-                Interactive Drill
-              </span>
-            </div>
-
             <div className="overflow-hidden rounded-[22px] border border-white/10 bg-[#0c1628]">
               <iframe
                 title="Project Vigil — Deepfake Voice Simulator"

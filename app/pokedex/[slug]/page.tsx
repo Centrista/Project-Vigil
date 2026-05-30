@@ -59,10 +59,6 @@ export default async function PokedexEntryPage({
             eyebrow="Standalone Card"
             title={entry.name}
             description={entry.scamLabel}
-            stats={[
-              { label: `#${String(entry.number).padStart(3, "0")}`, tone: "default" },
-              { label: entry.type, tone: "danger" },
-            ]}
             className="fade-up"
           />
         </div>

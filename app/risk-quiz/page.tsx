@@ -43,23 +43,9 @@ export default function RiskQuizPage() {
                 </svg>
               </Link>
             }
-            stats={[
-              { label: "Embedded pre-quiz", tone: "info" },
-              { label: "Anonymous", tone: "default" },
-              { label: "Post quiz follows", tone: "danger" },
-            ]}
           />
 
           <div className="premium-panel premium-panel-info mt-10 overflow-hidden p-4 sm:p-5">
-            <div className="eyebrow-row mb-4">
-              <div className="flex items-center gap-2">
-                <span className="premium-dot" />
-                <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/42">
-                  Embedded Pre-Quiz
-                </span>
-              </div>
-            </div>
-
             <p className="mb-4 max-w-2xl text-sm leading-relaxed text-white/46">
               If the embedded form feels cramped on your device, use the direct Google Forms link instead, then come back here to continue the quiz flow.
             </p>

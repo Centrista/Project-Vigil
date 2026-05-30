@@ -227,10 +227,6 @@ export default function GuidePage() {
               }
               description="Before it knows you. Six AI-powered scams broken down the way they actually hit you — the red flags, the psychology, the blind spots they exploit, and real cases. Not a textbook. A field manual."
               align="center"
-              stats={[
-                { label: "6 scam breakdowns", tone: "info" },
-                { label: "Real 2025–26 cases", tone: "danger" },
-              ]}
             />
 
             {/* Jump nav */}
@@ -255,12 +251,6 @@ export default function GuidePage() {
 
             {/* Cross-links to creatures with no written section yet */}
             <div className="mt-10 premium-panel premium-panel-soft p-6 sm:p-8">
-              <div className="eyebrow-row">
-                <span className="premium-dot" />
-                <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/55">
-                  More In The Pokédex
-                </span>
-              </div>
               <h2 className="section-title mb-2">Three more scams to know.</h2>
               <p className="section-copy mb-6 max-w-2xl text-sm">
                 These don&apos;t have a full written breakdown yet, but they&apos;re catalogued as

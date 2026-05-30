@@ -20,11 +20,6 @@ export default function FeedbackPage() {
             title="Feedback"
             description="Suggestions, bug reports, or anything else — we want to hear it. You can submit feedback directly below without leaving Project Vigil."
             align="center"
-            stats={[
-              { label: "Embedded submission", tone: "info" },
-              { label: "Fast product feedback", tone: "default" },
-              { label: "Opens in place", tone: "success" },
-            ]}
             actions={
               <Link
                 href={FEEDBACK_FORM_URL}
@@ -38,13 +33,6 @@ export default function FeedbackPage() {
           />
 
           <div className="premium-panel premium-panel-info overflow-hidden p-4 sm:p-5">
-            <div className="eyebrow-row mb-4">
-              <span className="premium-dot" />
-              <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/42">
-                Embedded Form
-              </span>
-            </div>
-
             <div className="overflow-hidden rounded-[22px] border border-white/10 bg-white">
               <iframe
                 title="Project Vigil Feedback Form"

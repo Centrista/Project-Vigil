@@ -39,12 +39,6 @@ export default function PokedexPage() {
               </>
             }
             description="Every card is powered by the PDF source, with exact scam copy, collectible styling, and a premium reveal flow built for exploration."
-            stats={[
-              { label: `${POKEDEX_ENTRY_COUNT} scams catalogued`, tone: "default" },
-              { label: "AI-Native", tone: "danger" },
-              { label: "AI-Transformed", tone: "warm" },
-              { label: "Traditional", tone: "info" },
-            ]}
             className="fade-up"
           />
         </div>

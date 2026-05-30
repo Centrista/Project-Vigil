@@ -28,11 +28,6 @@ export default function PostQuizPage() {
           }
           description="Use the embedded Google Form below to complete the post-quiz step and close out the full assessment flow."
           align="left"
-          stats={[
-            { label: "Embedded post-quiz", tone: "info" },
-            { label: "Follow-up step", tone: "default" },
-            { label: "Final checkpoint", tone: "danger" },
-          ]}
           actions={
             <Link
               href={POST_QUIZ_FORM_URL}
@@ -49,15 +44,6 @@ export default function PostQuizPage() {
         />
 
         <div className="premium-panel premium-panel-info mt-10 overflow-hidden p-4 sm:p-5">
-          <div className="eyebrow-row mb-4">
-            <div className="flex items-center gap-2">
-              <span className="premium-dot" />
-              <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/42">
-                Embedded Post Quiz
-              </span>
-            </div>
-          </div>
-
           <p className="mb-4 max-w-2xl text-sm leading-relaxed text-white/46">
             If the embedded form feels cramped on your device, use the direct Google Forms link instead and come back here to keep moving through Project Vigil.
           </p>

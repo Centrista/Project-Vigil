@@ -158,11 +158,6 @@ export default function EmergencyPage() {
               }
               description="Just been hit by an AI scam? No panic, no shame. Work down the first five minutes, call the right number, then find your scam below for the exact next steps."
               align="center"
-              stats={[
-                { label: "First 5 minutes", tone: "danger" },
-                { label: "24/7 SG hotlines", tone: "info" },
-                { label: "A playbook per scam", tone: "warm" },
-              ]}
             />
 
             {/* Reassurance bar */}
@@ -179,12 +174,6 @@ export default function EmergencyPage() {
 
             {/* First 5 minutes */}
             <div className="mb-14">
-              <div className="eyebrow-row justify-center">
-                <span className="premium-dot" />
-                <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/55">
-                  Do This First
-                </span>
-              </div>
               <h2 className="section-title mb-8 text-center">The first five minutes</h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                 {TRIAGE.map((step, i) => (
@@ -205,12 +194,6 @@ export default function EmergencyPage() {
 
             {/* Hotlines */}
             <div className="mb-14">
-              <div className="eyebrow-row justify-center">
-                <span className="premium-dot" />
-                <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/55">
-                  Who To Call · Singapore
-                </span>
-              </div>
               <h2 className="section-title mb-3 text-center">Tap a number to call</h2>
               <p className="section-copy mx-auto mb-8 max-w-2xl text-center text-sm">
                 All free, all reachable now. When money&apos;s involved, the bank line comes first —
@@ -224,12 +207,6 @@ export default function EmergencyPage() {
             </div>
 
             {/* Playbooks */}
-            <div className="eyebrow-row justify-center">
-              <span className="premium-dot" />
-              <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/55">
-                Find Your Scam
-              </span>
-            </div>
             <h2 className="section-title mb-6 text-center">Exact steps, by scam</h2>
 
             <nav className="mb-10 flex flex-wrap justify-center gap-2.5">

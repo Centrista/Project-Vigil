@@ -1,17 +1,7 @@
 import Link from "next/link";
 import ScamDemo from "@/components/ScamDemo";
 import ScrollReveal from "@/components/ScrollReveal";
-import { ALERTS } from "@/lib/alerts";
-import { POKEDEX_ENTRY_COUNT } from "@/lib/pokedex";
-import { HOME_DESTINATIONS, SCAM_TYPES } from "@/lib/constants";
-import { STORIES } from "@/lib/stories";
-
-const SIGNALS = [
-  { label: "Scam creatures", value: String(POKEDEX_ENTRY_COUNT), tone: "premium-chip premium-chip-info" },
-  { label: "Stories logged", value: String(STORIES.length), tone: "premium-chip premium-chip-purple" },
-  { label: "Active alerts", value: String(ALERTS.length || 0), tone: "premium-chip premium-chip-danger" },
-  { label: "Attack types", value: String(SCAM_TYPES.length), tone: "premium-chip premium-chip-amber" },
-];
+import { HOME_DESTINATIONS } from "@/lib/constants";
 
 export default function Home() {
   return (
@@ -56,24 +46,9 @@ export default function Home() {
                   Browse Trending Scams
                 </Link>
               </div>
-
-              <div className="hero-stats mt-8 fade-up fade-up-delay-3">
-                {SIGNALS.map((signal, i) => (
-                  <span key={signal.label} className={`${signal.tone} chip-enter chip-enter-delay-${i + 1 <= 4 ? i + 1 : 4}`}>
-                    {signal.value} {signal.label}
-                  </span>
-                ))}
-              </div>
             </div>
 
             <div className="premium-panel float-y p-6 sm:p-7">
-              <div className="eyebrow-row">
-                <span className="premium-dot" />
-                <span className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/56">
-                  Signal Brief
-                </span>
-              </div>
-
               <div className="space-y-4">
                 {[
                   {

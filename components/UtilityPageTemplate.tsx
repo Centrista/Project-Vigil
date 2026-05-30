@@ -38,13 +38,6 @@ export default function UtilityPageTemplate({
         />
 
         <div className={`${PREVIEW_CLASS[accentTone]} page-utility-panel mx-auto max-w-4xl`}>
-          <div className="eyebrow-row">
-            <span className="premium-dot" />
-            <span className="mono-label text-[11px] uppercase tracking-[0.24em] text-white/45">
-              Product Preview
-            </span>
-          </div>
-
           <h2 className="section-title mb-3 max-w-2xl">{previewTitle}</h2>
           <p className="section-copy max-w-2xl">{previewBody}</p>
 
