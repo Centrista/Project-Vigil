@@ -21,15 +21,15 @@ export default function PageIntro({
 
   return (
     <div className={`page-intro ${centered ? "page-intro-center" : ""} ${className}`.trim()}>
-      <div className={`hero-kicker ${centered ? "justify-center" : ""}`}>
+      <div className={`hero-kicker fade-up ${centered ? "justify-center" : ""}`}>
         {eyebrow}
       </div>
 
-      <h1 className={`hero-title ${centered ? "mx-auto" : ""}`}>{title}</h1>
-      <p className={`hero-copy ${centered ? "mx-auto" : ""}`}>{description}</p>
+      <h1 className={`hero-title fade-up fade-up-delay-1 ${centered ? "mx-auto" : ""}`}>{title}</h1>
+      <p className={`hero-copy fade-up fade-up-delay-2 ${centered ? "mx-auto" : ""}`}>{description}</p>
 
       {actions && (
-        <div className={`hero-support ${centered ? "justify-center" : ""}`}>
+        <div className={`hero-support fade-up fade-up-delay-3 ${centered ? "justify-center" : ""}`}>
           <div className={`hero-actions ${centered ? "justify-center" : ""}`}>{actions}</div>
         </div>
       )}

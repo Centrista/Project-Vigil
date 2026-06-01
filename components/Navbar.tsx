@@ -135,11 +135,6 @@ export default function Navbar() {
           style={{ backgroundColor: "rgba(9,16,33,0.96)", backdropFilter: "blur(18px)" }}
         >
           <div className="mx-auto max-w-7xl">
-            <div className="mb-4 px-1">
-              <p className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/48">
-                Primary Routes
-              </p>
-            </div>
             <div className="grid gap-2 sm:grid-cols-2">
               {PRIMARY_LINKS.map((link) => {
                 const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
@@ -147,27 +142,19 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`rounded-2xl border p-4 transition-all ${
+                    className={`rounded-2xl border px-4 py-3.5 text-sm font-semibold transition-all ${
                       isActive
-                        ? "border-[#ff1744]/24 bg-[#ff1744]/10"
-                        : "border-white/8 bg-white/[0.03] hover:border-white/18 hover:bg-white/[0.05]"
+                        ? "border-[#ff1744]/24 bg-[#ff1744]/10 text-white"
+                        : "border-white/8 bg-white/[0.03] text-white/80 hover:border-white/18 hover:bg-white/[0.05] hover:text-white"
                     }`}
                   >
-                    <div className="text-sm font-semibold text-white">{link.label}</div>
-                    <div className="mt-1 text-xs leading-relaxed text-white/58">
-                      {link.description}
-                    </div>
+                    {link.label}
                   </Link>
                 );
               })}
             </div>
 
-            <div className="mb-4 mt-5 px-1">
-              <p className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/48">
-                More Tools
-              </p>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-3">
+            <div className="mt-2 grid gap-2 sm:grid-cols-3">
               {SECONDARY_LINKS.map((link) => (
                 <Link
                   key={link.href}

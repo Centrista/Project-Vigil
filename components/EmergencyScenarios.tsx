@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 
 interface PokedexLink {
@@ -149,10 +150,14 @@ function ScenarioBlock({ scenario }: { scenario: Scenario }) {
   const accent = scenario.accent;
 
   return (
-    <div
-      className="overflow-hidden rounded-2xl border bg-black/20 transition-colors"
-      style={{
+    <motion.div
+      className="overflow-hidden rounded-2xl border bg-black/20"
+      animate={{
         borderColor: open ? `${accent}55` : `${accent}26`,
+        boxShadow: open ? `0 16px 40px -22px ${accent}aa` : "0 0 0 0 rgba(0,0,0,0)",
+      }}
+      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      style={{
         background: scenario.calm
           ? `linear-gradient(180deg, ${accent}14 0%, rgba(11,17,32,0.96) 60%)`
           : `linear-gradient(180deg, ${accent}0f 0%, rgba(11,17,32,0.96) 55%)`,
@@ -162,7 +167,7 @@ function ScenarioBlock({ scenario }: { scenario: Scenario }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6"
+        className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-white/[0.025] sm:px-6"
       >
         <span
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-2xl"
@@ -190,8 +195,17 @@ function ScenarioBlock({ scenario }: { scenario: Scenario }) {
         </svg>
       </button>
 
-      {open && (
-        <div className="fade-up px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            style={{ overflow: "hidden" }}
+          >
+            <div className="px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
           {scenario.lead && (
             <p className="mb-3 text-[15px] font-black leading-snug" style={{ color: accent }}>
               {scenario.lead}
@@ -230,9 +244,11 @@ function ScenarioBlock({ scenario }: { scenario: Scenario }) {
               </div>
             </div>
           )}
-        </div>
-      )}
-    </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
