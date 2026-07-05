@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { SCAMS } from "@/lib/scams";
 
@@ -126,19 +125,14 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
                     {risk.label.toUpperCase()}
                   </span>
                 </div>
-                <div className="relative h-[240px] w-full">
+                <div className="relative flex h-[240px] w-full items-center justify-center">
                   <div
                     className="absolute rounded-full"
                     style={{ inset: "10% 18%", background: risk.color, filter: "blur(42px)", opacity: 0.20 }}
                   />
-                  <Image
-                    src={scam.image}
-                    alt={scam.name}
-                    fill
-                    className="relative object-cover"
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    priority
-                  />
+                  <span className="relative text-[120px] leading-none" style={{ filter: "drop-shadow(0 6px 16px rgba(0,0,0,0.20))" }}>
+                    {scam.emoji}
+                  </span>
                 </div>
               </div>
 
@@ -162,7 +156,7 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
                 </p>
               </div>
 
-              {/* How to stay safe */}
+              {/* Tips (red flags / defence) */}
               <div
                 style={{
                   ...lightCard,
@@ -174,7 +168,7 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
                   className="mono-label mb-4 text-[10px] uppercase tracking-[0.18em]"
                   style={{ color: "rgba(7,16,43,0.38)" }}
                 >
-                  How to stay safe
+                  {scam.tipsLabel}
                 </div>
                 <ul className="flex flex-col gap-3">
                   {scam.tips.map((tip, i) => (
@@ -196,6 +190,28 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
                   ))}
                 </ul>
               </div>
+
+              {/* Kicker callout */}
+              {scam.kicker && (
+                <div
+                  style={{
+                    ...lightCard,
+                    border: `1px solid ${risk.color}28`,
+                    background: `linear-gradient(160deg, ${risk.color}12 0%, ${risk.color}06 100%)`,
+                    padding: "1.4rem 1.5rem",
+                  }}
+                >
+                  <div
+                    className="mono-label mb-2 text-[10px] uppercase tracking-[0.18em]"
+                    style={{ color: risk.color }}
+                  >
+                    {scam.kickerLabel}
+                  </div>
+                  <p className="text-[14px] font-semibold leading-relaxed" style={{ color: "rgba(7,16,43,0.82)" }}>
+                    {scam.kicker}
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Right column — stats */}
@@ -213,7 +229,7 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
                   className="mono-label mb-4 text-[10px] uppercase tracking-[0.18em]"
                   style={{ color: "rgba(7,16,43,0.38)" }}
                 >
-                  This week
+                  Status
                 </div>
                 <div className="flex flex-col gap-5">
                   <div>
@@ -221,21 +237,10 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
                       className="mono-label mb-0.5 text-[9px] uppercase tracking-widest"
                       style={{ color: "rgba(7,16,43,0.34)" }}
                     >
-                      Reports filed
+                      {scam.statusLabel}
                     </div>
-                    <div className="text-[30px] font-black leading-none" style={{ color: "#07102b" }}>
-                      {scam.reportsThisWeek.toLocaleString()}
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      className="mono-label mb-0.5 text-[9px] uppercase tracking-widest"
-                      style={{ color: "rgba(7,16,43,0.34)" }}
-                    >
-                      7-day change
-                    </div>
-                    <div className="text-[30px] font-black leading-none" style={{ color: risk.color }}>
-                      ↑{scam.reportsDelta}%
+                    <div className="text-[24px] font-black leading-tight" style={{ color: "#07102b" }}>
+                      {scam.statValue}
                     </div>
                   </div>
                   <div>
@@ -243,10 +248,21 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
                       className="mono-label mb-0.5 text-[9px] uppercase tracking-widest"
                       style={{ color: "rgba(7,16,43,0.34)" }}
                     >
-                      Last reported
+                      Context
                     </div>
-                    <div className="text-[16px] font-bold" style={{ color: "rgba(7,16,43,0.62)" }}>
-                      {scam.reportedAt}
+                    <div className="text-[14px] font-semibold leading-snug" style={{ color: "rgba(7,16,43,0.62)" }}>
+                      {scam.statCaption}
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      className="mono-label mb-0.5 text-[9px] uppercase tracking-widest"
+                      style={{ color: "rgba(7,16,43,0.34)" }}
+                    >
+                      Source
+                    </div>
+                    <div className="text-[12px] font-medium leading-snug" style={{ color: "rgba(7,16,43,0.52)" }}>
+                      {scam.source}
                     </div>
                   </div>
                 </div>
@@ -254,7 +270,7 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
 
               {/* Report CTA */}
               <a
-                href="https://reportfraud.ftc.gov"
+                href="https://www.scamshield.gov.sg/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block rounded-[14px] px-5 py-4 text-center text-sm font-bold transition-opacity hover:opacity-80"
@@ -264,7 +280,7 @@ export default async function ScamDetailPage({ params }: { params: Promise<{ id:
                   color: risk.color,
                 }}
               >
-                Report this scam →
+                Report to ScamShield →
               </a>
             </div>
           </div>

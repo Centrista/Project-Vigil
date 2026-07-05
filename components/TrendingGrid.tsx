@@ -66,13 +66,16 @@ export default function TrendingGrid() {
           Trending Scams
         </h1>
         <p className="mb-5 max-w-2xl text-base leading-relaxed text-white/64">
-          The AI attacks rising fastest right now — ranked by volume, filtered by risk. Click any card for the full breakdown.
+          Real scams hitting Singapore right now, sourced from SPF advisories and the Annual Scam and Cybercrime Brief 2025. Click any card for the full breakdown.
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div className="mb-3 flex flex-wrap gap-2">
           <span className="premium-chip premium-chip-danger chip-enter">{criticalCount} critical</span>
           <span className="premium-chip premium-chip-warm chip-enter chip-enter-delay-1">{spikingCount} spiking</span>
           <span className="premium-chip chip-enter chip-enter-delay-2">{SCAMS.length} tracked</span>
         </div>
+        <p className="mono-label text-[11px] text-white/38">
+          Last updated: 2 July 2026 · Sources: SPF, ScamShield
+        </p>
       </div>
 
       {/* ── FILTERS + SEARCH ── */}

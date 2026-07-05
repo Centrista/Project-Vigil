@@ -13,12 +13,27 @@ import type {
 function Avatar({
   seed,
   color,
+  image,
   size = 36,
 }: {
   seed?: string;
   color?: string;
+  image?: string;
   size?: number;
 }) {
+  if (image) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={image}
+        alt={seed ?? ""}
+        width={size}
+        height={size}
+        className="shrink-0 rounded-full object-cover"
+        style={{ width: size, height: size }}
+      />
+    );
+  }
   return (
     <div
       className="flex shrink-0 items-center justify-center rounded-full font-bold text-white"
@@ -115,6 +130,42 @@ function AttachmentBox({ label }: { label: string }) {
   );
 }
 
+function ImageBubble({
+  image,
+  variant,
+}: {
+  image: NonNullable<InboxMessage["image"]>;
+  variant: "incoming" | "outgoing";
+}) {
+  const isIncoming = variant === "incoming";
+  return (
+    <div
+      className={`mt-1 max-w-[78%] overflow-hidden rounded-2xl border border-white/10 bg-black/20 ${
+        isIncoming ? "rounded-tl-md" : "ml-auto rounded-tr-md"
+      }`}
+    >
+      <div className="relative">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={image.src}
+          alt={image.alt ?? "attached image"}
+          className="block max-h-[260px] w-full object-cover"
+        />
+        {image.aiTag ? (
+          <span className="mono-label absolute right-2 top-2 rounded-md bg-black/65 px-2 py-0.5 text-[8px] uppercase tracking-[0.16em] text-rose-300">
+            AI-Generated
+          </span>
+        ) : null}
+      </div>
+      {image.caption ? (
+        <p className="bg-white/[0.05] px-3 py-1.5 text-[11px] text-white/65">
+          {image.caption}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 function TextBubble({
   msg,
   variant,
@@ -134,19 +185,28 @@ function TextBubble({
     );
   }
   const isIncoming = variant === "incoming";
+
+  // Image-only message → render just the image bubble.
+  if (msg.image && !msg.body && !msg.link && !msg.attachmentLabel) {
+    return <ImageBubble image={msg.image} variant={variant} />;
+  }
+
   return (
-    <div
-      className={`max-w-[88%] rounded-2xl px-3 py-2 text-[13px] leading-relaxed ${
-        isIncoming
-          ? "rounded-tl-md bg-white/[0.08] text-white"
-          : "ml-auto rounded-tr-md text-white"
-      }`}
-      style={!isIncoming ? { background: accent } : undefined}
-    >
-      <p className="whitespace-pre-wrap">{msg.body}</p>
-      {msg.link ? <LinkCard displayText={msg.link.displayText} outgoing={!isIncoming} /> : null}
-      {msg.attachmentLabel ? <AttachmentBox label={msg.attachmentLabel} /> : null}
-    </div>
+    <>
+      <div
+        className={`max-w-[88%] rounded-2xl px-3 py-2 text-[13px] leading-relaxed ${
+          isIncoming
+            ? "rounded-tl-md bg-white/[0.08] text-white"
+            : "ml-auto rounded-tr-md text-white"
+        }`}
+        style={!isIncoming ? { background: accent } : undefined}
+      >
+        {msg.body ? <p className="whitespace-pre-wrap">{msg.body}</p> : null}
+        {msg.link ? <LinkCard displayText={msg.link.displayText} outgoing={!isIncoming} /> : null}
+        {msg.attachmentLabel ? <AttachmentBox label={msg.attachmentLabel} /> : null}
+      </div>
+      {msg.image ? <ImageBubble image={msg.image} variant={variant} /> : null}
+    </>
   );
 }
 
@@ -222,6 +282,7 @@ function ShellHeader({
       <Avatar
         seed={scenario.sender.avatarSeed ?? scenario.sender.name}
         color={scenario.sender.avatarColor}
+        image={scenario.sender.avatarImage}
       />
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1.5">
@@ -284,9 +345,18 @@ function ListingPreviewBlock({ listing }: { listing: ListingPreviewData }) {
   return (
     <div className="sb-listing">
       <div className="sb-listing-image">
-        <span className="sb-listing-emoji" aria-hidden="true">
-          {listing.productEmoji ?? "📦"}
-        </span>
+        {listing.productImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={listing.productImage}
+            alt={listing.productTitle}
+            className="sb-listing-photo"
+          />
+        ) : (
+          <span className="sb-listing-emoji" aria-hidden="true">
+            {listing.productEmoji ?? "📦"}
+          </span>
+        )}
         <span className="sb-listing-image-badge">PHOTO</span>
       </div>
       <div className="sb-listing-body">

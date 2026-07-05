@@ -20,24 +20,32 @@ export interface InboxSender {
   email?: string;           // displayed for Gmail
   avatarSeed?: string;      // initials / emoji to render the avatar
   avatarColor?: string;     // CSS color for the avatar tile
+  avatarImage?: string;     // /images/scam-shots/... — renders instead of the initial tile
   verified?: boolean;
   isKnownContact?: boolean; // legit known contact vs unsaved-number-using-display-name
   subtitleHint?: string;    // "online", "last seen 10:42 pm", carousell "Joined 3d ago"
 }
 
 export interface InboxMessage {
-  body: string;
+  body?: string;            // optional — a message can be image-only
   isOutgoing?: boolean;
   isVoiceNote?: boolean;
   voiceTranscript?: string;
   voiceDurationSec?: number;
   link?: { displayText: string; actualUrl: string };
   attachmentLabel?: string;   // describes a "photo" or "listing" attachment
+  image?: {                   // a real image shown inside the chat bubble
+    src: string;              // /images/scam-shots/...
+    caption?: string;         // small line under the image (e.g. "video call · 0:14")
+    aiTag?: boolean;          // show a subtle "AI-GENERATED" corner chip for teaching
+    alt?: string;             // a11y text
+  };
 }
 
 export interface ListingPreview {
   productTitle: string;
   productEmoji?: string;       // emoji stand-in for product image
+  productImage?: string;       // /images/scam-shots/... — real product photo (emoji is fallback)
   priceNow: string;
   priceMarket?: string;        // strikethrough "market" price for comparison
   sellerBadge?: string;        // e.g. "Joined 3 days ago · 0 reviews"

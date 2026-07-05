@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import type { ScamItem, ThreatLevel } from "@/lib/scams";
 
 export type { ScamItem, ThreatLevel };
@@ -89,8 +88,8 @@ export default function TrendingScamCard({ item, index }: { item: ScamItem; inde
           </span>
         </div>
 
-        {/* Image with glow */}
-        <div className="relative h-[138px] w-full">
+        {/* Emoji glyph with glow, in place of a stock photo */}
+        <div className="relative flex h-[138px] w-full items-center justify-center">
           <div
             className="absolute rounded-full"
             style={{
@@ -100,18 +99,19 @@ export default function TrendingScamCard({ item, index }: { item: ScamItem; inde
               opacity: 0.28,
             }}
           />
-          <Image
-            src={item.image}
-            alt={item.name}
-            fill
-            className="relative object-cover"
-            sizes="(max-width: 640px) calc(100vw - 1.5rem), (max-width: 1280px) calc(50vw - 2rem), calc(33vw - 1.5rem)"
-          />
+          <span className="relative text-[64px] leading-none" style={{ filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.18))" }}>
+            {item.emoji}
+          </span>
         </div>
       </div>
 
       {/* Body */}
       <div className="flex flex-1 flex-col px-4 pt-3 pb-4">
+        <div className="mb-1.5 flex items-center gap-1.5">
+          <span className="mono-label text-[9px] font-black" style={{ color: risk.color }}>
+            {item.statusLabel}
+          </span>
+        </div>
         <h3 className="mb-1.5 text-[14px] font-black leading-snug" style={{ color: "#07102b" }}>
           {item.name}
         </h3>
@@ -120,9 +120,7 @@ export default function TrendingScamCard({ item, index }: { item: ScamItem; inde
         </p>
         {/* Compact stats row */}
         <div className="mono-label text-[10px]" style={{ color: "rgba(7,16,43,0.42)" }}>
-          {item.reportsThisWeek.toLocaleString()} reports
-          <span className="mx-1.5 opacity-50">·</span>
-          <span style={{ color: risk.color }}>↑{item.reportsDelta}%</span>
+          <span style={{ color: risk.color }}>{item.statValue}</span>
           <span className="mx-1.5 opacity-50">·</span>
           {item.reportedAt}
         </div>

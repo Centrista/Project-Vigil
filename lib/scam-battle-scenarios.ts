@@ -63,8 +63,13 @@ export const INBOX_POOL: InboxScenario[] = [
     },
     messages: [
       {
-        body: "📹 Incoming video call... [tap to view]",
-        attachmentLabel: "WhatsApp video call screen — pixelated face, audio glitchy",
+        body: "📹 Video call screenshot — that's me bro, see?",
+        image: {
+          src: "/images/scam-shots/ai-videocall-01.jpg",
+          caption: "Video call · weak signal · 0:11",
+          aiTag: true,
+          alt: "Blurry video-call still of a young man",
+        },
       },
       {
         body: "Eh bro!! I'm in JB for the trip, lost my wallet. Connection super lousy here — PayNow me $420 ah? Send to +65 8455 7820, my colleague will bring cash to me. Quick lah, my battery dying.",
@@ -195,6 +200,7 @@ export const INBOX_POOL: InboxScenario[] = [
       phone: "+60 16 884 2207",
       avatarSeed: "H",
       avatarColor: "#f59e0b",
+      avatarImage: "/images/scam-shots/ai-face-03.jpg",
       isKnownContact: false,
       subtitleHint: "Telegram — Malaysian number",
     },
@@ -232,6 +238,7 @@ export const INBOX_POOL: InboxScenario[] = [
     listingPreview: {
       productTitle: "AirPods Pro 2 — Brand New Sealed",
       productEmoji: "🎧",
+      productImage: "/images/scam-shots/product-earbuds.jpg",
       priceNow: "$80",
       priceMarket: "$349",
       sellerBadge: "Joined 3 days ago · 0 reviews",
@@ -262,6 +269,7 @@ export const INBOX_POOL: InboxScenario[] = [
     redFlagsToTeach: [
       "AirPods Pro 2 retail $349 — $80 is impossible for legit new stock",
       "Account joined 3 days ago, zero real reviews",
+      "Listing photo is a generic stock image — not a real photo of the actual item",
       "Reviews are AI-template style — same emoji pattern, no specifics",
       "Pushes payment OUTSIDE Carousell's protection",
     ],
@@ -278,9 +286,10 @@ export const INBOX_POOL: InboxScenario[] = [
       handle: "@sgtrader_lambo",
       avatarSeed: "L",
       avatarColor: "#a855f7",
+      avatarImage: "/images/scam-shots/ai-face-01.jpg",
       verified: false,
       isKnownContact: false,
-      subtitleHint: "Bio: \"24, made my first 100k at 22\" · Profile pic: Lamborghini",
+      subtitleHint: "Bio: \"24, made my first 100k at 22\" · Profile pic looks AI-generated",
     },
     messages: [
       { body: "Yo bro you commented on my live earlier, I added you 🙏" },
@@ -296,7 +305,7 @@ export const INBOX_POOL: InboxScenario[] = [
       "'GUARANTEED' returns don't exist in any real investment",
       "30% weekly = a real fund would charge for that, not give it free",
       "'Slots close tonight' = artificial urgency",
-      "Lambo profile pic + young trader story = classic Ponsi avatar",
+      "AI-generated 'rich young trader' face + flashy story = classic Ponsi avatar",
     ],
     whyItsScamLesson:
       "If a returns offer uses the word 'guaranteed', it's a scam. Always. Real licensed investments are regulated by MAS — these never are.",
@@ -311,6 +320,7 @@ export const INBOX_POOL: InboxScenario[] = [
       handle: "@rachel_lim_19",
       avatarSeed: "R",
       avatarColor: "#ec4899",
+      avatarImage: "/images/scam-shots/ai-face-02.jpg",
       isKnownContact: false,
       subtitleHint: "3 mutual followers from HCI · Active now",
     },
@@ -926,6 +936,88 @@ export const INBOX_POOL: InboxScenario[] = [
       "Context matches your actual class (3A1)",
       "Real Telegram invite link (t.me/+...) — not a redirect or bit.ly",
       "No money ask, no 'easy task' job offer",
+    ],
+  },
+
+  // ============================================================
+  // AI-IMAGE SCENARIOS — fabricated visual "proof" + a legit photo
+  // ============================================================
+
+  // 3c. DOLON — AI-fabricated "breaking news" image + phishing link
+  {
+    id: "dolon-fake-news-1",
+    platform: "telegram",
+    sender: {
+      name: "SG News Alert 🚨",
+      handle: "@sg_breaking_alert",
+      avatarSeed: "N",
+      avatarColor: "#ef4444",
+      isKnownContact: false,
+      subtitleHint: "Channel · 12k subscribers · forwarded to you",
+    },
+    messages: [
+      {
+        body: "🚨 BREAKING: Major SG bank hit this morning — accounts being drained. Photo from the scene 👇",
+        image: {
+          src: "/images/scam-shots/ai-news-01.jpg",
+          caption: "Forwarded · \"live from CBD\"",
+          aiTag: true,
+          alt: "Dramatic AI-generated image of an exploding city street",
+        },
+      },
+      {
+        body: "Protect your account NOW — verify your details before 6pm or your funds get frozen:",
+        link: {
+          displayText: "dbs-secure-alert.sg/verify",
+          actualUrl: "https://dbs-secure-alert.sg/verify",
+        },
+      },
+    ],
+    timestamp: "8:47 am",
+    verdict: "scam",
+    pokemonSlug: "dolon",
+    redFlagsToTeach: [
+      "The 'news photo' is AI-generated — cinematic, no real source or agency",
+      "Real banks and news outlets don't break stories via a random Telegram channel",
+      "URL is dbs-secure-alert.sg — not the real dbs.com.sg",
+      "Fear + a countdown ('before 6pm') is engineered to rush you past thinking",
+    ],
+    whyItsScamLesson:
+      "AI can fabricate a dramatic 'news' image in seconds to make a fake crisis feel real. Never act on a shocking forwarded photo — check a real news site, and open your banking app directly, never through a link in a message.",
+  },
+
+  // L9. LEGIT — a saved friend shares a genuine (real) photo
+  {
+    id: "legit-friend-photo",
+    platform: "whatsapp",
+    sender: {
+      name: "Marcus 🏀",
+      phone: "+65 9388 1042",
+      avatarSeed: "M",
+      avatarColor: "#22c55e",
+      isKnownContact: true,
+      subtitleHint: "Saved contact · last seen today",
+    },
+    messages: [
+      { body: "ay the team photo from training just now 🔥" },
+      {
+        image: {
+          src: "/images/scam-shots/real-photo-01.jpg",
+          caption: "IMG_2048.jpg",
+          alt: "A real photo of a smiling friend",
+        },
+      },
+      { body: "send to the class group? 😄" },
+    ],
+    timestamp: "Today 6:12 pm",
+    verdict: "legit",
+    whyItsLegitLesson:
+      "A photo proves nothing on its own — real messages have photos too. This is a saved contact, normal context (training you actually went to), no money ask, no link, no urgency. Judge the request, not the picture.",
+    redFlagsToTeach: [
+      "Saved contact you actually know, +65 number",
+      "Genuine photo + normal context — no money, no link, no urgency",
+      "Having an image does NOT make a message a scam (or safe)",
+      "No secrecy push, no 'verify', no deadline",
     ],
   },
 ];
