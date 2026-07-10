@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import CursorGlow from "@/components/CursorGlow";
 import PageTransitionShell from "@/components/PageTransitionShell";
+import VigilGuide from "@/components/vigil-guide/VigilGuide";
 
 export const metadata: Metadata = {
   title: "Project Vigil — AI Scam Defense for Teens",
@@ -25,6 +26,7 @@ export default function RootLayout({
           <PageTransitionShell>{children}</PageTransitionShell>
         </main>
         <Footer />
+        <VigilGuide />
         <CursorGlow />
         <Analytics />
       </body>

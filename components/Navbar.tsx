@@ -3,11 +3,15 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { NAV_LINKS, PRIMARY_NAV_LINKS } from "@/lib/constants";
+import { LEARNING_PATH, NAV_LINKS, PRIMARY_NAV_LINKS } from "@/lib/constants";
 
 const PRIMARY_LINKS = NAV_LINKS.filter((link) =>
   PRIMARY_NAV_LINKS.includes(link.href as (typeof PRIMARY_NAV_LINKS)[number]),
 );
+
+const PATH_STEP_BY_HREF = Object.fromEntries(
+  LEARNING_PATH.map((step) => [step.href, step.step]),
+) as Record<string, number>;
 
 const SECONDARY_LINKS = NAV_LINKS.filter(
   (link) => !PRIMARY_NAV_LINKS.includes(link.href as (typeof PRIMARY_NAV_LINKS)[number]),
@@ -135,23 +139,40 @@ export default function Navbar() {
           style={{ backgroundColor: "rgba(9,16,33,0.96)", backdropFilter: "blur(18px)" }}
         >
           <div className="mx-auto max-w-7xl">
+            <p className="mono-label mb-3 px-1 text-[10px] uppercase tracking-[0.24em] text-white/40">
+              Suggested order — start at 01
+            </p>
             <div className="grid gap-2 sm:grid-cols-2">
-              {PRIMARY_LINKS.map((link) => {
-                const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`rounded-2xl border px-4 py-3.5 text-sm font-semibold transition-all ${
-                      isActive
-                        ? "border-[#ff1744]/24 bg-[#ff1744]/10 text-white"
-                        : "border-white/8 bg-white/[0.03] text-white/80 hover:border-white/18 hover:bg-white/[0.05] hover:text-white"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
+              {[...PRIMARY_LINKS]
+                .sort(
+                  (a, b) =>
+                    (PATH_STEP_BY_HREF[a.href] ?? 99) - (PATH_STEP_BY_HREF[b.href] ?? 99),
+                )
+                .map((link) => {
+                  const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+                  const step = PATH_STEP_BY_HREF[link.href];
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`flex items-center gap-3 rounded-2xl border px-4 py-3.5 text-sm font-semibold transition-all ${
+                        isActive
+                          ? "border-[#ff1744]/24 bg-[#ff1744]/10 text-white"
+                          : "border-white/8 bg-white/[0.03] text-white/80 hover:border-white/18 hover:bg-white/[0.05] hover:text-white"
+                      }`}
+                    >
+                      {step ? (
+                        <span
+                          className="mono-label text-[10px] font-black tracking-[0.14em]"
+                          style={{ color: link.tone }}
+                        >
+                          {String(step).padStart(2, "0")}
+                        </span>
+                      ) : null}
+                      {link.label}
+                    </Link>
+                  );
+                })}
             </div>
 
             <div className="mt-2 grid gap-2 sm:grid-cols-3">

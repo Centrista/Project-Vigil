@@ -40,6 +40,9 @@ const HP_PER_TURN = 25;
 
 export function useEncounter(tree: EncounterTree): EncounterApi {
   const [phase, setPhase] = useState<EncounterPhase>("intro");
+  // startEncounter() picks randomly, so this must only ever run on the client.
+  // Guaranteed by the run page, which renders a skeleton until useDrillRun is
+  // ready — an encounter can therefore never appear in prerendered HTML.
   const [state, setState] = useState<EncounterState>(() => startEncounter(tree));
   const [report, setReport] = useState<EncounterReport | null>(null);
 

@@ -198,4 +198,34 @@ export const SCAMS: ScamItem[] = [
     ],
     source: "SPF Annual Scam and Cybercrime Brief 2025",
   },
+  {
+    id: "ai-disability-begging-videos",
+    name: "AI \"Disabled Creators\" Begging for Your Money",
+    emoji: "🎥",
+    summary:
+      "A creator with Down syndrome films herself making a crochet bag. She thanks you for the support. She asks you to buy one, or just donate. She does not exist. AI-generated videos of disabled people — and of elderly and Black creators — are flooding YouTube Shorts, TikTok and Instagram, engineered to convert your sympathy into a sale or a transfer. The products are usually stolen from real disabled artisans, then drop-shipped from Shein. The faces are often deepfaked onto footage taken from real creators' accounts.",
+    rank: 8,
+    riskLevel: "high",
+    category: "ai-native",
+    categoryLabel: "AI-Native",
+    statusLabel: "🔥 Spiking Now",
+    isSpiking: true,
+    isTop: false,
+    statValue: "30+ fake accounts · 130,000 followers on one",
+    statCaption: "Across Instagram, YouTube and TikTok",
+    reportedAt: "18 Jun 2026",
+    tipsLabel: "Red flags",
+    tips: [
+      "The face is soft, smeared or subtly melting at the edges — especially around the hands, teeth and the seam where the jaw meets the neck.",
+      "The account grew to six figures in weeks. Real disability advocates take years — one real advocate built 24,000 followers over years while an AI account passed 130,000 in months.",
+      "Every video ends with a link. A shop, a donation page, a \"support my work\" button.",
+      "The same handicraft appears on three different \"creators'\" accounts — the product photo was lifted from a real artisan and the faces were swapped.",
+      "The charity named is real, but the account has no connection to it. One AI account falsely claimed to fundraise for the National Down Syndrome Society.",
+    ],
+    kickerLabel: "The kicker",
+    kicker:
+      "These videos crowd out the real disabled entrepreneurs they're stealing from. The money you meant for them goes to a dropshipper — and the feed learns to show you more fakes.",
+    source:
+      "CBS News Confirmed, 6 May 2025 · AFP / France 24, 18 June 2026 · Instagram opened an investigation into AI profiles impersonating disabled people, Feb 2026",
+  },
 ];

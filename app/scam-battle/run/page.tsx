@@ -8,7 +8,30 @@ import { useDrillRun } from "@/components/scam-battle/useDrillRun";
 
 export default function ScamBattleRunPage() {
   const run = useDrillRun();
-  const { state, currentScenario, submitVerdict, dismissReveal, completeEncounter, skipEncounter, restart, totalScenarios } = run;
+  const { state, isReady, currentScenario, submitVerdict, dismissReveal, completeEncounter, skipEncounter, restart, totalScenarios } = run;
+
+  // The run is shuffled with Math.random on the client. Until it exists, render
+  // a fixed skeleton so the prerendered HTML and the first client render agree.
+  if (!isReady) {
+    return (
+      <div className="w-full overflow-x-hidden">
+        <div className="page-section">
+          <div className="page-frame page-frame-narrow pt-6">
+            <div className="sb-run-skeleton" aria-live="polite" aria-busy="true">
+              <span className="mono-label text-[11px] uppercase tracking-[0.22em] text-white/45">
+                Loading your inbox…
+              </span>
+              <div className="sb-run-skeleton-bars" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full overflow-x-hidden">

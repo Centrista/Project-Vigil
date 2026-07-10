@@ -1,3 +1,5 @@
+import { POKEDEX_ENTRY_COUNT } from "@/lib/pokedex";
+
 export const COLORS = {
   navy: "#0a0e27",
   card: "#1a1f2e",
@@ -11,7 +13,7 @@ export const COLORS = {
 export const NAV_LINKS = [
   { label: "Pre & Post Quiz", href: "/risk-quiz", description: "Complete the quiz flow.", tone: COLORS.red },
   { label: "Scam Pokédex", href: "/pokedex", description: "Browse the threat catalogue.", tone: "#8b5cf6" },
-  { label: "Scam Simulator", href: "/scam-battle", description: "Spot the scam, battle the Pokémon.", tone: "#ff1744" },
+  { label: "Scam Battle", href: "/scam-battle", description: "Spot the scam, battle the Pokémon.", tone: "#ff1744" },
   { label: "Trending", href: "/trending-scams", description: "Track active scam patterns.", tone: COLORS.red },
   { label: "Guide", href: "/guide", description: "Educational Guide.", tone: COLORS.cyan },
   { label: "Stories", href: "/stories", description: "Read real teen experiences.", tone: "#f59e0b" },
@@ -43,7 +45,7 @@ export const FOOTER_GROUPS = [
   {
     title: "Practice",
     links: [
-      { label: "Scam Simulator", href: "/scam-battle" },
+      { label: "Scam Battle", href: "/scam-battle" },
       { label: "Pre Quiz", href: "/risk-quiz" },
       { label: "Post Quiz", href: "/risk-quiz/post-quiz" },
       { label: "Real Stories", href: "/stories" },
@@ -69,7 +71,7 @@ export const HOME_DESTINATIONS = [
   {
     n: "02",
     label: "Scam Pokédex",
-    sub: "Catalogue of nine creatures, each one a scam pattern targeting teens right now.",
+    sub: `Catalogue of ${POKEDEX_ENTRY_COUNT} creatures, each one a scam pattern targeting teens right now.`,
     href: "/pokedex",
     accent: COLORS.cyan,
   },
@@ -89,9 +91,9 @@ export const HOME_DESTINATIONS = [
   },
   {
     n: "05",
-    label: "Scam Alerts",
-    sub: "Stay current on the newest attack patterns showing up right now.",
-    href: "/trending-scams",
+    label: "Educational Guide",
+    sub: "Understand how each scam actually works, step by step.",
+    href: "/guide",
     accent: "#fb7185",
   },
   {
@@ -101,6 +103,29 @@ export const HOME_DESTINATIONS = [
     href: "/emergency",
     accent: "#ff6d00",
   },
+  {
+    n: "07",
+    label: "Deepfake Tester",
+    sub: "Ten photos. Half are AI. Find out how good you really are.",
+    href: "/simulator",
+    accent: "#a855f7",
+  },
+] as const;
+
+/**
+ * The suggested order through the site — rendered as numbered steps in the
+ * mobile menu and surfaced by the Vigil Guide widget's "Where do I start?".
+ * Purely presentational; PRIMARY_NAV_LINKS stays the nav's source of truth.
+ */
+export const LEARNING_PATH = [
+  { step: 1, href: "/trending-scams", label: "Trending Scams", why: "See what's attacking teens right now." },
+  { step: 2, href: "/pokedex", label: "Scam Pokédex", why: "Meet the creature behind each scam pattern." },
+  { step: 3, href: "/guide", label: "Educational Guide", why: "Learn how each one actually works." },
+  { step: 4, href: "/simulator", label: "Deepfake Tester", why: "Test your eye against AI-generated faces." },
+  { step: 5, href: "/scam-battle", label: "Scam Battle", why: "Survive a scam inbox, one verdict at a time." },
+  { step: 6, href: "/risk-quiz", label: "Pre & Post Quiz", why: "Measure what you've actually learned." },
+  { step: 7, href: "/stories", label: "Real Stories", why: "Read what happened when people missed the signs." },
+  { step: 8, href: "/emergency", label: "Emergency", why: "Know the moves before you ever need them." },
 ] as const;
 
 export const SCAM_TYPES = [

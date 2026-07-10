@@ -2,8 +2,8 @@ import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 
 export const metadata = {
-  title: "Deepfake Voice Simulator — Project Vigil",
-  description: "Can you tell when AI is faking a voice? Train your ear on real samples, then test yourself against AI clones.",
+  title: "Deepfake Image Tester — Project Vigil",
+  description: "Ten photos. Half are real people. Half never existed. Can you tell the difference?",
 };
 
 // Resolve simulator URL:
@@ -18,14 +18,14 @@ export default function SimulatorPage() {
       <section className="page-section">
         <div className="page-frame page-frame-narrow">
           <PageIntro
-            eyebrow="Deepfake Voice Simulator"
+            eyebrow="Deepfake Image Tester"
             title={
               <>
-                Can you tell when AI is{" "}
-                <span className="gradient-text-red">faking a voice?</span>
+                Can you spot an{" "}
+                <span className="gradient-text-red">AI-generated face?</span>
               </>
             }
-            description="Listen to 5 real voice samples from one person to learn their voice. Then we test you with 4 new clips — 2 real, 2 cloned by AI. Spot the fakes."
+            description="We'll show you 10 photos — half real, half AI-generated. For each one, decide: real, or fake? Most people score close to a coin flip."
             align="center"
             actions={
               <Link
@@ -42,7 +42,7 @@ export default function SimulatorPage() {
           <div className="premium-panel premium-panel-danger overflow-hidden p-4 sm:p-5">
             <div className="overflow-hidden rounded-[22px] border border-white/10 bg-[#0c1628]">
               <iframe
-                title="Project Vigil — Deepfake Voice Simulator"
+                title="Project Vigil — Deepfake Image Tester"
                 src={SIMULATOR_URL}
                 className="block w-full"
                 style={{ minHeight: "920px", border: 0, borderRadius: "22px", background: "#0c1628" }}
@@ -54,7 +54,7 @@ export default function SimulatorPage() {
             </div>
 
             <p className="mono-label mt-4 text-center text-[10px] uppercase tracking-[0.22em] text-white/35">
-              Runs in your browser. Nothing is recorded.
+              Voice cloning test coming soon. Runs in your browser. Nothing is recorded.
             </p>
           </div>
         </div>

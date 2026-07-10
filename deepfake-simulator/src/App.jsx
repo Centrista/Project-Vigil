@@ -50,7 +50,7 @@ const VIGIL_URL = 'https://projectvigil.vercel.app'
 const SAMPLES = { voice: voiceSamples, image: imageSamples }
 
 export default function App() {
-  const [mode,  setMode]  = useState('voice')         // 'voice' | 'image'
+  const [mode,  setMode]  = useState('image')         // 'voice' | 'image' — voice hidden until clips exist
   const [phase, setPhase] = useState('intro')         // 'intro' | 'training' | 'test' | 'results'
   const [score, setScore] = useState(0)
   const [shuffledTests, setShuffledTests] = useState([])

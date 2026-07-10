@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   buildRun,
   evaluateVerdict,
@@ -29,6 +29,8 @@ export interface DrillRunState {
 
 export interface DrillRunApi {
   state: DrillRunState;
+  /** False until the randomised run has been built on the client. */
+  isReady: boolean;
   currentScenario: InboxScenario | null;
   submitVerdict: (v: Verdict) => void;
   dismissReveal: () => void;
@@ -40,22 +42,33 @@ export interface DrillRunApi {
 
 const RUN_LENGTH = 8;
 
+/**
+ * buildRun() shuffles with Math.random, so it must never run while the server
+ * prerenders this page — the build-time shuffle and the browser's shuffle would
+ * disagree and hydration would tear. Start empty, fill in on the client.
+ */
+const EMPTY_STATE: DrillRunState = {
+  scenarios: [],
+  index: 0,
+  phase: "viewing",
+  lastOutcome: null,
+  correctCount: 0,
+  caughtPokemon: [],
+  encounterScores: [],
+  missedScams: [],
+};
+
 function buildInitial(): DrillRunState {
   const { scenarios } = buildRun(INBOX_POOL, RUN_LENGTH);
-  return {
-    scenarios,
-    index: 0,
-    phase: "viewing",
-    lastOutcome: null,
-    correctCount: 0,
-    caughtPokemon: [],
-    encounterScores: [],
-    missedScams: [],
-  };
+  return { ...EMPTY_STATE, scenarios };
 }
 
 export function useDrillRun(): DrillRunApi {
-  const [state, setState] = useState<DrillRunState>(() => buildInitial());
+  const [state, setState] = useState<DrillRunState>(EMPTY_STATE);
+
+  useEffect(() => {
+    setState(buildInitial());
+  }, []);
 
   const currentScenario = useMemo(
     () => state.scenarios[state.index] ?? null,
@@ -86,6 +99,7 @@ export function useDrillRun(): DrillRunApi {
 
   const dismissReveal = useCallback(() => {
     setState((prev) => {
+      if (prev.scenarios.length === 0) return prev;
       if (prev.phase !== "verdict") return prev;
       // If the player correctly identified a scam, trigger the encounter.
       if (prev.lastOutcome?.kind === "scam-caught") {
@@ -108,6 +122,7 @@ export function useDrillRun(): DrillRunApi {
   const completeEncounter = useCallback(
     (slug: string, totalDanger: number) => {
       setState((prev) => {
+        if (prev.scenarios.length === 0) return prev;
         const nextIndex = prev.index + 1;
         const caught = prev.caughtPokemon.includes(slug)
           ? prev.caughtPokemon
@@ -137,6 +152,7 @@ export function useDrillRun(): DrillRunApi {
 
   const skipEncounter = useCallback(() => {
     setState((prev) => {
+      if (prev.scenarios.length === 0) return prev;
       const nextIndex = prev.index + 1;
       if (nextIndex >= prev.scenarios.length) {
         return { ...prev, phase: "summary", lastOutcome: null };
@@ -156,6 +172,7 @@ export function useDrillRun(): DrillRunApi {
 
   return {
     state,
+    isReady: state.scenarios.length > 0,
     currentScenario,
     submitVerdict,
     dismissReveal,
