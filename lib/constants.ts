@@ -110,6 +110,13 @@ export const HOME_DESTINATIONS = [
     href: "/simulator",
     accent: COLORS.red,
   },
+  {
+    n: "08",
+    label: "Scam Battle",
+    sub: "Survive a scam inbox — spot it, then battle the creature behind it.",
+    href: "/scam-battle",
+    accent: COLORS.red,
+  },
 ] as const;
 
 /**

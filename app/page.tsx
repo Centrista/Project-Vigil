@@ -2,6 +2,28 @@ import Link from "next/link";
 import ScamDemo from "@/components/ScamDemo";
 import ScrollReveal from "@/components/ScrollReveal";
 import { HOME_DESTINATIONS } from "@/lib/constants";
+import { SCAMS } from "@/lib/scams";
+
+const RISK_COLOR = {
+  critical: "#ff1744",
+  high: "#ff6d00",
+  medium: "#0099cc",
+} as const;
+
+const TOP_THREATS = [...SCAMS].sort((a, b) => a.rank - b.rank).slice(0, 3);
+
+const DESTINATION_CLUSTERS = [
+  { title: "Learn", hrefs: ["/trending-scams", "/pokedex", "/guide"] },
+  { title: "Practice", hrefs: ["/risk-quiz", "/simulator", "/scam-battle"] },
+  { title: "Act", hrefs: ["/stories", "/emergency"] },
+].map((cluster) => ({
+  ...cluster,
+  items: cluster.hrefs
+    .map((href) => HOME_DESTINATIONS.find((d) => d.href === href))
+    .filter((d): d is (typeof HOME_DESTINATIONS)[number] => Boolean(d)),
+}));
+
+const POKEDEX_PREVIEW = ["passal", "akmon", "dolon", "fanir", "peitho"];
 
 export default function Home() {
   return (
@@ -35,7 +57,7 @@ export default function Home() {
 
               <div className="hero-actions mt-8 fade-up fade-up-delay-3">
                 <Link href="/risk-quiz" className="btn-red spring-btn px-8 py-4 text-base rounded-2xl">
-                  Test My AI Scam IQ
+                  Take the 2-minute quiz
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0-5 5m5-5H6" />
                   </svg>
@@ -47,40 +69,30 @@ export default function Home() {
             </div>
 
             <div className="premium-panel p-6 sm:p-7">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <span className="mono-label flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/50">
+                  <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[#ff1744]" />
+                  Live threat board
+                </span>
+                <Link href="/trending-scams" className="text-xs font-semibold text-white/45 transition-colors hover:text-white/80">
+                  See all →
+                </Link>
+              </div>
               <div className="space-y-4">
-                {[
-                  {
-                    title: "Trending scams",
-                    body: "Track the threats rising right now, filter by risk, and spot sudden spikes before they normalize.",
-                    href: "/trending-scams",
-                    accent: "#ff1744",
-                  },
-                  {
-                    title: "Battle the playbook",
-                    body: "Spot the scam, then fight the Pokémon behind it. Every choice teaches the real-world move.",
-                    href: "/scam-battle",
-                    accent: "#00d4ff",
-                  },
-                  {
-                    title: "Move fast in a crisis",
-                    body: "If something feels off, jump to the response path instead of second-guessing your instincts.",
-                    href: "/emergency",
-                    accent: "#ff6d00",
-                  },
-                ].map((item) => (
-                  <Link key={item.href} href={item.href} className="card-rail-link group">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="mono-label mb-2 text-[11px] uppercase tracking-[0.22em]" style={{ color: item.accent }}>
-                          Recommended
-                        </div>
-                        <h2 className="text-xl font-black text-white">{item.title}</h2>
+                {TOP_THREATS.map((scam) => (
+                  <Link key={scam.id} href={`/trending-scams/${scam.id}`} className="card-rail-link group">
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl leading-none" aria-hidden="true">{scam.emoji}</span>
+                      <div className="min-w-0">
+                        <h2 className="text-base font-black leading-snug text-white">{scam.name}</h2>
+                        <p className="mono-label mt-1.5 text-[11px] tracking-[0.06em]" style={{ color: RISK_COLOR[scam.riskLevel] }}>
+                          {scam.statValue}
+                        </p>
+                        <p className="mt-1 text-[11px] text-white/40">
+                          {scam.statusLabel} · {scam.reportedAt}
+                        </p>
                       </div>
-                      <svg className="mt-1 h-4 w-4 text-white/24 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-white/55" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
                     </div>
-                    <p className="text-sm leading-relaxed text-white/64">{item.body}</p>
                   </Link>
                 ))}
               </div>
@@ -89,39 +101,75 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="page-frame py-2">
+        <ScrollReveal>
+          <Link
+            href="/pokedex"
+            className="group flex flex-col items-start gap-4 rounded-[var(--radius-panel)] border border-white/8 bg-white/[0.02] px-6 py-5 transition-colors hover:border-white/16 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div className="flex items-center gap-5">
+              <div className="flex shrink-0">
+                {POKEDEX_PREVIEW.map((slug, i) => (
+                  <img
+                    key={slug}
+                    src={`/images/pokedex/${slug}.jpg`}
+                    alt=""
+                    loading="lazy"
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 rounded-2xl border-2 border-[#0c1628] object-cover"
+                    style={{ marginLeft: i === 0 ? 0 : -14, transform: `rotate(${(i - 2) * 2.5}deg)` }}
+                  />
+                ))}
+              </div>
+              <p className="text-sm leading-relaxed text-white/70 sm:text-base">
+                Nine scam patterns, catalogued as creatures.{" "}
+                <span className="font-bold text-white">Meet the Pokédex.</span>
+              </p>
+            </div>
+            <span className="text-sm font-semibold text-white/45 transition-colors group-hover:text-white/85">
+              Open the Pokédex →
+            </span>
+          </Link>
+        </ScrollReveal>
+      </section>
+
       <section className="page-section">
         <div className="page-frame">
           <ScrollReveal>
           <div className="warm-panel overflow-hidden">
-            <div className="grid gap-6 border-b border-[rgba(255,210,100,0.14)] px-6 py-6 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-              <div>
-                <div className="hero-kicker mb-4" style={{ color: "#e8c96a" }}>Choose your path</div>
-                <h2 className="section-title mb-3 max-w-sm blur-reveal">Start where you need clarity most.</h2>
-                <p className="section-copy max-w-md blur-reveal blur-reveal-delay-1">
-                  Learn the attacks, test yourself, scan current threats, or move straight into response mode.
+            <div className="border-b border-[rgba(255,210,100,0.14)] px-6 py-6 sm:px-8">
+              <div className="mb-7 max-w-xl">
+                <p className="mono-label mb-3 text-[11px] uppercase tracking-[0.22em]" style={{ color: "#e8c96a" }}>
+                  Choose your path
                 </p>
+                <h2 className="section-title mb-3 blur-reveal">Start anywhere. This is the order we&apos;d go in.</h2>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {HOME_DESTINATIONS.map((item, index) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="card-rail-link-warm group entrance-stagger"
-                    style={{ "--stagger-delay": `${index * 90}ms` } as React.CSSProperties}
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="mono-label text-xs font-black" style={{ color: item.accent }}>
-                        {item.n}
-                      </span>
-                      <svg className="h-4 w-4 text-white/18 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-white/45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+              <div className="grid gap-8 md:grid-cols-3">
+                {DESTINATION_CLUSTERS.map((cluster) => (
+                  <div key={cluster.title}>
+                    <p className="mb-3 border-b border-white/8 pb-2 text-sm font-bold uppercase tracking-[0.12em] text-white/55">
+                      {cluster.title}
+                    </p>
+                    <div className="space-y-3">
+                      {cluster.items.map((item, index) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="card-rail-link-warm group entrance-stagger block"
+                          style={{ "--stagger-delay": `${index * 90}ms` } as React.CSSProperties}
+                        >
+                          <div className="flex items-baseline gap-2.5">
+                            <span className="mono-label text-xs font-black" style={{ color: item.accent }}>
+                              {item.n}
+                            </span>
+                            <h3 className="text-lg font-black text-white">{item.label}</h3>
+                          </div>
+                          <p className="mt-1.5 text-sm leading-relaxed text-white/60">{item.sub}</p>
+                        </Link>
+                      ))}
                     </div>
-                    <div>
-                      <h3 className="mb-2 text-lg font-black text-white">{item.label}</h3>
-                      <p className="text-sm leading-relaxed text-white/60">{item.sub}</p>
-                    </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
             </div>
@@ -136,7 +184,6 @@ export default function Home() {
           <div className="premium-panel overflow-hidden">
             <div className="grid gap-8 border-b border-white/8 px-6 py-7 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
               <div>
-                <div className="hero-kicker mb-4">Live Simulation</div>
                 <h2 className="section-title mb-3">Watch an AI scam unfold in real time.</h2>
                 <p className="section-copy">
                   A cloned voice of a parent, played back in a single message. The AI threat scanner runs the same detection logic we teach in the quiz.
