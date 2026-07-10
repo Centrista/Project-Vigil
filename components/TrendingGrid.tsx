@@ -58,7 +58,7 @@ export default function TrendingGrid() {
         <div className="hero-kicker mb-4">
           <span className="relative flex h-2.5 w-2.5">
             <span className="pulse-ring absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: "#ff1744" }} />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full neon-flicker" style={{ backgroundColor: "#ff1744" }} />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full" style={{ backgroundColor: "#ff1744" }} />
           </span>
           Live Threat Board
         </div>
