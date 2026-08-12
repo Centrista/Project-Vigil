@@ -122,6 +122,24 @@ function GuideSection({ guide }: { guide: ScamGuide }) {
               </li>
             ))}
           </ul>
+
+          {/* Caution attached to the tells above */}
+          {guide.caveat && (
+            <div
+              className="mt-3 rounded-xl border-l-[3px] p-3.5"
+              style={{ background: `${accent}1f`, borderLeftColor: accent }}
+            >
+              <p
+                className="mb-1.5 text-[11px] font-black uppercase tracking-[0.12em]"
+                style={{ color: accent }}
+              >
+                ⚠ Tells aren&apos;t enough
+              </p>
+              <p className="text-sm font-semibold leading-relaxed text-white/85">
+                {guide.caveat}
+              </p>
+            </div>
+          )}
         </div>
         <div>
           <SubHeading label="⚙️ How It Works" accent={accent} />
@@ -198,18 +216,6 @@ function GuideSection({ guide }: { guide: ScamGuide }) {
         </div>
       )}
 
-      {/* Closing caution */}
-      {guide.caveat && (
-        <div
-          className="mt-7 flex gap-3 rounded-2xl p-4"
-          style={{ background: `${accent}0f`, border: `1px solid ${accent}33` }}
-        >
-          <span className="text-base leading-none" style={{ color: accent }}>
-            ⚠
-          </span>
-          <p className="text-[13px] leading-relaxed text-white/75">{guide.caveat}</p>
-        </div>
-      )}
     </section>
   );
 }
