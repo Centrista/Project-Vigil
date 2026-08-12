@@ -121,25 +121,13 @@ function GuideSection({ guide }: { guide: ScamGuide }) {
                 {flag}
               </li>
             ))}
-          </ul>
-
-          {/* Caution attached to the tells above */}
-          {guide.caveat && (
-            <div
-              className="mt-3 rounded-xl border-l-[3px] p-3.5"
-              style={{ background: `${accent}1f`, borderLeftColor: accent }}
-            >
-              <p
-                className="mb-1.5 text-[11px] font-black uppercase tracking-[0.12em]"
-                style={{ color: accent }}
-              >
-                ⚠ Tells aren&apos;t enough
-              </p>
-              <p className="text-sm font-semibold leading-relaxed text-white/85">
+            {/* Caution rendered as the closing flag */}
+            {guide.caveat && (
+              <li className="rounded-xl border border-white/10 bg-white/[0.03] p-3.5 text-sm leading-relaxed text-white/70">
                 {guide.caveat}
-              </p>
-            </div>
-          )}
+              </li>
+            )}
+          </ul>
         </div>
         <div>
           <SubHeading label="⚙️ How It Works" accent={accent} />
