@@ -38,7 +38,7 @@ export interface ScamGuide {
     lead: string;
     points: GuideAnatomyPoint[];
   };
-  /** Closing caution shown at the end of the section. */
+  /** Closing caution shown at the end of the section, after the anatomy block. */
   caveat?: string;
 }
 
