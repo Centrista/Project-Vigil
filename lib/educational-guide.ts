@@ -38,6 +38,8 @@ export interface ScamGuide {
     lead: string;
     points: GuideAnatomyPoint[];
   };
+  /** Closing caution shown at the end of the section. */
+  caveat?: string;
 }
 
 export const SCAM_GUIDES: ScamGuide[] = [
@@ -128,6 +130,8 @@ export const SCAM_GUIDES: ScamGuide[] = [
         { flag: "Teleporting movement", detail: "Hands move too fast and seem to jump position — because AI predicts the next frame rather than understanding how bodies actually move." },
       ],
     },
+    caveat:
+      "If you're unsure, check anyway. Deepfake video is advancing so fast that the newest fakes can pass every tell on this page, so spotting nothing is not proof it's real. Verify through a separate channel you already trust before you act on it.",
   },
 
   // ── 3. AI PHISHING — Dolon ──────────────────────────────────────────────────

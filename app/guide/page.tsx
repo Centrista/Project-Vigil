@@ -197,6 +197,19 @@ function GuideSection({ guide }: { guide: ScamGuide }) {
           </div>
         </div>
       )}
+
+      {/* Closing caution */}
+      {guide.caveat && (
+        <div
+          className="mt-7 flex gap-3 rounded-2xl p-4"
+          style={{ background: `${accent}0f`, border: `1px solid ${accent}33` }}
+        >
+          <span className="text-base leading-none" style={{ color: accent }}>
+            ⚠
+          </span>
+          <p className="text-[13px] leading-relaxed text-white/75">{guide.caveat}</p>
+        </div>
+      )}
     </section>
   );
 }

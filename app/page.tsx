@@ -47,7 +47,7 @@ export default function Home() {
                 <br />
                 <span className="text-white">right now might not</span>
                 <br />
-                <span className="gradient-text-red">be human.</span>
+                <span className="home-mark">be human.</span>
               </h1>
 
               <p className="hero-copy fade-up fade-up-delay-2">
