@@ -11,9 +11,43 @@ import type { InboxScenario } from "./scam-battle-engine";
 export const INBOX_POOL: InboxScenario[] = [
   // ============================================================
   // SCAMS — one per Pokédex entry
-  // (Passal voice-clone scenarios removed until the voice test ships — the
-  //  creature still lives in the Pokédex and guide.)
   // ============================================================
+
+  // 1. PASSAL — Deepfake audio mum
+  {
+    id: "passal-whatsapp-1",
+    platform: "whatsapp",
+    sender: {
+      name: "Mom 💕",
+      phone: "+65 8234 9981",
+      avatarSeed: "M",
+      avatarColor: "#ff6d9e",
+      isKnownContact: false,
+      subtitleHint: "online",
+    },
+    messages: [
+      {
+        body: "🎙️ Voice note",
+        isVoiceNote: true,
+        voiceDurationSec: 42,
+        voiceTranscript:
+          "Boy ah!! Mommy got into accident at AYE just now... cannot use my phone properly, screen cracked. Quickly PayNow $340 to this number for the tow truck uncle, very urgent! Don't tell daddy first, I settle later with him.",
+      },
+      { body: "Quickly leh boy 😭" },
+      { body: "+65 8234 9981 — PayNow this number okay" },
+    ],
+    timestamp: "11:47 pm",
+    verdict: "scam",
+    pokemonSlug: "passal",
+    redFlagsToTeach: [
+      "PayNow number isn't mum's saved one",
+      "'Don't tell daddy' — secrecy push",
+      "Urgency stops you from verifying",
+      "Voice notes can be AI-cloned in under 30 seconds",
+    ],
+    whyItsScamLesson:
+      "The voice sounds like mum because AI cloned it from her TikTok / voice notes. Real mum would use her usual PayNow number, not a fresh one, and wouldn't need secrecy from dad.",
+  },
 
   // 2. AKMON — Deepfake video cousin
   {
@@ -319,6 +353,82 @@ export const INBOX_POOL: InboxScenario[] = [
   // so runs get different opening shots, not the same one twice.
   // ============================================================
 
+  // 1b. PASSAL — Voice clone "DAD" instead of mum
+  {
+    id: "passal-whatsapp-2",
+    platform: "whatsapp",
+    sender: {
+      name: "Daddy",
+      phone: "+65 9883 1207",
+      avatarSeed: "D",
+      avatarColor: "#3478F6",
+      isKnownContact: false,
+      subtitleHint: "Unknown number — using display name 'Daddy'",
+    },
+    messages: [
+      {
+        body: "🎙️ Voice note",
+        isVoiceNote: true,
+        voiceDurationSec: 28,
+        voiceTranscript:
+          "Boy ah, daddy in trouble! Got pulled over at the checkpoint, phone almost no battery. PayNow $480 to this number for the officer fine, settle today only. Don't tell mummy first, she will panic. Quick okay.",
+      },
+      { body: "Cannot call back, signal very weak here" },
+    ],
+    timestamp: "Fri 6:18 pm",
+    verdict: "scam",
+    pokemonSlug: "passal",
+    redFlagsToTeach: [
+      "Number isn't dad's saved one in your contacts",
+      "'Don't tell mum' — same secrecy trick as the mum variant",
+      "Officers never collect fines via PayNow",
+      "Voice + urgency + new number = textbook Passal",
+    ],
+    whyItsScamLesson:
+      "Same playbook, different parent. No real officer takes a fine through a personal PayNow. Hang up, call dad's saved number, loop in mum — that whole frame falls apart the moment you verify.",
+  },
+
+  // 1c. PASSAL + AKMON combined — Fake Zoom call from "form teacher" (voice + video deepfake together)
+  {
+    id: "passal-akmon-zoom",
+    platform: "gmail",
+    sender: {
+      name: "Mrs Tan (Form Teacher)",
+      email: "ms.tan.hci.urgent@hci-edu.sg",
+      avatarSeed: "T",
+      avatarColor: "#ef4444",
+      isKnownContact: false,
+      subtitleHint: "Lookalike domain — real one is hci.edu.sg",
+    },
+    subjectLine: "URGENT — Join Zoom now (parent meeting)",
+    messages: [
+      {
+        body: "Dear student, please join the emergency Zoom now — your parent is on the call to discuss a serious matter regarding your account. Camera and mic must be on. Do not tell other students.",
+      },
+      {
+        body: "Zoom: zoom-hci-urgent.com/j/8472019 (Meeting ID 8472019, passcode HCI2026)",
+        link: {
+          displayText: "zoom-hci-urgent.com/j/8472019",
+          actualUrl: "https://zoom-hci-urgent.com/j/8472019",
+        },
+      },
+      {
+        body: "(If you join: a deepfake of Mrs Tan's face appears with a cloned voice. A second window 'connects mum' — another deepfake — and both pressure you to PayNow $400 to clear a 'school payment block' before midnight.)",
+      },
+    ],
+    timestamp: "9:42 pm",
+    verdict: "scam",
+    pokemonSlug: "passal",
+    redFlagsToTeach: [
+      "Email domain is hci-edu.sg (fake) — real HCI is hci.edu.sg",
+      "Real teachers never run urgent Zoom calls at night with secrecy rules",
+      "Both the teacher AND the parent on the same call = both are deepfakes (Akmon + Passal together)",
+      "Any meeting that demands PayNow before 'unlocking' something is the entire scam",
+    ],
+    whyItsScamLesson:
+      "This is the next-generation scam — voice clone (Passal) + face deepfake (Akmon) running side-by-side in a fake Zoom to overwhelm your verification reflex. Two 'people' on the call doesn't mean it's real; both can be fake. Always hang up and call the school directly using the published main line.",
+  },
+
   // 2b. AKMON — Deepfake "older brother stuck overseas"
   {
     id: "akmon-whatsapp-2",
@@ -613,7 +723,7 @@ export const INBOX_POOL: InboxScenario[] = [
     timestamp: "12:14 pm",
     verdict: "legit",
     whyItsLegitLesson:
-      "This is mum's saved number, small amount, specific context (Auntie Mei, family dinner), no urgency, no secrecy, reciprocal payback. All the actual scam-features are absent — only the surface looks like a fake-parent scam.",
+      "This is mum's saved number, small amount, specific context (Auntie Mei, family dinner), no urgency, no secrecy, reciprocal payback. All the actual scam-features are absent — just the surface looks similar to a Passal attempt.",
     redFlagsToTeach: [
       "Sender is mum's actual saved contact",
       "Amount is small and matches a normal grocery run",

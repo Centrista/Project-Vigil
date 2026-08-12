@@ -1,22 +1,91 @@
 // ─── VIGIL GUIDE ─────────────────────────────────────────────────────────────
-// The site's chat-style navigator: a side-docked widget that answers typed
-// questions by keyword-matching against content that already exists (Pokédex,
-// trending scams, nav pages). Deliberately NOT an LLM and it says so —
-// deterministic, client-side, and it can only point at pages that are on the
-// site. No chips, no menus: type, get routed.
+// The site's built-in navigator: a scripted decision tree plus a keyword index
+// over content that already exists (Pokédex, trending scams, nav pages).
+// Deliberately NOT an LLM and it says so — everything here is deterministic,
+// runs client-side, and can only point at pages that are actually on the site.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { POKEDEX_ENTRIES } from "@/lib/pokedex";
 import { SCAMS } from "@/lib/scams";
 import { LEARNING_PATH, NAV_LINKS } from "@/lib/constants";
 
-export type GuideRecordKind = "creature" | "alert" | "page";
+export interface GuideChip {
+  label: string;
+  /** Route to a node in GUIDE_TREE… */
+  next?: string;
+  /** …or straight to a page. Exactly one of next/href is set. */
+  href?: string;
+}
+
+export interface GuideNode {
+  id: string;
+  prompt: string;
+  chips: GuideChip[];
+}
+
+export const GUIDE_TREE: Record<string, GuideNode> = {
+  root: {
+    id: "root",
+    prompt: "Where do you want to start?",
+    chips: [
+      { label: "I've been scammed", next: "scammed" },
+      { label: "Is this message real?", next: "suspicious" },
+      { label: "Show me the scams", next: "browse" },
+      { label: "Test my skills", next: "practice" },
+    ],
+  },
+  scammed: {
+    id: "scammed",
+    prompt: "Move fast — the first hour matters most. What happened?",
+    chips: [
+      { label: "I sent money", href: "/emergency" },
+      { label: "I clicked a link or gave a password", href: "/emergency" },
+      { label: "Someone is threatening me", href: "/emergency" },
+      { label: "I'm not sure yet", href: "/emergency" },
+    ],
+  },
+  suspicious: {
+    id: "suspicious",
+    prompt: "Tell me what you're looking at.",
+    chips: [
+      { label: "A voice call or voice note", href: "/pokedex/passal" },
+      { label: "A video call", href: "/pokedex/akmon" },
+      { label: "An email or text", href: "/pokedex/dolon" },
+      { label: "A job or internship offer", href: "/pokedex/circe" },
+      { label: "A seller or a listing", href: "/pokedex/glaukult" },
+      { label: "An investment tip", href: "/pokedex/ponsi" },
+      { label: "Someone I met online", href: "/pokedex/peitho" },
+    ],
+  },
+  browse: {
+    id: "browse",
+    prompt: "Two ways in — the catalogue, or what's spiking right now.",
+    chips: [
+      { label: "The full catalogue", href: "/pokedex" },
+      { label: "What's trending this month", href: "/trending-scams" },
+      { label: "How each one actually works", href: "/guide" },
+    ],
+  },
+  practice: {
+    id: "practice",
+    prompt: "Pick your poison.",
+    chips: [
+      { label: "Spot the AI photo", href: "/simulator" },
+      { label: "Survive a scam inbox", href: "/scam-battle" },
+      { label: "Rate my risk", href: "/risk-quiz" },
+    ],
+  },
+};
+
+export const GUIDE_START_HERE = LEARNING_PATH[0];
+
+// ─── Keyword index ───────────────────────────────────────────────────────────
 
 export interface GuideIndexRecord {
-  kind: GuideRecordKind;
   href: string;
   title: string;
   subtitle: string;
+  /** Search corpus: title + hand-relevant fields, weighted. */
   strongTerms: Set<string>;
   weakTerms: Set<string>;
 }
@@ -41,7 +110,6 @@ function buildIndex(): GuideIndexRecord[] {
 
   for (const entry of POKEDEX_ENTRIES) {
     records.push({
-      kind: "creature",
       href: `/pokedex/${entry.slug}`,
       title: entry.name,
       subtitle: entry.scamLabel,
@@ -52,7 +120,6 @@ function buildIndex(): GuideIndexRecord[] {
 
   for (const scam of SCAMS) {
     records.push({
-      kind: "alert",
       href: `/trending-scams/${scam.id}`,
       title: scam.name,
       subtitle: `Trending · ${scam.categoryLabel}`,
@@ -63,7 +130,6 @@ function buildIndex(): GuideIndexRecord[] {
 
   for (const link of NAV_LINKS) {
     records.push({
-      kind: "page",
       href: link.href,
       title: link.label,
       subtitle: link.description,
@@ -128,7 +194,6 @@ function expand(tokens: string[]): string[] {
 }
 
 export interface GuideMatch {
-  kind: GuideRecordKind;
   href: string;
   title: string;
   subtitle: string;
@@ -150,84 +215,9 @@ export function matchQuery(query: string): GuideMatch[] {
       else if (rec.weakTerms.has(t)) score += 1;
     }
     if (score >= MIN_SCORE) {
-      scored.push({ kind: rec.kind, href: rec.href, title: rec.title, subtitle: rec.subtitle, score });
+      scored.push({ href: rec.href, title: rec.title, subtitle: rec.subtitle, score });
     }
   }
 
   return scored.sort((a, b) => b.score - a.score).slice(0, 3);
-}
-
-// ─── Conversation layer ──────────────────────────────────────────────────────
-
-export interface GuideReply {
-  text: string;
-  matches: GuideMatch[];
-}
-
-export const GUIDE_GREETING =
-  "Hey — I'm the Vigil guide. Tell me what's going on or what you're looking for, and I'll point you to the right part of the site. (I'm not an AI — I match keywords, and I only know this site.)";
-
-/** Conversation starters — clicking one sends it as a normal typed message. */
-export const GUIDE_STARTERS = [
-  "I think I just got scammed",
-  "Is this job offer real?",
-  "Where do I start?",
-];
-
-const EMERGENCY_TERMS = new Set([
-  "scammed", "hacked", "stolen", "sent", "paid", "transferred", "threatened",
-  "threatening", "blackmail", "blackmailed", "emergency", "urgent", "victim",
-]);
-
-const START_TERMS = new Set(["start", "begin", "beginner", "new", "first", "lost"]);
-
-export function buildReply(query: string): GuideReply {
-  const tokens = new Set(tokenize(query));
-
-  if ([...tokens].some((t) => EMERGENCY_TERMS.has(t))) {
-    return {
-      text: "Okay — move fast, the first hour matters most. The emergency guide walks you through securing accounts and preserving evidence, step by step:",
-      matches: [
-        {
-          kind: "page",
-          href: "/emergency",
-          title: "Emergency Guide",
-          subtitle: "What to do right now, in order",
-          score: 99,
-        },
-      ],
-    };
-  }
-
-  if ([...tokens].some((t) => START_TERMS.has(t)) && tokens.size <= 4) {
-    return {
-      text: "Start here — this is the order we'd go in:",
-      matches: LEARNING_PATH.slice(0, 3).map((step, i) => ({
-        kind: "page" as const,
-        href: step.href,
-        title: `${step.step}. ${step.label}`,
-        subtitle: step.why,
-        score: 99 - i,
-      })),
-    };
-  }
-
-  const matches = matchQuery(query);
-
-  if (matches.length === 0) {
-    return {
-      text: "I couldn't match that to anything on the site. I work off keywords — try describing the situation, like \"someone cloned my mum's voice\", \"fake concert tickets\", or \"crypto investment group\".",
-      matches: [],
-    };
-  }
-
-  const top = matches[0];
-  const lead =
-    top.kind === "creature"
-      ? `That sounds like ${top.title} — ${top.subtitle.toLowerCase()}. Here's its file:`
-      : top.kind === "alert"
-        ? "There's a live alert that matches what you're describing:"
-        : "This is the page you want:";
-
-  return { text: lead, matches };
 }
